@@ -1,0 +1,16 @@
+{
+    "eslint.format.enable": true,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnType": false, // required
+    "editor.formatOnPaste": true, // optional
+    "editor.codeActionsOnSave": {
+        "source.fixAll.ts": "always",
+        "source.fixAll.eslint": "always"
+    },
+    "editor.formatOnSave": true, // optional
+    "editor.formatOnSaveMode": "file", // required to format on save
+    "files.autoSave": "onFocusChange", // optional but recommended
+    "eslint.lintTask.enable": true,
+    "npm.packageManager": "npm",
+    "npm.autoDetect": "on"
+}

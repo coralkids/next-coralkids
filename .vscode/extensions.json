@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "vercel.turbo-vsc"
+        "vercel.turbo-vsc",
+        "dbaeumer.vscode-eslint"
     ]
 }

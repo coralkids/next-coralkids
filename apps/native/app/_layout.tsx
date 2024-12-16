@@ -1,5 +1,10 @@
-import { Stack } from "expo-router";
+import ConvexClientProvider from "@/components/ConvexClientProvider";
+import { Slot } from "expo-router";
 
 export default function RootLayout() {
-  return <Stack />;
+  return (
+    <ConvexClientProvider>
+      <Slot />
+    </ConvexClientProvider>
+  );
 }
