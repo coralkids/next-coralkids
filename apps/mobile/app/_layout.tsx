@@ -41,7 +41,6 @@ export default function RootLayout() {
     SemiBold: require("./assets/fonts/Inter-SemiBold.ttf"),
     Medium: require("./assets/fonts/Inter-Medium.ttf"),
     Regular: require("./assets/fonts/Inter-Regular.ttf"),
-
     MBold: require("./assets/fonts/Montserrat-Bold.ttf"),
     MSemiBold: require("./assets/fonts/Montserrat-SemiBold.ttf"),
     MMedium: require("./assets/fonts/Montserrat-Medium.ttf"),
