@@ -22,9 +22,6 @@ export default function Page() {
           <Link href="/(auth)/sign-in">
             <Text>Sign in</Text>
           </Link>
-          <Link href="/(auth)/sign-up">
-            <Text>Sign up</Text>
-          </Link>
         </SignedOut>
       </SafeAreaView>
     </View>
