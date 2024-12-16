@@ -41,7 +41,7 @@ export default function Page() {
       <View style={styles.container}>
         <View style={styles.card}>
           <Image
-            source="../../assets/icons/logo2small.png" // Ensure the correct path to your logo image file
+            source={require("../../assets/icons/logo2small.png")} // Ensure the correct path to your logo image file
             style={styles.logo}
           />
           <Text style={styles.title}>Log in to your account</Text>
@@ -78,7 +78,6 @@ export default function Page() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
   },
   card: {
