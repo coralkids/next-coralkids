@@ -36,3 +36,8 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+#convex
+convex-local-backend
+convex_local_storage
+convex_local_backend.sqlite3

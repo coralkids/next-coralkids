@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "convex dev",
-    "setup": "convex dev --until-success"
+    "dev": "just convex dev",
+    "setup": "just convex dev --until-success"
   },
   "author": "",
   "license": "ISC",

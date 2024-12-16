@@ -1,0 +1,10 @@
+{
+    "name": "@packages/convex-local",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "dev": "./convex-local-backend"
+    },
+    "author": "",
+    "license": "ISC"
+}
