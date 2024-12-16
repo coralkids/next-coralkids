@@ -12,7 +12,7 @@ export default function Page() {
       <SafeAreaView>
         <SignedIn>
           <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
-          <TouchableOpacity onPress={() => signOut()}>
+          <TouchableOpacity onPress={async () => await signOut()}>
             <Text>Logout</Text>
           </TouchableOpacity>
         </SignedIn>
