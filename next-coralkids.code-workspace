@@ -1,0 +1,55 @@
+{
+    "folders": [
+      {
+        "name": "root",
+        "path": "./"
+      },
+      {
+        "name": "coralkids-mobile",
+        "path": "apps/mobile"
+      },
+       {
+        "name": "coralkids-web",
+        "path": "apps/web"
+      },
+      {
+        "name": "coralkids-backend",
+        "path": "packages/backend"
+      },
+      {
+        "name": "convex-local",
+        "path": "packages/convex-local"
+      }
+    ],
+    "settings": {
+      "files.exclude": {
+        "apps/mobile": true,
+        "apps/web": true,
+        "packages/backend": true,
+        "packages/convex-local": true
+      },
+      "eslint.format.enable": true,
+      "eslint.codeActionsOnSave.mode": "all",
+      "eslint.enable": true,
+      "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+      "editor.formatOnType": false, // required
+      "editor.formatOnPaste": true, // optional
+      "editor.codeActionsOnSave": {
+          "source.fixAll.ts": "always",
+          "source.fixAll.eslint": "always"
+      },
+      "editor.formatOnSave": true, // optional
+      "editor.formatOnSaveMode": "file", // required to format on save
+      "files.autoSave": "onFocusChange", // optional but recommended
+      "eslint.lintTask.enable": true,
+      "npm.packageManager": "yarn",
+      "npm.autoDetect": "on"
+    },
+    "extensions": {
+      "recommendations": [
+        "vercel.turbo-vsc",
+        "github.github-vscode-theme",
+        "vscode-icons-team.vscode-icons"
+      ]
+    }
+  }

@@ -1,5 +1,7 @@
 {
     "eslint.format.enable": true,
+    "eslint.codeActionsOnSave.mode": "all",
+    "eslint.enable": true,
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnType": false, // required
     "editor.formatOnPaste": true, // optional
