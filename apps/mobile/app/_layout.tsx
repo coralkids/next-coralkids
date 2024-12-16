@@ -1,4 +1,9 @@
 import { tokenCache } from "@/utils/cache";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
 import { ClerkLoaded, ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { ConvexReactClient } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
@@ -7,6 +12,9 @@ import { Stack } from "expo-router";
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { LogBox } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { useColorScheme } from "./hooks/useColorScheme";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 if (!process.env.EXPO_PUBLIC_CONVEX_URL) {
   throw new Error("EXPO_PUBLIC_CONVEX_URL is not defined and is requred");
@@ -18,6 +26,7 @@ const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL);
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const colorScheme = useColorScheme();
   LogBox.ignoreLogs(["Warning: ..."]);
   LogBox.ignoreAllLogs();
 
@@ -57,7 +66,12 @@ export default function RootLayout() {
     >
       <ClerkLoaded>
         <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-          <Stack screenOptions={{ headerShown: false }} />
+          <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+          >
+            <Stack screenOptions={{ headerShown: false }} />
+            <StatusBar style="auto" />
+          </ThemeProvider>
         </ConvexProviderWithClerk>
       </ClerkLoaded>
     </ClerkProvider>
