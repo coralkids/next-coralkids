@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, useAuth, useUser } from "@clerk/clerk-expo";
-import { Link } from "expo-router";
+import { Link, Redirect } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -19,9 +19,7 @@ export default function Page() {
           </TouchableOpacity>
         </SignedIn>
         <SignedOut>
-          <Link href="/(auth)/sign-in">
-            <Text>Sign in</Text>
-          </Link>
+          <Redirect href="/(auth)/sign-in" />
         </SignedOut>
       </SafeAreaView>
     </View>
