@@ -6,6 +6,8 @@ export default function Page() {
   const { user } = useUser();
   const { signOut } = useAuth();
 
+  console.log("Rendered Page");
+
   return (
     <View>
       <SignedIn>

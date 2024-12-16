@@ -2,6 +2,7 @@ import * as React from "react";
 import { Text, TextInput, Button, View } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -78,7 +79,7 @@ export default function SignUpScreen() {
   }
 
   return (
-    <View>
+    <SafeAreaView>
       <>
         <Text>Sign up</Text>
         <TextInput
@@ -95,6 +96,6 @@ export default function SignUpScreen() {
         />
         <Button title="Continue" onPress={onSignUpPress} />
       </>
-    </View>
+    </SafeAreaView>
   );
 }
