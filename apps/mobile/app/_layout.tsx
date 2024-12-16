@@ -31,14 +31,12 @@ export default function RootLayout() {
     >
       <ClerkLoaded>
         <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-          <View style={{ flex: 1 }}>
-            <View
-              style={{ height: STATUS_BAR_HEIGHT, backgroundColor: "#0D87E1" }}
-            >
-              <StatusBar translucent backgroundColor={"#0D87E1"} />
-            </View>
-            <Stack screenOptions={{ headerShown: false }} />
+          <View
+            style={{ height: STATUS_BAR_HEIGHT, backgroundColor: "#0D87E1" }}
+          >
+            <StatusBar translucent backgroundColor={"#0D87E1"} />
           </View>
+          <Stack screenOptions={{ headerShown: false }} />
         </ConvexProviderWithClerk>
       </ClerkLoaded>
     </ClerkProvider>

@@ -70,6 +70,13 @@ export default function Page() {
               Continue with Apple
             </Text>
           </TouchableOpacity>
+
+          <View style={styles.signupContainer}>
+            <Text style={{ fontFamily: "Regular" }}>
+              Don’t have an account?{" "}
+            </Text>
+            <Text>Sign up above.</Text>
+          </View>
         </View>
       </View>
     </SafeAreaView>
