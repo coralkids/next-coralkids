@@ -72,8 +72,8 @@ export default function Page() {
           </TouchableOpacity>
 
           <View style={styles.signupContainer}>
-            <Text style={{ fontFamily: "Regular" }}>
-              Don’t have an account?{" "}
+            <Text style={{ fontFamily: "Regular", marginRight: 10 }}>
+              Don’t have an account?
             </Text>
             <Text>Sign up above.</Text>
           </View>
