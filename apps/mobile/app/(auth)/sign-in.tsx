@@ -21,11 +21,7 @@ export default function Page() {
   const { startOAuthFlow: startAppleAuthFlow } = useOAuth({
     strategy: "oauth_apple",
   });
-  const { signIn, setActive, isLoaded } = useSignIn();
   const router = useRouter();
-
-  const [emailAddress, setEmailAddress] = React.useState("");
-  const [password, setPassword] = React.useState("");
 
   const onPress = async (authType: string) => {
     try {
@@ -47,40 +43,12 @@ export default function Page() {
     }
   };
 
-  // Handle the submission of the sign-in form
-  const onSignInPress = React.useCallback(async () => {
-    if (!isLoaded) return;
-
-    // Start the sign-in process using the email and password provided
-    try {
-      const signInAttempt = await signIn.create({
-        identifier: emailAddress,
-        password,
-      });
-
-      // If sign-in process is complete, set the created session as active
-      // and redirect the user
-      if (signInAttempt.status === "complete") {
-        await setActive({ session: signInAttempt.createdSessionId });
-        router.replace("/");
-      } else {
-        // If the status isn't complete, check why. User might need to
-        // complete further steps.
-        console.error(JSON.stringify(signInAttempt, null, 2));
-      }
-    } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
-      console.error(JSON.stringify(err, null, 2));
-    }
-  }, [isLoaded, emailAddress, password, router, setActive, signIn]);
-
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.card}>
           <Image
-            source="/assets/images/react-logo.png" // Ensure the correct path to your logo image file
+            source="../../assets/icons/logo2small.png" // Ensure the correct path to your logo image file
             style={styles.logo}
           />
           <Text style={styles.title}>Log in to your account</Text>
@@ -91,7 +59,7 @@ export default function Page() {
           >
             <Image
               style={styles.googleIcon}
-              source="/assets/icons/google.png"
+              source={require("../../assets/icons/google.png")}
             />
             <Text style={{ ...styles.buttonText, color: "#344054" }}>
               Continue with Google
@@ -109,33 +77,7 @@ export default function Page() {
               Continue with Apple
             </Text>
           </TouchableOpacity>
-
-          <View style={styles.signupContainer}>
-            <Text style={{ fontFamily: "Regular" }}>
-              Don’t have an account?{" "}
-            </Text>
-            <Text>Sign up above.</Text>
-          </View>
         </View>
-      </View>
-      <TextInput
-        autoCapitalize="none"
-        value={emailAddress}
-        placeholder="Enter email"
-        onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
-      />
-      <TextInput
-        value={password}
-        placeholder="Enter password"
-        secureTextEntry={true}
-        onChangeText={(password) => setPassword(password)}
-      />
-      <Button title="Sign in" onPress={onSignInPress} />
-      <View>
-        <Text>Don't have an account?</Text>
-        <Link href="/sign-up">
-          <Text>Sign up</Text>
-        </Link>
       </View>
     </SafeAreaView>
   );

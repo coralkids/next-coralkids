@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Text, TextInput, Button, View } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignUpScreen() {
@@ -95,6 +95,9 @@ export default function SignUpScreen() {
           onChangeText={(password) => setPassword(password)}
         />
         <Button title="Continue" onPress={onSignUpPress} />
+        <Link href="/(auth)/sign-in">
+          <Text>Sign in</Text>
+        </Link>
       </>
     </SafeAreaView>
   );
