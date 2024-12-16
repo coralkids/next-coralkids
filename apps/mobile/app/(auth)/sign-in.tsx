@@ -37,8 +37,8 @@ export default function Page() {
   };
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <SafeAreaView>
         <View style={styles.card}>
           <Image
             source={require("../../assets/icons/logo2small.png")} // Ensure the correct path to your logo image file
@@ -78,14 +78,15 @@ export default function Page() {
             <Text>Sign up above.</Text>
           </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
+    height: "100%",
   },
   card: {
     backgroundColor: "#fff",
