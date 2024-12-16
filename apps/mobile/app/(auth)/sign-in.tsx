@@ -1,14 +1,7 @@
 import React from "react";
-import { useOAuth, useSignIn } from "@clerk/clerk-expo";
-import { Link, useRouter } from "expo-router";
-import {
-  Text,
-  TextInput,
-  Button,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { useOAuth } from "@clerk/clerk-expo";
+import { useRouter } from "expo-router";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
