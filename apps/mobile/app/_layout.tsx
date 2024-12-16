@@ -14,7 +14,6 @@ import * as SplashScreen from "expo-splash-screen";
 import { LogBox } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "./hooks/useColorScheme";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 if (!process.env.EXPO_PUBLIC_CONVEX_URL) {
   throw new Error("EXPO_PUBLIC_CONVEX_URL is not defined and is requred");
