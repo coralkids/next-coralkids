@@ -1,5 +1,5 @@
-import { Stack } from "expo-router/stack";
+import { AuthProtected } from "../components/AuthProtected";
 
 export default function Layout() {
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return <AuthProtected />;
 }

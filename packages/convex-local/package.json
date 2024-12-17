@@ -1,5 +1,5 @@
 {
-    "name": "@packages/convex-local",
+    "name": "convex-local",
     "version": "1.0.0",
     "description": "",
     "scripts": {

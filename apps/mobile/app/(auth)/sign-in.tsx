@@ -5,7 +5,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function Page() {
   const { startOAuthFlow: startGoogleAuthFlow } = useOAuth({
@@ -39,8 +39,8 @@ export default function Page() {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView>
-        <View style={styles.card}>
+      <View style={styles.card}>
+        <SafeAreaView>
           <Image
             source={require("../assets/icons/logo2small.png")} // Ensure the correct path to your logo image file
             style={styles.logo}
@@ -66,7 +66,11 @@ export default function Page() {
           >
             <AntDesign name="apple1" size={24} color="black" />
             <Text
-              style={{ ...styles.buttonText, color: "#344054", marginLeft: 12 }}
+              style={{
+                ...styles.buttonText,
+                color: "#344054",
+                marginLeft: 12,
+              }}
             >
               Continue with Apple
             </Text>
@@ -78,8 +82,8 @@ export default function Page() {
             </Text>
             <Text>Sign up above.</Text>
           </View>
-        </View>
-      </SafeAreaView>
+        </SafeAreaView>
+      </View>
     </View>
   );
 }
@@ -87,7 +91,6 @@ export default function Page() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    height: "100%",
   },
   card: {
     backgroundColor: "#fff",
@@ -147,7 +150,6 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   divider: {
-    flex: 1,
     height: 1,
     backgroundColor: "#000",
   },

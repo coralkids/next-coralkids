@@ -1,25 +1,30 @@
 import { tokenCache } from "@/utils/cache";
+import { Text } from "react-native";
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { ClerkLoaded, ClerkProvider, useAuth } from "@clerk/clerk-expo";
+import { ClerkLoading, useAuth } from "@clerk/clerk-react";
+import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
 import { ConvexReactClient } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import { useEffect } from "react";
+import { Slot } from "expo-router";
+import React, { StrictMode, useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { LogBox } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "./hooks/useColorScheme";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 if (!process.env.EXPO_PUBLIC_CONVEX_URL) {
   throw new Error("EXPO_PUBLIC_CONVEX_URL is not defined and is requred");
 }
 
-const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL);
+const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL, {
+  unsavedChangesWarning: false,
+});
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -58,20 +63,24 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider
-      tokenCache={tokenCache}
-      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}
-    >
-      <ClerkLoaded>
+    <StrictMode>
+      <ClerkProvider
+        tokenCache={tokenCache}
+        publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      >
         <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
           <ThemeProvider
             value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
           >
-            <Stack screenOptions={{ headerShown: false }} />
-            <StatusBar style="auto" />
+            <ClerkLoading>
+              <Text>Clerk is loading...</Text>
+            </ClerkLoading>
+            <ClerkLoaded>
+              <Slot screenOptions={{ headerShown: false }} />
+            </ClerkLoaded>
           </ThemeProvider>
         </ConvexProviderWithClerk>
-      </ClerkLoaded>
-    </ClerkProvider>
+      </ClerkProvider>
+    </StrictMode>
   );
 }
