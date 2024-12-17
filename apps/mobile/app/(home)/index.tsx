@@ -43,8 +43,6 @@ const NotesDashboardScreen = () => {
       : allNotes;
   }, [allNotes, search]);
 
-  console.log("render", loading);
-
   const renderItem = ({ item }: { item: Doc<"notes"> }) => (
     <TouchableOpacity
       onPress={() => {

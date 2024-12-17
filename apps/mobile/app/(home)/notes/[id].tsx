@@ -1,7 +1,5 @@
-import { api } from "@packages/backend/convex/_generated/api";
-import { Id } from "@packages/backend/convex/_generated/dataModel";
-import { useQuery } from "convex/react";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useCurrentNote } from "@/app/hooks/useCurrentNote";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -11,14 +9,16 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
 const { width } = Dimensions.get("window");
 
 export default function InsideNoteScreen() {
-  const { id } = useLocalSearchParams<{ id: Id<"notes"> }>();
-  const item = useQuery(api.notes.getNote, { id });
+  const { note: item, loading } = useCurrentNote();
+
+  console.log("Render item", item, loading);
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("original"); // State to manage active tab
 
@@ -30,7 +30,6 @@ export default function InsideNoteScreen() {
           style={styles.logo}
         />
       </View>
-
       <View style={styles.underHeaderContainer}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
@@ -38,8 +37,8 @@ export default function InsideNoteScreen() {
             source={require("../../assets/icons/arrow-back.png")}
           />
         </TouchableOpacity>
-
-        <Text style={styles.title}>{item?.title}</Text>
+        {!loading && <Text style={styles.title}>{item?.title}</Text>}
+        {loading && <ActivityIndicator />}
         <TouchableOpacity></TouchableOpacity>
       </View>
 
@@ -48,16 +47,17 @@ export default function InsideNoteScreen() {
         contentContainerStyle={{ paddingBottom: 100 }}
       >
         <View style={styles.contentContainer}>
-          <Text style={styles.contentDescription}>
-            {activeTab === "original"
-              ? item?.content
-              : item?.summary
-                ? item?.summary
-                : "No summary available"}
-          </Text>
+          {!loading && (
+            <Text style={styles.contentDescription}>
+              {activeTab === "original"
+                ? item?.content
+                : item?.summary
+                  ? item?.summary
+                  : "No summary available"}
+            </Text>
+          )}
         </View>
       </ScrollView>
-
       {/* Sticky footer */}
       <View style={styles.footer}>
         <TouchableOpacity
