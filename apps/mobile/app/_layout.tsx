@@ -1,5 +1,5 @@
 import { tokenCache } from "@/utils/cache";
-import { Text } from "react-native";
+import { Text, StatusBar, View, Platform } from "react-native";
 import {
   DarkTheme,
   DefaultTheme,
@@ -14,9 +14,7 @@ import { Slot } from "expo-router";
 import React, { StrictMode, useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { LogBox } from "react-native";
-import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "./hooks/useColorScheme";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 if (!process.env.EXPO_PUBLIC_CONVEX_URL) {
   throw new Error("EXPO_PUBLIC_CONVEX_URL is not defined and is requred");
@@ -52,6 +50,9 @@ export default function RootLayout() {
     MLight: require("./assets/fonts/Montserrat-Light.ttf"),
   });
 
+  const STATUS_BAR_HEIGHT =
+    Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
+
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
@@ -72,6 +73,15 @@ export default function RootLayout() {
           <ThemeProvider
             value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
           >
+            <View
+              style={{ height: STATUS_BAR_HEIGHT, backgroundColor: "#0D87E1" }}
+            >
+              <StatusBar
+                translucent
+                backgroundColor={"#0D87E1"}
+                barStyle="light-content"
+              />
+            </View>
             <ClerkLoading>
               <Text>Clerk is loading...</Text>
             </ClerkLoading>

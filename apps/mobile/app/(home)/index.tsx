@@ -13,7 +13,6 @@ import { Feather, AntDesign } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { api } from "@packages/backend/convex/_generated/api";
 
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useUser } from "@clerk/clerk-expo";
 import { useQuery } from "convex/react";
 import { router } from "expo-router";
@@ -102,7 +101,7 @@ const NotesDashboardScreen = () => {
         />
       )}
       <TouchableOpacity
-        onPress={() => router.navigate("/(home)/create")}
+        onPress={() => router.navigate("/(home)/notes/create")}
         style={styles.newNoteButton}
       >
         <AntDesign name="pluscircle" size={20} color="#fff" />
