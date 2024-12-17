@@ -1,8 +1,10 @@
-import { AuthProtected } from "../components/AuthProtected";
-import useLoadResources from "../hooks/useLoadResources";
+import { AuthProtectedSlot } from "../components/AuthProtectedSlot";
+import { BaseLayout } from "../components/BaseLayout";
 
 export default function Layout() {
-  useLoadResources();
-
-  return <AuthProtected />;
+  return (
+    <BaseLayout>
+      <AuthProtectedSlot />
+    </BaseLayout>
+  );
 }

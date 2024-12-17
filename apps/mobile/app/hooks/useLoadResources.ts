@@ -23,7 +23,7 @@ const useLoadResources = () => {
     }
   }, [loaded, clerkLoaded]);
 
-  if (!loaded) {
+  if (!loaded || clerkLoaded) {
     return false;
   }
 };

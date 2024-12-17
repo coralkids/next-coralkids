@@ -1,19 +1,17 @@
 import { Redirect, Slot } from "expo-router";
 import { SignedIn, SignedOut } from "@clerk/clerk-expo";
 import React from "react";
-import useLoadResources from "../hooks/useLoadResources";
+import { BaseLayout } from "../components/BaseLayout";
 
 export default function AuthRoutesLayout() {
-  useLoadResources();
-
   return (
-    <>
+    <BaseLayout>
       <SignedIn>
         <Redirect href={"/"} />
       </SignedIn>
       <SignedOut>
         <Slot screenOptions={{ headerShown: false }} />
       </SignedOut>
-    </>
+    </BaseLayout>
   );
 }

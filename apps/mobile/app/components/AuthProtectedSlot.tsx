@@ -3,7 +3,7 @@ import React from "react";
 import { SignedIn, SignedOut } from "@clerk/clerk-expo";
 import { Redirect, Slot } from "expo-router";
 
-export const AuthProtected: React.FC<React.PropsWithChildren> = () => {
+export const AuthProtectedSlot: React.FC<React.PropsWithChildren> = () => {
   return (
     <>
       <SignedIn>
@@ -16,4 +16,4 @@ export const AuthProtected: React.FC<React.PropsWithChildren> = () => {
   );
 };
 
-export default AuthProtected;
+export default AuthProtectedSlot;
