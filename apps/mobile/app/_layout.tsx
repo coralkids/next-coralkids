@@ -1,22 +1,18 @@
 import { Platform, StatusBar, View } from "react-native";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
 import { Slot } from "expo-router";
 import React, { StrictMode } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { LogBox } from "react-native";
-import { useColorScheme } from "./hooks/useColorScheme";
 import ClerkConvexProvider from "./components/ClerkConvexProvider";
 import BaseLayout from "./components/BaseLayout";
+import { AppRegistry } from "react-native";
+import { PaperProvider } from "react-native-paper";
+import * as app from "../app.json";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   LogBox.ignoreLogs(["Warning: ..."]);
   LogBox.ignoreAllLogs();
 
@@ -32,12 +28,13 @@ export default function RootLayout() {
   return (
     <StrictMode>
       <ClerkConvexProvider>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
+        <PaperProvider>
           <BaseLayout>
             <View
-              style={{ height: STATUS_BAR_HEIGHT, backgroundColor: "#0D87E1" }}
+              style={{
+                height: STATUS_BAR_HEIGHT,
+                backgroundColor: "#0D87E1",
+              }}
             >
               <StatusBar
                 translucent
@@ -47,8 +44,10 @@ export default function RootLayout() {
             </View>
             <Slot screenOptions={{ headerShown: false }} />
           </BaseLayout>
-        </ThemeProvider>
+        </PaperProvider>
       </ClerkConvexProvider>
     </StrictMode>
   );
 }
+
+AppRegistry.registerComponent(app.expo.name, () => RootLayout);
