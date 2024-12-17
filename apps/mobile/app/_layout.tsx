@@ -1,28 +1,16 @@
-import { tokenCache } from "@/utils/cache";
-import { Text, StatusBar, View, Platform } from "react-native";
+import { Platform, StatusBar, View } from "react-native";
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { ClerkLoading, useAuth } from "@clerk/clerk-react";
-import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
-import { ConvexReactClient } from "convex/react";
-import { ConvexProviderWithClerk } from "convex/react-clerk";
-import { useFonts } from "expo-font";
 import { Slot } from "expo-router";
-import React, { StrictMode, useEffect } from "react";
+import React, { StrictMode } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { LogBox } from "react-native";
 import { useColorScheme } from "./hooks/useColorScheme";
-
-if (!process.env.EXPO_PUBLIC_CONVEX_URL) {
-  throw new Error("EXPO_PUBLIC_CONVEX_URL is not defined and is requred");
-}
-
-const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL, {
-  unsavedChangesWarning: false,
-});
+import { ClerkConvexProvider } from "./components/ClerkConvexProvider";
+import useLoadResources from "./hooks/useLoadResources";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -38,59 +26,27 @@ export default function RootLayout() {
     );
   }
 
-  const [loaded] = useFonts({
-    Bold: require("./assets/fonts/Inter-Bold.ttf"),
-    SemiBold: require("./assets/fonts/Inter-SemiBold.ttf"),
-    Medium: require("./assets/fonts/Inter-Medium.ttf"),
-    Regular: require("./assets/fonts/Inter-Regular.ttf"),
-    MBold: require("./assets/fonts/Montserrat-Bold.ttf"),
-    MSemiBold: require("./assets/fonts/Montserrat-SemiBold.ttf"),
-    MMedium: require("./assets/fonts/Montserrat-Medium.ttf"),
-    MRegular: require("./assets/fonts/Montserrat-Regular.ttf"),
-    MLight: require("./assets/fonts/Montserrat-Light.ttf"),
-  });
-
   const STATUS_BAR_HEIGHT =
     Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return false;
-  }
-
   return (
     <StrictMode>
-      <ClerkProvider
-        tokenCache={tokenCache}
-        publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}
-      >
-        <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-          <ThemeProvider
-            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+      <ClerkConvexProvider>
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <View
+            style={{ height: STATUS_BAR_HEIGHT, backgroundColor: "#0D87E1" }}
           >
-            <View
-              style={{ height: STATUS_BAR_HEIGHT, backgroundColor: "#0D87E1" }}
-            >
-              <StatusBar
-                translucent
-                backgroundColor={"#0D87E1"}
-                barStyle="light-content"
-              />
-            </View>
-            <ClerkLoading>
-              <Text>Clerk is loading...</Text>
-            </ClerkLoading>
-            <ClerkLoaded>
-              <Slot screenOptions={{ headerShown: false }} />
-            </ClerkLoaded>
-          </ThemeProvider>
-        </ConvexProviderWithClerk>
-      </ClerkProvider>
+            <StatusBar
+              translucent
+              backgroundColor={"#0D87E1"}
+              barStyle="light-content"
+            />
+          </View>
+          <Slot screenOptions={{ headerShown: false }} />
+        </ThemeProvider>
+      </ClerkConvexProvider>
     </StrictMode>
   );
 }
