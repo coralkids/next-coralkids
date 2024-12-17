@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -8,15 +8,15 @@ import {
   Image,
   FlatList,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
-import { api } from "@packages/backend/convex/_generated/api";
 
 import { useAuth, useUser } from "@clerk/clerk-react";
-import { useQuery } from "convex/react";
 import { router } from "expo-router";
 import { Doc } from "@packages/backend/convex/_generated/dataModel";
+import { useNotes } from "../hooks/useNotes";
 
 const NotesDashboardScreen = () => {
   const { user } = useUser();
@@ -26,19 +26,24 @@ const NotesDashboardScreen = () => {
   const firstName = user?.firstName;
   const lastName = user?.lastName;
 
-  const allNotes = useQuery(api.notes.getNotes) || [];
-
   const [search, setSearch] = useState("");
+  const { notes: allNotes, loading } = useNotes();
 
-  const finalNotes = search
-    ? allNotes?.filter(
-        (note) =>
-          note.title.toLowerCase().includes(search.toLowerCase()) ||
-          note.content.toLowerCase().includes(search.toLowerCase()),
-      )
-    : allNotes;
+  const finalNotes = useMemo(() => {
+    if (!allNotes) {
+      return [];
+    }
 
-  console.log(finalNotes);
+    return search
+      ? allNotes?.filter(
+          (note) =>
+            note.title.toLowerCase().includes(search.toLowerCase()) ||
+            note.content.toLowerCase().includes(search.toLowerCase()),
+        )
+      : allNotes;
+  }, [allNotes, search]);
+
+  console.log("render", loading);
 
   const renderItem = ({ item }: { item: Doc<"notes"> }) => (
     <TouchableOpacity
@@ -109,7 +114,12 @@ const NotesDashboardScreen = () => {
           style={styles.searchInput}
         />
       </View>
-      {!finalNotes || finalNotes.length === 0 ? (
+      {!allNotes && (
+        <View style={styles.emptyState}>
+          <ActivityIndicator size="large" />
+        </View>
+      )}
+      {allNotes && allNotes.length === 0 ? (
         <View style={styles.emptyState}>
           <Text style={styles.emptyStateText}>
             Create your first note to{"\n"}get started
