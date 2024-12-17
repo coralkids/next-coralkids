@@ -6,6 +6,7 @@ import React, { createContext } from "react";
 export const NotesContext = createContext<Doc<"notes">[] | undefined>(
   undefined,
 );
+
 export const NotesProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
