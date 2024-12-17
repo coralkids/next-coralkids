@@ -27,7 +27,7 @@ export default function RootLayout() {
   }
 
   const STATUS_BAR_HEIGHT =
-    Platform.OS === "ios" ? 35 : StatusBar.currentHeight;
+    Platform.OS === "ios" ? 40 : StatusBar.currentHeight;
 
   return (
     <StrictMode>
