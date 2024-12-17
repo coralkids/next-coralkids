@@ -37,3 +37,5 @@ export const ClerkConvexProvider: React.FC<React.PropsWithChildren> = ({
     </ClerkProvider>
   );
 };
+
+export default ClerkConvexProvider;

@@ -9,8 +9,8 @@ import React, { StrictMode } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { LogBox } from "react-native";
 import { useColorScheme } from "./hooks/useColorScheme";
-import { ClerkConvexProvider } from "./components/ClerkConvexProvider";
-import { BaseLayout } from "./components/BaseLayout";
+import ClerkConvexProvider from "./components/ClerkConvexProvider";
+import BaseLayout from "./components/BaseLayout";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();

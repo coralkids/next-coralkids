@@ -16,3 +16,5 @@ export const NotesProvider: React.FC<React.PropsWithChildren> = ({
     <NotesContext.Provider value={allNotes}>{children}</NotesContext.Provider>
   );
 };
+
+export default NotesProvider;

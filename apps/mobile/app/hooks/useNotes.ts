@@ -9,3 +9,5 @@ export const useNotes = () => {
     notes: notes,
   };
 };
+
+export default useNotes;

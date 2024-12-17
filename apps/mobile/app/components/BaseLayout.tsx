@@ -34,3 +34,5 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return <Loader />;
 };
+
+export default BaseLayout;
