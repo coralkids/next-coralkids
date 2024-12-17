@@ -10,7 +10,6 @@ import {
   Keyboard,
   Animated,
 } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
 import { AntDesign } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { api } from "@packages/backend/convex/_generated/api";
@@ -145,7 +144,7 @@ export default function CreateNoteScreen() {
               {isAdvancedSummarizationEnabled && (
                 <AntDesign
                   name="check"
-                  size={RFValue(12.5)}
+                  size={12.5}
                   color="#0D87E1"
                   aria-checked
                 />
@@ -180,6 +179,7 @@ export default function CreateNoteScreen() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
+    width: "100%",
   },
   header: {
     backgroundColor: "#0D87E1",
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   title: {
-    fontSize: RFValue(17.5),
+    fontSize: 17.5,
     fontFamily: "MMedium",
     color: "#2D2D2D",
   },
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     marginTop: 43,
   },
   inputLabel: {
-    fontSize: RFValue(15),
+    fontSize: 15,
     fontFamily: "MMedium",
     color: "#000",
     marginBottom: 6,
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   inputField: {
     backgroundColor: "#FFF",
     marginBottom: 30,
-    fontSize: RFValue(15),
+    fontSize: 15,
     fontFamily: "MLight",
     color: "#000",
     borderRadius: 8,
@@ -251,34 +251,34 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   checkbox: {
-    width: RFValue(17.5),
-    height: RFValue(17.5),
-    borderRadius: RFValue(5),
+    width: 17.5,
+    height: 17.5,
+    borderRadius: 5,
     borderWidth: 1,
     borderColor: "#0D87E1",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: RFValue(10),
+    marginRight: 10,
     backgroundColor: "#F9F5FF",
   },
   checkboxDisabled: {
-    width: RFValue(17.5),
-    height: RFValue(17.5),
-    borderRadius: RFValue(5),
+    width: 17.5,
+    height: 17.5,
+    borderRadius: 5,
     borderWidth: 1,
     borderColor: "#D9D9D9",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: RFValue(10),
+    marginRight: 10,
     backgroundColor: "#F9F5FF",
   },
   advancedSummarizationText: {
-    fontSize: RFValue(15),
+    fontSize: 15,
     fontFamily: "MLight",
     color: "#000",
   },
   advancedSummarizationSubtext: {
-    fontSize: RFValue(12.5),
+    fontSize: 12.5,
     fontFamily: "MRegular",
     color: "#A9A9A9",
     paddingHorizontal: 30,
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
   },
   newNoteButtonText: {
     color: "white",
-    fontSize: RFValue(15),
+    fontSize: 15,
     fontFamily: "MMedium",
     marginLeft: 10,
   },
