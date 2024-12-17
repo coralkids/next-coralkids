@@ -13,16 +13,18 @@ import { Feather, AntDesign } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { api } from "@packages/backend/convex/_generated/api";
 
-import { useUser } from "@clerk/clerk-expo";
+import { useAuth, useUser } from "@clerk/clerk-react";
 import { useQuery } from "convex/react";
 import { router } from "expo-router";
 import { Doc } from "@packages/backend/convex/_generated/dataModel";
 
 const NotesDashboardScreen = () => {
   const { user } = useUser();
+  const { signOut } = useAuth();
 
   const imageUrl = user?.imageUrl;
   const firstName = user?.firstName;
+  const lastName = user?.lastName;
 
   const allNotes = useQuery(api.notes.getNotes) || [];
 
@@ -60,14 +62,38 @@ const NotesDashboardScreen = () => {
       </View>
 
       <View style={styles.yourNotesContainer}>
-        {/* @ts-ignore, for css purposes */}
-        <Image style={styles.avatarSmall} />
-        <Text style={styles.title}>Your Notes</Text>
-        {imageUrl ? (
-          <Image style={styles.avatarSmall} source={{ uri: imageUrl }} />
-        ) : (
-          <Text>{firstName ? firstName : ""}</Text>
-        )}
+        <View
+          style={{
+            display: "flex",
+            flex: 1,
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 10,
+          }}
+        >
+          {imageUrl && (
+            <Image style={styles.avatarSmall} source={{ uri: imageUrl }} />
+          )}
+          <Text>
+            {firstName} {lastName}
+          </Text>
+        </View>
+        <TouchableOpacity
+          onPress={async () => await signOut()}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 10,
+            backgroundColor: "pink",
+            padding: 10,
+            borderRadius: 10,
+            marginLeft: 10,
+          }}
+        >
+          <Text style={{ color: "red" }}>Logout</Text>
+          <AntDesign name="logout" size={20} color="red" />
+        </TouchableOpacity>
       </View>
       <View style={styles.searchContainer}>
         <Feather

@@ -7,7 +7,7 @@ export default function AuthRoutesLayout() {
   return (
     <BaseLayout>
       <SignedIn>
-        <Redirect href={"/"} />
+        <Redirect href="/(home)" />
       </SignedIn>
       <SignedOut>
         <Slot screenOptions={{ headerShown: false }} />

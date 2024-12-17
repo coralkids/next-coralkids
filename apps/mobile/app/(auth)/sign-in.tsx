@@ -5,7 +5,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Page() {
   const { startOAuthFlow: startGoogleAuthFlow } = useOAuth({
@@ -22,13 +22,13 @@ export default function Page() {
       if (authType === "google") {
         const { createdSessionId, setActive } = await startGoogleAuthFlow();
         if (createdSessionId && setActive) {
-          setActive({ session: createdSessionId });
+          await setActive({ session: createdSessionId });
           router.navigate("/(home)");
         }
       } else if (authType === "apple") {
         const { createdSessionId, setActive } = await startAppleAuthFlow();
         if (createdSessionId && setActive) {
-          setActive({ session: createdSessionId });
+          await setActive({ session: createdSessionId });
           router.navigate("/(home)");
         }
       }
@@ -41,46 +41,56 @@ export default function Page() {
     <View style={styles.container}>
       <View style={styles.card}>
         <SafeAreaView>
-          <Image
-            source={require("../assets/icons/logo2small.png")} // Ensure the correct path to your logo image file
-            style={styles.logo}
-          />
-          <Text style={styles.title}>Log in to your account</Text>
-          <Text style={styles.subtitle}>Welcome! Please login below.</Text>
-          <TouchableOpacity
-            style={styles.buttonGoogle}
-            onPress={() => onPress("google")}
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
             <Image
-              style={styles.googleIcon}
-              source={require("../assets/icons/google.png")}
+              source={require("../assets/icons/logo2small.png")} // Ensure the correct path to your logo image file
+              style={styles.logo}
             />
-            <Text style={{ ...styles.buttonText, color: "#344054" }}>
-              Continue with Google
-            </Text>
-          </TouchableOpacity>
+            <Text style={styles.title}>Log in to your account</Text>
+            <Text style={styles.subtitle}>Welcome! Please login below.</Text>
 
-          <TouchableOpacity
-            style={styles.buttonApple}
-            onPress={() => onPress("apple")}
-          >
-            <AntDesign name="apple1" size={24} color="black" />
-            <Text
-              style={{
-                ...styles.buttonText,
-                color: "#344054",
-                marginLeft: 12,
-              }}
+            <TouchableOpacity
+              style={styles.buttonGoogle}
+              onPress={() => onPress("google")}
             >
-              Continue with Apple
-            </Text>
-          </TouchableOpacity>
+              <Image
+                style={styles.googleIcon}
+                source={require("../assets/icons/google.png")}
+              />
+              <Text style={{ ...styles.buttonText, color: "#344054" }}>
+                Continue with Google
+              </Text>
+            </TouchableOpacity>
 
-          <View style={styles.signupContainer}>
-            <Text style={{ fontFamily: "Regular", marginRight: 10 }}>
-              Don’t have an account?
-            </Text>
-            <Text>Sign up above.</Text>
+            <TouchableOpacity
+              style={styles.buttonApple}
+              onPress={() => onPress("apple")}
+            >
+              <AntDesign name="apple1" size={24} color="black" />
+              <Text
+                style={{
+                  ...styles.buttonText,
+                  color: "#344054",
+                  marginLeft: 12,
+                }}
+              >
+                Continue with Apple
+              </Text>
+            </TouchableOpacity>
+
+            <View style={styles.signupContainer}>
+              <Text style={{ fontFamily: "Regular", marginRight: 10 }}>
+                Don’t have an account?
+              </Text>
+              <Text>Sign up above.</Text>
+            </View>
           </View>
         </SafeAreaView>
       </View>
@@ -94,14 +104,11 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "#fff",
-    padding: 10,
     alignItems: "center",
-    width: "98%",
   },
   logo: {
     width: 74,
     height: 74,
-    marginTop: 20,
   },
   title: {
     marginTop: 49,
