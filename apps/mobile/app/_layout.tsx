@@ -10,7 +10,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { LogBox } from "react-native";
 import { useColorScheme } from "./hooks/useColorScheme";
 import { ClerkConvexProvider } from "./components/ClerkConvexProvider";
-import useLoadResources from "./hooks/useLoadResources";
+import { BaseLayout } from "./components/BaseLayout";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -35,16 +35,18 @@ export default function RootLayout() {
         <ThemeProvider
           value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
         >
-          <View
-            style={{ height: STATUS_BAR_HEIGHT, backgroundColor: "#0D87E1" }}
-          >
-            <StatusBar
-              translucent
-              backgroundColor={"#0D87E1"}
-              barStyle="light-content"
-            />
-          </View>
-          <Slot screenOptions={{ headerShown: false }} />
+          <BaseLayout>
+            <View
+              style={{ height: STATUS_BAR_HEIGHT, backgroundColor: "#0D87E1" }}
+            >
+              <StatusBar
+                translucent
+                backgroundColor={"#0D87E1"}
+                barStyle="light-content"
+              />
+            </View>
+            <Slot screenOptions={{ headerShown: false }} />
+          </BaseLayout>
         </ThemeProvider>
       </ClerkConvexProvider>
     </StrictMode>
