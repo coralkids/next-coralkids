@@ -2,7 +2,6 @@ import React from "react";
 import { useOAuth } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -204,13 +203,5 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     marginRight: 12,
-  },
-  errorText: {
-    fontSize: RFValue(14),
-    color: "tomato",
-    fontFamily: "Medium",
-    alignSelf: "flex-start",
-    marginBottom: 8,
-    marginLeft: 4,
   },
 });
