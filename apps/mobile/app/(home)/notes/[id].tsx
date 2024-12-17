@@ -1,5 +1,7 @@
-import { useCurrentNote } from "@/app/hooks/useCurrentNote";
-import { useRouter } from "expo-router";
+import { api } from "@packages/backend/convex/_generated/api";
+import { Id } from "@packages/backend/convex/_generated/dataModel";
+import { useQuery } from "convex/react";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -11,14 +13,13 @@ import {
   ScrollView,
   ActivityIndicator,
 } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
 
 const { width } = Dimensions.get("window");
 
 export default function InsideNoteScreen() {
-  const { note: item, loading } = useCurrentNote();
-
-  console.log("Render item", item, loading);
+  const params = useLocalSearchParams<{ id: Id<"notes"> }>();
+  const item = useQuery(api.notes.getNote, { id: params.id });
+  const loading = item === undefined;
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("original"); // State to manage active tab
 
@@ -120,6 +121,7 @@ export default function InsideNoteScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
     backgroundColor: "#F5F7FE",
   },
   header: {
@@ -151,7 +153,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   title: {
-    fontSize: RFValue(17.5),
+    fontSize: 17.5,
     fontFamily: "MMedium",
     color: "#2D2D2D",
   },
@@ -159,14 +161,14 @@ const styles = StyleSheet.create({
     // Add styles for contentContainer if needed
   },
   contentTitle: {
-    fontSize: RFValue(17.5),
+    fontSize: 17.5,
     fontFamily: "MMedium",
     color: "#000",
     textAlign: "center",
     marginTop: 28,
   },
   contentDescription: {
-    fontSize: RFValue(17.5),
+    fontSize: 17.5,
     fontFamily: "MRegular",
     alignSelf: "center",
     textAlign: "justify",
@@ -205,7 +207,7 @@ const styles = StyleSheet.create({
     tintColor: "#000",
   },
   footerText: {
-    fontSize: RFValue(12.5),
+    fontSize: 12.5,
     fontFamily: "MRegular",
   },
   activeTabText: {

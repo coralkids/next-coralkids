@@ -100,7 +100,11 @@ export default function Page() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: "#fff",
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
   },
   card: {
     backgroundColor: "#fff",
@@ -112,12 +116,12 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 49,
-    fontSize: RFValue(21),
+    fontSize: 21,
     fontFamily: "SemiBold",
   },
   subtitle: {
     marginTop: 8,
-    fontSize: RFValue(14),
+    fontSize: 14,
     color: "#000",
     fontFamily: "Regular",
     marginBottom: 32,
@@ -131,7 +135,7 @@ const styles = StyleSheet.create({
     padding: 14,
     marginBottom: 16,
     fontFamily: "Regular",
-    fontSize: RFValue(14),
+    fontSize: 14,
   },
   buttonEmail: {
     backgroundColor: "#0D87E1",
@@ -145,7 +149,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#FFF",
     fontFamily: "SemiBold",
-    fontSize: RFValue(14),
+    fontSize: 14,
   },
   buttonTextWithIcon: {
     marginLeft: 10,

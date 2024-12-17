@@ -11,7 +11,6 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
-import { RFValue } from "react-native-responsive-fontsize";
 
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { router } from "expo-router";
@@ -27,7 +26,7 @@ const NotesDashboardScreen = () => {
   const lastName = user?.lastName;
 
   const [search, setSearch] = useState("");
-  const { notes: allNotes, loading } = useNotes();
+  const { notes: allNotes } = useNotes();
 
   const finalNotes = useMemo(() => {
     if (!allNotes) {
@@ -165,7 +164,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   title: {
-    fontSize: RFValue(17.5),
+    fontSize: 17.5,
     fontFamily: "MMedium",
     alignSelf: "center",
   },
@@ -195,7 +194,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   searchInput: {
-    fontSize: RFValue(15),
+    fontSize: 15,
     fontFamily: "MRegular",
     color: "#2D2D2D",
   },
@@ -240,7 +239,7 @@ const styles = StyleSheet.create({
   },
   newNoteButtonText: {
     color: "white",
-    fontSize: RFValue(15),
+    fontSize: 15,
     fontFamily: "MMedium",
     marginLeft: 10,
   },
@@ -252,7 +251,7 @@ const styles = StyleSheet.create({
   emptyStateText: {
     textAlign: "center",
     alignSelf: "center",
-    fontSize: RFValue(15),
+    fontSize: 15,
     color: "grey",
     fontFamily: "MLight",
   },
