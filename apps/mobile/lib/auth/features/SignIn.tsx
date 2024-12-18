@@ -6,7 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function SignIn() {
+export default function Page() {
   const { startOAuthFlow: startGoogleAuthFlow } = useOAuth({
     strategy: "oauth_google",
   });
@@ -52,8 +52,8 @@ export default function SignIn() {
               source={require("@/assets/icons/logo2small.png")} // Ensure the correct path to your logo image file
               style={styles.logo}
             />
-            <Text style={styles.title}>Log in to your account</Text>
-            <Text style={styles.subtitle}>Welcome! Please login below.</Text>
+            <Text style={styles.title}>Iniciar sesion</Text>
+            <Text style={styles.subtitle}>Bienvenid@ a Coralkids!</Text>
 
             <TouchableOpacity
               style={styles.buttonGoogle}
@@ -64,7 +64,7 @@ export default function SignIn() {
                 source={require("@/assets/icons/google.png")}
               />
               <Text style={{ ...styles.buttonText, color: "#344054" }}>
-                Continue with Google
+                Continuar con Google
               </Text>
             </TouchableOpacity>
 
@@ -80,16 +80,9 @@ export default function SignIn() {
                   marginLeft: 12,
                 }}
               >
-                Continue with Apple
+                Continuar con Apple
               </Text>
             </TouchableOpacity>
-
-            <View style={styles.signupContainer}>
-              <Text style={{ fontFamily: "Regular", marginRight: 10 }}>
-                Don’t have an account?
-              </Text>
-              <Text>Sign up above.</Text>
-            </View>
           </View>
         </SafeAreaView>
       </View>
@@ -185,7 +178,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFF",
-    padding: 15,
+    height: 44,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#D0D5DD",

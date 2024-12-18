@@ -1,4 +1,3 @@
-import { Platform, StatusBar, View } from "react-native";
 import { Slot } from "expo-router";
 import React, { StrictMode } from "react";
 import * as SplashScreen from "expo-splash-screen";
@@ -54,26 +53,11 @@ export default function RootLayout() {
       : { ...CombinedDefaultTheme, colors: lightTheme.colors }
   ) as ThemeProp;
 
-  const STATUS_BAR_HEIGHT =
-    Platform.OS === "ios" ? 40 : StatusBar.currentHeight;
-
   return (
     <StrictMode>
       <ClerkConvexProvider>
         <PaperProvider theme={paperTheme}>
           <BaseLayout>
-            <View
-              style={{
-                height: STATUS_BAR_HEIGHT,
-                backgroundColor: "#0D87E1",
-              }}
-            >
-              <StatusBar
-                translucent
-                backgroundColor={"#0D87E1"}
-                barStyle="light-content"
-              />
-            </View>
             <Slot screenOptions={{ headerShown: false }} />
           </BaseLayout>
         </PaperProvider>
