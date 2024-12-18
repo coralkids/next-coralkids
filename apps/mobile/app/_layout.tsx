@@ -51,11 +51,10 @@ export default function RootLayout() {
     );
   }
 
-  const paperTheme = (
+  const paperTheme: ReactNativePaperCustomTheme =
     colorScheme === "dark"
       ? { ...CombinedDarkTheme, colors: darkTheme.colors }
-      : { ...CombinedDefaultTheme, colors: lightTheme.colors }
-  ) as ReactNativePaperCustomTheme;
+      : { ...CombinedDefaultTheme, colors: lightTheme.colors };
 
   const STATUS_BAR_HEIGHT =
     Platform.OS === "ios" ? 50 : StatusBar.currentHeight;

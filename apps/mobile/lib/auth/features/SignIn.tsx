@@ -106,7 +106,8 @@ export default function Page() {
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors?.background};
+  background-color: ${({ theme }: { theme: ReactNativePaperCustomTheme }) =>
+    theme.colors?.background};
   align-items: center;
   justify-content: center;
   display: flex;
