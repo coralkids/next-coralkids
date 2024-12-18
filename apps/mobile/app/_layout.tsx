@@ -23,7 +23,8 @@ import merge from "deepmerge";
 
 import lightTheme from "./theme/light.json";
 import darkTheme from "./theme/dark.json";
-import { ThemeProp } from "react-native-paper/lib/typescript/types";
+
+import type { ThemeProp } from "react-native-paper/lib/typescript/types";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -49,8 +50,8 @@ export default function RootLayout() {
 
   const paperTheme = (
     colorScheme === "dark"
-      ? { ...CombinedDarkTheme, colors: darkTheme }
-      : { ...CombinedDefaultTheme, colors: lightTheme }
+      ? { ...CombinedDarkTheme, colors: darkTheme.colors }
+      : { ...CombinedDefaultTheme, colors: lightTheme.colors }
   ) as ThemeProp;
 
   const STATUS_BAR_HEIGHT =
