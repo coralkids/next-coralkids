@@ -6,14 +6,34 @@ import { LogBox } from "react-native";
 import ClerkConvexProvider from "./components/ClerkConvexProvider";
 import BaseLayout from "./components/BaseLayout";
 import { AppRegistry } from "react-native";
-import { MD3DarkTheme, MD3LightTheme, PaperProvider } from "react-native-paper";
+import {
+  adaptNavigationTheme,
+  MD3DarkTheme,
+  MD3LightTheme,
+  PaperProvider,
+} from "react-native-paper";
 import * as app from "../app.json";
 import { useColorScheme } from "./hooks/useColorScheme.web";
+import {
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+} from "@react-navigation/native";
+
+import merge from "deepmerge";
+
 import lightTheme from "./theme/light.json";
 import darkTheme from "./theme/dark.json";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+const { LightTheme, DarkTheme } = adaptNavigationTheme({
+  reactNavigationLight: NavigationDefaultTheme,
+  reactNavigationDark: NavigationDarkTheme,
+});
+
+const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
+const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 
 export default function RootLayout() {
   LogBox.ignoreLogs(["Warning: ..."]);
@@ -28,8 +48,8 @@ export default function RootLayout() {
 
   const paperTheme =
     colorScheme === "dark"
-      ? { ...MD3DarkTheme, colors: darkTheme }
-      : { ...MD3LightTheme, colors: lightTheme };
+      ? { ...CombinedDarkTheme, colors: darkTheme }
+      : { ...CombinedDefaultTheme, colors: lightTheme };
 
   const STATUS_BAR_HEIGHT =
     Platform.OS === "ios" ? 40 : StatusBar.currentHeight;
