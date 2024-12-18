@@ -7,6 +7,7 @@ import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "react-native-paper";
 import AppLoader from "@/lib/core/ui/AppLoader";
+import styled from "styled-components/native";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
@@ -45,9 +46,7 @@ export default function Page() {
   };
 
   return (
-    <View
-      style={{ ...styles.container, backgroundColor: theme.colors.background }}
-    >
+    <Container>
       {!loading && (
         <View style={styles.card}>
           <View
@@ -100,17 +99,19 @@ export default function Page() {
         </View>
       )}
       {loading && <AppLoader />}
-    </View>
+    </Container>
   );
 }
 
+const Container = styled.View`
+  flex: 1;
+  background-color: ${(props) => props.theme.colors.background};
+  align-items: center;
+  justify-content: center;
+  display: flex;
+`;
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "center",
-  },
   card: {
     alignItems: "center",
   },

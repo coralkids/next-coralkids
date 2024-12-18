@@ -25,6 +25,7 @@ import darkTheme from "../theme/dark.json";
 
 import type { ThemeProp } from "react-native-paper/lib/typescript/types";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { ThemeProvider } from "styled-components/native";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -61,24 +62,26 @@ export default function RootLayout() {
     <StrictMode>
       <ClerkConvexProvider>
         <PaperProvider theme={paperTheme}>
-          <BaseLayout>
-            <View
-              style={{
-                height: STATUS_BAR_HEIGHT,
-                backgroundColor:
-                  colorScheme === "dark"
-                    ? darkTheme.colors.background
-                    : lightTheme.colors.background,
-              }}
-            >
-              <StatusBar translucent />
-            </View>
-            <SafeAreaProvider>
-              <SafeAreaView style={{ flex: 1 }}>
-                <Slot screenOptions={{ headerShown: false }} />
-              </SafeAreaView>
-            </SafeAreaProvider>
-          </BaseLayout>
+          <ThemeProvider theme={paperTheme}>
+            <BaseLayout>
+              <View
+                style={{
+                  height: STATUS_BAR_HEIGHT,
+                  backgroundColor:
+                    colorScheme === "dark"
+                      ? darkTheme.colors.background
+                      : lightTheme.colors.background,
+                }}
+              >
+                <StatusBar translucent />
+              </View>
+              <SafeAreaProvider>
+                <SafeAreaView style={{ flex: 1 }}>
+                  <Slot screenOptions={{ headerShown: false }} />
+                </SafeAreaView>
+              </SafeAreaProvider>
+            </BaseLayout>
+          </ThemeProvider>
         </PaperProvider>
       </ClerkConvexProvider>
     </StrictMode>
