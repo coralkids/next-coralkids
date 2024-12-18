@@ -1,4 +1,3 @@
-import { Doc } from "@packages/backend/convex/_generated/dataModel";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {

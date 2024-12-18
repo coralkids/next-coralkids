@@ -15,7 +15,7 @@ import { Feather, AntDesign } from "@expo/vector-icons";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { router } from "expo-router";
 import { Doc } from "@packages/backend/convex/_generated/dataModel";
-import { useNotes } from "@/hooks/useNotes";
+import { useNotes } from "@/lib/notes/hooks/useNotes";
 
 const NotesDashboardScreen = () => {
   const { user } = useUser();
