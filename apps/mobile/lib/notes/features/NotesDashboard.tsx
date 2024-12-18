@@ -45,7 +45,7 @@ const NotesDashboard = () => {
   const renderItem = ({ item }: { item: Doc<"notes"> }) => (
     <TouchableOpacity
       onPress={() => {
-        router.navigate(`/(home)/notes/${item._id}`);
+        router.navigate(`/(home)/${item._id}`);
       }}
       activeOpacity={0.5}
       style={styles.noteItem}
