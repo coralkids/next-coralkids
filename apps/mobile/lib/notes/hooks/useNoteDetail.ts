@@ -5,10 +5,6 @@ import { NoteDetailContext } from "../providers/NoteDetailProvider";
 export const useNoteDetail = () => {
   const ctx = useContext(NoteDetailContext);
 
-  if (!ctx) {
-    throw new Error("useNoteDetail needs a NoteDetailProvider");
-  }
-
   return ctx;
 };
 

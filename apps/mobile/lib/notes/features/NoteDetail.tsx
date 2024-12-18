@@ -19,7 +19,7 @@ export default function NoteDetail() {
   const loading = item === undefined;
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("original"); // State to manage active tab
-
+  console.log("render", loading, item);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
