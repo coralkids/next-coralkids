@@ -2,7 +2,7 @@ import React from "react";
 import { ClerkProvider } from "@clerk/clerk-expo";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ConvexReactClient } from "convex/react";
-import { tokenCache } from "@/utils/cache";
+import { tokenCache } from "@/lib/core/utils/cache";
 import { ClerkLoaded, ClerkLoading, useAuth } from "@clerk/clerk-react";
 import Loader from "./AppLoader";
 
