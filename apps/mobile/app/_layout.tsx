@@ -1,10 +1,10 @@
 import { Slot } from "expo-router";
 import React, { StrictMode } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { LogBox } from "react-native";
+import { LogBox, Platform, View } from "react-native";
 import ClerkConvexProvider from "@/lib/core/ui/ClerkConvexProvider";
 import BaseLayout from "@/lib/core/ui/BaseLayout";
-import { AppRegistry } from "react-native";
+import { AppRegistry, StatusBar } from "react-native";
 import {
   adaptNavigationTheme,
   MD3DarkTheme,
@@ -24,6 +24,7 @@ import lightTheme from "../theme/light.json";
 import darkTheme from "../theme/dark.json";
 
 import type { ThemeProp } from "react-native-paper/lib/typescript/types";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -53,12 +54,30 @@ export default function RootLayout() {
       : { ...CombinedDefaultTheme, colors: lightTheme.colors }
   ) as ThemeProp;
 
+  const STATUS_BAR_HEIGHT =
+    Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
+
   return (
     <StrictMode>
       <ClerkConvexProvider>
         <PaperProvider theme={paperTheme}>
           <BaseLayout>
-            <Slot screenOptions={{ headerShown: false }} />
+            <View
+              style={{
+                height: STATUS_BAR_HEIGHT,
+                backgroundColor:
+                  colorScheme === "dark"
+                    ? darkTheme.colors.background
+                    : lightTheme.colors.background,
+              }}
+            >
+              <StatusBar translucent />
+            </View>
+            <SafeAreaProvider>
+              <SafeAreaView style={{ flex: 1 }}>
+                <Slot screenOptions={{ headerShown: false }} />
+              </SafeAreaView>
+            </SafeAreaProvider>
           </BaseLayout>
         </PaperProvider>
       </ClerkConvexProvider>

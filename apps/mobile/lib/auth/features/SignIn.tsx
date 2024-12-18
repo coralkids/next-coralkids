@@ -5,6 +5,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "react-native-paper";
 
 export default function Page() {
   const { startOAuthFlow: startGoogleAuthFlow } = useOAuth({
@@ -13,6 +14,8 @@ export default function Page() {
   const { startOAuthFlow: startAppleAuthFlow } = useOAuth({
     strategy: "oauth_apple",
   });
+
+  const theme = useTheme();
 
   const router = useRouter();
 
@@ -37,7 +40,9 @@ export default function Page() {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{ ...styles.container, backgroundColor: theme.colors.background }}
+    >
       <View style={styles.card}>
         <SafeAreaView>
           <View
@@ -93,13 +98,11 @@ export default function Page() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     display: "flex",
     justifyContent: "center",
   },
   card: {
-    backgroundColor: "#fff",
     alignItems: "center",
   },
   logo: {
