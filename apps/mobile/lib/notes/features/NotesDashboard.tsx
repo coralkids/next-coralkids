@@ -45,7 +45,7 @@ const NotesDashboard = () => {
   const renderItem = ({ item }: { item: Doc<"notes"> }) => (
     <TouchableOpacity
       onPress={() => {
-        router.navigate(`/(home)/${item._id}`);
+        router.navigate(`/${item._id}`);
       }}
       activeOpacity={0.5}
       style={styles.noteItem}
@@ -136,7 +136,7 @@ const NotesDashboard = () => {
         />
       )}
       <TouchableOpacity
-        onPress={() => router.navigate("/(home)/notes/create")}
+        onPress={() => router.navigate("/create")}
         style={styles.newNoteButton}
       >
         <AntDesign name="pluscircle" size={20} color="#fff" />
