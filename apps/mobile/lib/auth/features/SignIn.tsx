@@ -5,7 +5,12 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import AppLoader from "@/lib/core/ui/AppLoader";
-import styled from "styled-components/native";
+import s, {
+  ReactNativePaperCustomTheme,
+  ReactNativeStyledInterface,
+} from "styled-components/native";
+
+const styled: ReactNativeStyledInterface<ReactNativePaperCustomTheme> = s;
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
@@ -101,7 +106,7 @@ export default function Page() {
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors?.background};
   align-items: center;
   justify-content: center;
   display: flex;

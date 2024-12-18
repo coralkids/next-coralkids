@@ -6,13 +6,23 @@
       "@/*": [
         "./*"
       ]
-    }
+    },
+    "plugins": [
+          {
+              "transform": "typescript-plugin-styled-components",
+              "type": "config",
+
+              // other typescript-plugin-styled-components options can be added here
+              "minify": true,
+              "ssr": true
+          }
+    ],
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "theme/theme.d.ts",
+    "**/*.d.ts",
     "expo-env.d.ts"
   ]
 }
