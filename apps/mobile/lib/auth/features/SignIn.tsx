@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useOAuth } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
@@ -6,8 +6,10 @@ import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "react-native-paper";
+import AppLoader from "@/lib/core/ui/AppLoader";
 
 export default function Page() {
+  const [loading, setLoading] = useState(false);
   const { startOAuthFlow: startGoogleAuthFlow } = useOAuth({
     strategy: "oauth_google",
   });
@@ -20,6 +22,8 @@ export default function Page() {
   const router = useRouter();
 
   const onPress = async (authType: string) => {
+    setLoading(true);
+
     try {
       if (authType === "google") {
         const { createdSessionId, setActive } = await startGoogleAuthFlow();
@@ -37,16 +41,19 @@ export default function Page() {
     } catch (err) {
       console.error("OAuth error", err);
     }
+    setLoading(false);
   };
 
   return (
     <View
       style={{ ...styles.container, backgroundColor: theme.colors.background }}
     >
-      <View style={styles.card}>
-        <SafeAreaView>
+      {!loading && (
+        <View style={styles.card}>
           <View
             style={{
+              flex: 1,
+              width: "100%",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
@@ -54,7 +61,8 @@ export default function Page() {
             }}
           >
             <Image
-              source={require("@/assets/icons/logo2small.png")} // Ensure the correct path to your logo image file
+              contentFit="contain"
+              source={require("@/assets/icons/logo-negro-degradado.png")} // Ensure the correct path to your logo image file
               style={styles.logo}
             />
             <Text style={styles.title}>Iniciar sesion</Text>
@@ -89,8 +97,9 @@ export default function Page() {
               </Text>
             </TouchableOpacity>
           </View>
-        </SafeAreaView>
-      </View>
+        </View>
+      )}
+      {loading && <AppLoader />}
     </View>
   );
 }
@@ -106,8 +115,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 74,
-    height: 74,
+    width: 350,
+    height: 55,
+    backgroundPosition: "center",
+    backgroundImage: "url()",
   },
   title: {
     marginTop: 49,
@@ -172,7 +183,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#D0D5DD",
-    width: "100%",
+    paddingHorizontal: 50,
     marginBottom: 12,
     height: 44,
   },
@@ -184,8 +195,8 @@ const styles = StyleSheet.create({
     height: 44,
     borderRadius: 10,
     borderWidth: 1,
+    paddingHorizontal: 50,
     borderColor: "#D0D5DD",
-    width: "100%",
     marginBottom: 32,
   },
   signupContainer: {
