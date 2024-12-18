@@ -20,12 +20,14 @@ import {
 
 import merge from "deepmerge";
 
-import lightTheme from "../theme/light.json";
-import darkTheme from "../theme/dark.json";
+import lightTheme from "../theme/light";
+import darkTheme from "../theme/dark";
 
-import type { ThemeProp } from "react-native-paper/lib/typescript/types";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { ThemeProvider } from "styled-components/native";
+import {
+  ReactNativePaperCustomTheme,
+  ThemeProvider,
+} from "styled-components/native";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -53,7 +55,7 @@ export default function RootLayout() {
     colorScheme === "dark"
       ? { ...CombinedDarkTheme, colors: darkTheme.colors }
       : { ...CombinedDefaultTheme, colors: lightTheme.colors }
-  ) as ThemeProp;
+  ) as ReactNativePaperCustomTheme;
 
   const STATUS_BAR_HEIGHT =
     Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
@@ -69,8 +71,8 @@ export default function RootLayout() {
                   height: STATUS_BAR_HEIGHT,
                   backgroundColor:
                     colorScheme === "dark"
-                      ? darkTheme.colors.background
-                      : lightTheme.colors.background,
+                      ? darkTheme.colors?.background
+                      : lightTheme.colors?.background,
                 }}
               >
                 <StatusBar translucent />
