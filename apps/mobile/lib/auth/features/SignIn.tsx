@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { useOAuth } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import AppLoader from "@/lib/core/ui/AppLoader";
+import { Text } from "react-native-paper";
 import styled, { ThemeStyledProps } from "styled-components/native";
+import {
+  SocialLoginButton,
+  SocialLoginButtonContent,
+  SocialLoginButtonText,
+  SocialLoginImageIcon,
+} from "../ui/SocialLoginButton";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
@@ -44,55 +50,40 @@ export default function Page() {
   return (
     <Container>
       {!loading && (
-        <View style={styles.card}>
-          <View
-            style={{
-              flex: 1,
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Image
-              contentFit="contain"
-              source={require("@/assets/icons/logo-negro-degradado.png")} // Ensure the correct path to your logo image file
-              style={styles.logo}
-            />
-            <Text style={styles.title}>Iniciar sesion</Text>
-            <Text style={styles.subtitle}>Bienvenid@ a Coralkids!</Text>
+        <>
+          <AppLogo
+            contentFit="contain"
+            source={require("@/assets/icons/logo-negro-degradado.png")} // Ensure the correct path to your logo image file
+          />
+          <Title variant="titleLarge">Iniciar sesion</Title>
+          <Subtitle variant="bodyMedium">Bienvenid@ a Coralkids!</Subtitle>
 
-            <TouchableOpacity
-              style={styles.buttonGoogle}
-              onPress={() => onPress("google")}
-            >
-              <Image
-                style={styles.googleIcon}
+          <SocialLoginButton
+            onPress={() => onPress("google")}
+            mode="elevated"
+            buttonColor="white"
+          >
+            <SocialLoginButtonContent>
+              <SocialLoginImageIcon
                 source={require("@/assets/icons/google.png")}
               />
-              <Text style={{ ...styles.buttonText, color: "#344054" }}>
+              <SocialLoginButtonText>
                 Continuar con Google
-              </Text>
-            </TouchableOpacity>
+              </SocialLoginButtonText>
+            </SocialLoginButtonContent>
+          </SocialLoginButton>
 
-            <TouchableOpacity
-              style={styles.buttonApple}
-              onPress={() => onPress("apple")}
-            >
+          <SocialLoginButton
+            mode="elevated"
+            buttonColor="white"
+            onPress={() => onPress("apple")}
+          >
+            <SocialLoginButtonContent>
               <AntDesign name="apple1" size={24} color="black" />
-              <Text
-                style={{
-                  ...styles.buttonText,
-                  color: "#344054",
-                  marginLeft: 12,
-                }}
-              >
-                Continuar con Apple
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+              <SocialLoginButtonText>Continuar con Apple</SocialLoginButtonText>
+            </SocialLoginButtonContent>
+          </SocialLoginButton>
+        </>
       )}
       {loading && <AppLoader />}
     </Container>
@@ -108,105 +99,18 @@ const Container = styled.View`
   display: flex;
 `;
 
-const styles = StyleSheet.create({
-  card: {
-    alignItems: "center",
-  },
-  logo: {
-    width: 350,
-    height: 55,
-    backgroundPosition: "center",
-    backgroundImage: "url()",
-  },
-  title: {
-    marginTop: 49,
-    fontSize: 21,
-    fontFamily: "SemiBold",
-  },
-  subtitle: {
-    marginTop: 8,
-    fontSize: 14,
-    color: "#000",
-    fontFamily: "Regular",
-    marginBottom: 32,
-    textAlign: "center",
-  },
-  input: {
-    width: "100%",
-    borderWidth: 1,
-    borderColor: "#D0D5DD",
-    borderRadius: 10,
-    padding: 14,
-    marginBottom: 16,
-    fontFamily: "Regular",
-    fontSize: 14,
-  },
-  buttonEmail: {
-    backgroundColor: "#0D87E1",
-    padding: 15,
-    borderRadius: 10,
-    width: "100%",
-    marginBottom: 24,
-    minHeight: 44,
-  },
-  buttonText: {
-    textAlign: "center",
-    color: "#FFF",
-    fontFamily: "SemiBold",
-    fontSize: 14,
-  },
-  buttonTextWithIcon: {
-    marginLeft: 10,
-  },
-  dividerContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-    marginBottom: 24,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: "#000",
-  },
-  dividerText: {
-    marginHorizontal: 10,
-    color: "#000",
-    fontFamily: "Medium",
-  },
-  buttonGoogle: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFF",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#D0D5DD",
-    paddingHorizontal: 50,
-    marginBottom: 12,
-    height: 44,
-  },
-  buttonApple: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FFF",
-    height: 44,
-    borderRadius: 10,
-    borderWidth: 1,
-    paddingHorizontal: 50,
-    borderColor: "#D0D5DD",
-    marginBottom: 32,
-  },
-  signupContainer: {
-    flexDirection: "row",
-  },
-  signupText: {
-    color: "#4D9DE0",
-    fontFamily: "SemiBold",
-  },
-  googleIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 12,
-  },
-});
+const AppLogo = styled(Image)`
+  width: 300px;
+  height: 55px;
+  background-position: center;
+`;
+
+const Title = styled(Text)`
+  margin-top: 40px;
+  font-weight: 500;
+`;
+
+const Subtitle = styled(Text)`
+  margin-top: 5px;
+  margin-bottom: 10px;
+`;

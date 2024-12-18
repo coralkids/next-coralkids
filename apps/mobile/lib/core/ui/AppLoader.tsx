@@ -1,24 +1,23 @@
-import { ActivityIndicator, StyleSheet } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
+import styled, { ThemeStyledProps } from "styled-components/native";
+import { ActivityIndicator } from "react-native-paper";
 
-const AppLoader = () => (
-  <SafeAreaProvider>
-    <SafeAreaView style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator size="large" />
-    </SafeAreaView>
-  </SafeAreaProvider>
-);
+const AppLoader = () => {
+  return (
+    <Container>
+      <ActivityIndicator animating={true} size="large" />
+    </Container>
+  );
+};
 
 export default AppLoader;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  horizontal: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10,
-  },
-});
+const Container = styled(View)`
+  justify-content: center;
+  justify-content: space-around;
+  padding: 10px;
+  background-color: ${({ theme }: ThemeStyledProps) =>
+    theme.colors?.background};
+  width: 100%;
+  height: 100%;
+`;
