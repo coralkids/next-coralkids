@@ -7,6 +7,7 @@ import { Image } from "expo-image";
 import AppLoader from "@/lib/core/ui/AppLoader";
 import s, {
   ReactNativePaperCustomTheme,
+  ThemeStyledProps,
   ReactNativeStyledInterface,
 } from "styled-components/native";
 
@@ -106,7 +107,7 @@ export default function Page() {
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${({ theme }: { theme: ReactNativePaperCustomTheme }) =>
+  background-color: ${({ theme }: ThemeStyledProps) =>
     theme.colors?.background};
   align-items: center;
   justify-content: center;
