@@ -5,13 +5,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import AppLoader from "@/lib/core/ui/AppLoader";
-import s, {
-  ReactNativePaperCustomTheme,
-  ThemeStyledProps,
-  ReactNativeStyledInterface,
-} from "styled-components/native";
-
-const styled: ReactNativeStyledInterface<ReactNativePaperCustomTheme> = s;
+import styled, { ThemeStyledProps } from "styled-components/native";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
