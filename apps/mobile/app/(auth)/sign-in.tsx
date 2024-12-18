@@ -49,7 +49,7 @@ export default function Page() {
             }}
           >
             <Image
-              source={require("../assets/icons/logo2small.png")} // Ensure the correct path to your logo image file
+              source={require("@/assets/icons/logo2small.png")} // Ensure the correct path to your logo image file
               style={styles.logo}
             />
             <Text style={styles.title}>Log in to your account</Text>
@@ -61,7 +61,7 @@ export default function Page() {
             >
               <Image
                 style={styles.googleIcon}
-                source={require("../assets/icons/google.png")}
+                source={require("@/assets/icons/google.png")}
               />
               <Text style={{ ...styles.buttonText, color: "#344054" }}>
                 Continue with Google

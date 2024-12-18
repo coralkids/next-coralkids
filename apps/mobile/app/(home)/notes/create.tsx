@@ -82,7 +82,7 @@ export default function CreateNoteScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
-          source={require("../../assets/icons/logo2small.png")} // Replace with your logo image file
+          source={require("@/assets/icons/logo2small.png")} // Replace with your logo image file
           style={styles.logo}
         />
       </View>
@@ -91,7 +91,7 @@ export default function CreateNoteScreen() {
         <TouchableOpacity onPress={() => router.back()}>
           <Image
             style={styles.arrowBack}
-            source={require("../../assets/icons/arrow-back.png")}
+            source={require("@/assets/icons/arrow-back.png")}
           />
         </TouchableOpacity>
 
@@ -99,7 +99,7 @@ export default function CreateNoteScreen() {
         <TouchableOpacity>
           <Image
             style={styles.arrowBack}
-            source={require("../../assets/icons/saveIcon.png")}
+            source={require("@/assets/icons/saveIcon.png")}
           />
         </TouchableOpacity>
       </View>

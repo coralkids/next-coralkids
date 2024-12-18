@@ -3,8 +3,8 @@ import { Slot } from "expo-router";
 import React, { StrictMode } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { LogBox } from "react-native";
-import ClerkConvexProvider from "./components/ClerkConvexProvider";
-import BaseLayout from "./components/BaseLayout";
+import ClerkConvexProvider from "@/components/ClerkConvexProvider";
+import BaseLayout from "@/components/BaseLayout";
 import { AppRegistry } from "react-native";
 import {
   adaptNavigationTheme,
@@ -13,7 +13,7 @@ import {
   PaperProvider,
 } from "react-native-paper";
 import * as app from "../app.json";
-import { useColorScheme } from "./hooks/useColorScheme.web";
+import { useColorScheme } from "@/hooks/useColorScheme.web";
 import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
@@ -21,8 +21,8 @@ import {
 
 import merge from "deepmerge";
 
-import lightTheme from "./theme/light.json";
-import darkTheme from "./theme/dark.json";
+import lightTheme from "../theme/light.json";
+import darkTheme from "../theme/dark.json";
 
 import type { ThemeProp } from "react-native-paper/lib/typescript/types";
 

@@ -15,7 +15,7 @@ import { Feather, AntDesign } from "@expo/vector-icons";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { router } from "expo-router";
 import { Doc } from "@packages/backend/convex/_generated/dataModel";
-import { useNotes } from "../hooks/useNotes";
+import { useNotes } from "@/hooks/useNotes";
 
 const NotesDashboardScreen = () => {
   const { user } = useUser();
@@ -58,7 +58,7 @@ const NotesDashboardScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
-          source={require("../assets/icons/logo2small.png")} // Replace with your logo image file
+          source={require("@/assets/icons/logo2small.png")} // Replace with your logo image file
           style={styles.logo}
         />
       </View>
