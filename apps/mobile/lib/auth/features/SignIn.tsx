@@ -95,8 +95,6 @@ export default function Page() {
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${({ theme }: ThemeStyledProps) =>
-    theme.colors?.background};
   align-items: center;
   justify-content: center;
   display: flex;

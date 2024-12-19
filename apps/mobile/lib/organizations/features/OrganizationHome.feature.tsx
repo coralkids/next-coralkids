@@ -2,21 +2,23 @@ import { LogoutButton } from "@/lib/core/ui/LogoutButton";
 import { useUser } from "@clerk/clerk-expo";
 import React from "react";
 import { View } from "react-native";
-import { Appbar, Text } from "react-native-paper";
+import { Appbar, Avatar, Text } from "react-native-paper";
+import styled, { ThemeStyledProps } from "styled-components/native";
 
 export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
   const { user } = useUser();
 
   return (
     <>
-      <Appbar.Header>
+      <Appbar.Header elevated>
         <LogoutButton />
-        <Appbar.Content title={`${user?.firstName} ${user?.lastName}`} />
+        <ProfileAvatarImage size={40} source={{ uri: user?.imageUrl }} />
       </Appbar.Header>
-
-      <View>
-        <Text>Prueba</Text>
-      </View>
+      <Text>Prueba</Text>
     </>
   );
 };
+
+const ProfileAvatarImage = styled(Avatar.Image)`
+  margin-left: 10px;
+`;
