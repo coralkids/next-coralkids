@@ -1,11 +1,13 @@
 import { LogoutButton } from "@/lib/core/ui/LogoutButton";
-import { useUser } from "@clerk/clerk-expo";
+import useUser from "@/lib/user/hooks/useUser";
 import React from "react";
 import { Appbar, Avatar, Text } from "react-native-paper";
 import styled from "styled-components/native";
 
 export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
-  const { user } = useUser();
+  const user = useUser();
+
+  console.log(user);
 
   return (
     <>

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
 import { useOAuth } from "@clerk/clerk-expo";
-import { useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
+import { useColorScheme } from "react-native";
 import { ActivityIndicator, Text } from "react-native-paper";
 import styled from "styled-components/native";
 import {
@@ -11,7 +12,6 @@ import {
   SocialLoginButtonText,
   SocialLoginImageIcon,
 } from "../ui/SocialLoginButton";
-import { useColorScheme } from "react-native";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
