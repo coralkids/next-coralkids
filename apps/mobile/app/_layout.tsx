@@ -75,7 +75,9 @@ export default function RootLayout() {
       <ClerkConvexProvider>
         <PaperProvider theme={paperTheme}>
           <ThemeProvider theme={paperTheme}>
-            <ExpoRouterThemeProvider value={paperTheme as any}>
+            <ExpoRouterThemeProvider
+              value={paperTheme as ReactNativePaperCustomTheme & Theme}
+            >
               <BaseLayout>
                 <View
                   style={{
