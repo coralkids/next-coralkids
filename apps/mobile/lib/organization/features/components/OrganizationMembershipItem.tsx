@@ -1,6 +1,6 @@
 import React from "react";
 import { OrganizationMembershipResource } from "@clerk/types";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { Image } from "expo-image";
 import {
   Card,
