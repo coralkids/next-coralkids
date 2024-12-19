@@ -1,4 +1,4 @@
-import { Slot } from "expo-router";
+import { Stack } from "expo-router";
 import React, { StrictMode } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { LogBox, Platform, View } from "react-native";
@@ -16,6 +16,8 @@ import { useColorScheme } from "@/lib/core/hooks/useColorScheme.web";
 import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
+  ThemeProvider as ExpoRouterThemeProvider,
+  Theme,
 } from "@react-navigation/native";
 
 import merge from "deepmerge";
@@ -73,32 +75,34 @@ export default function RootLayout() {
       <ClerkConvexProvider>
         <PaperProvider theme={paperTheme}>
           <ThemeProvider theme={paperTheme}>
-            <BaseLayout>
-              <View
-                style={{
-                  height: STATUS_BAR_HEIGHT,
-                  backgroundColor:
-                    colorScheme === "dark"
-                      ? darkTheme.colors?.background
-                      : lightTheme.colors?.background,
-                }}
-              >
-                <StatusBar translucent />
-              </View>
-              <SafeAreaProvider>
-                <SafeAreaView
+            <ExpoRouterThemeProvider value={paperTheme as any}>
+              <BaseLayout>
+                <View
                   style={{
-                    flex: 1,
+                    height: STATUS_BAR_HEIGHT,
                     backgroundColor:
                       colorScheme === "dark"
                         ? darkTheme.colors?.background
                         : lightTheme.colors?.background,
                   }}
                 >
-                  <Slot screenOptions={{ headerShown: false }} />
-                </SafeAreaView>
-              </SafeAreaProvider>
-            </BaseLayout>
+                  <StatusBar translucent />
+                </View>
+                <SafeAreaProvider>
+                  <SafeAreaView
+                    style={{
+                      flex: 1,
+                      backgroundColor:
+                        colorScheme === "dark"
+                          ? darkTheme.colors?.background
+                          : lightTheme.colors?.background,
+                    }}
+                  >
+                    <Stack screenOptions={{ headerShown: false }} />
+                  </SafeAreaView>
+                </SafeAreaProvider>
+              </BaseLayout>
+            </ExpoRouterThemeProvider>
           </ThemeProvider>
         </PaperProvider>
       </ClerkConvexProvider>
