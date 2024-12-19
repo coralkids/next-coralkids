@@ -4,28 +4,31 @@ import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
-import { Avatar, Button, Divider, Menu, Text } from "react-native-paper";
+import {
+  Avatar,
+  Button,
+  Divider,
+  Menu,
+  Text,
+  useTheme,
+} from "react-native-paper";
 import styled from "styled-components/native";
 
 const ProfileTouchableWithMenu = () => {
   const user = useUser();
   const auth = useAuth();
+  const theme = useTheme();
 
   const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
   return (
     <React.Fragment>
-      <ProfileTouchableOpacity onPress={() => setIsUserMenuVisible(true)}>
-        <ProfileAvatarImage size={40} source={{ uri: user?.imageUrl }} />
-        <ProfileFullName variant="labelMedium">
-          {user?.firstName} {user?.lastName}
-        </ProfileFullName>
-      </ProfileTouchableOpacity>
       <ProfileMenu
         visible={isUserMenuVisible}
         onDismiss={() => setIsUserMenuVisible(false)}
         anchor={
           <ProfileMenuOpenIcon
-            size={15}
+            size={0}
+            color={theme.colors.primary}
             onPress={() => setIsUserMenuVisible(true)}
             name={isUserMenuVisible ? "up" : "down"}
           ></ProfileMenuOpenIcon>
@@ -43,6 +46,18 @@ const ProfileTouchableWithMenu = () => {
           Salir
         </LogountButton>
       </ProfileMenu>
+      <ProfileTouchableOpacity onPress={() => setIsUserMenuVisible(true)}>
+        <ProfileAvatarImage size={40} source={{ uri: user?.imageUrl }} />
+        <ProfileFullName variant="labelMedium">
+          {user?.firstName} {user?.lastName}
+        </ProfileFullName>
+        <ProfileMenuOpenIcon
+          size={15}
+          color={theme.colors.inverseSurface}
+          onPress={() => setIsUserMenuVisible(true)}
+          name={isUserMenuVisible ? "up" : "down"}
+        ></ProfileMenuOpenIcon>
+      </ProfileTouchableOpacity>
     </React.Fragment>
   );
 };
@@ -67,8 +82,8 @@ const ProfileMenuOpenIcon = styled(AntDesign)`
 `;
 
 const ProfileMenu = styled(Menu)`
-  margin-left: -140px;
   margin-top: 45px;
+  margin-left: 10px;
 `;
 
 const LogountButton = styled(Button)`
