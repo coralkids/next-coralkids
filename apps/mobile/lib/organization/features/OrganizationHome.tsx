@@ -2,8 +2,9 @@ import useUser from "@/lib/user/hooks/useUser";
 import { useAuth } from "@clerk/clerk-expo";
 import { AntDesign } from "@expo/vector-icons";
 import React, { useState } from "react";
+import { Image } from "expo-image";
 import { TouchableOpacity, View } from "react-native";
-import { Appbar, Avatar, Button, Menu, Text } from "react-native-paper";
+import { Appbar, Avatar, Button, Card, Menu, Text } from "react-native-paper";
 import styled from "styled-components/native";
 
 export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
@@ -11,6 +12,8 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
   const auth = useAuth();
 
   const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
+
+  console.log(user?.organizationMemberships[0].organization);
 
   return (
     <>
@@ -43,9 +46,20 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
       </Appbar.Header>
       <Container>
         {user?.organizationMemberships.map((org) => (
-          <View>
-            <Text>{org.organization.name}</Text>
-          </View>
+          <Card>
+            <Card.Content>
+              <OrganizationContainer>
+                <OrganizationAvatarImage
+                  size={100}
+                  source={{
+                    uri: org.organization.imageUrl,
+                    headers: { Accept: "image/*" },
+                  }}
+                />
+                <Text variant="titleMedium">{org.organization.name}</Text>
+              </OrganizationContainer>
+            </Card.Content>
+          </Card>
         ))}
       </Container>
     </>
@@ -72,8 +86,8 @@ const ProfileMenuOpenIcon = styled(AntDesign)`
 `;
 
 const ProfileMenu = styled(Menu)`
-  margin-left: -100;
-  margin-top: 50;
+  margin-left: -100px;
+  margin-top: 50px;
 `;
 
 const LogountButton = styled(Button)`
@@ -83,4 +97,18 @@ const LogountButton = styled(Button)`
 const Container = styled(View)`
   flex: 1;
   padding: 10px;
+`;
+
+const OrganizationContainer = styled(View)`
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+`;
+
+const OrganizationAvatarImage = styled(Image)`
+  border-radius: 0px;
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
 `;
