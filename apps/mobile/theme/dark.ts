@@ -1,6 +1,8 @@
+import { configureFonts } from "react-native-paper";
 import { ReactNativePaperCustomTheme } from "styled-components/native";
+import fontConfig from "./fonts";
 
-export const darkTheme: ReactNativePaperCustomTheme = {
+export const darkTheme: Partial<ReactNativePaperCustomTheme> = {
   colors: {
     primary: "rgb(224, 182, 255)",
     onPrimary: "rgb(75, 0, 125)",
@@ -43,6 +45,7 @@ export const darkTheme: ReactNativePaperCustomTheme = {
     onSurfaceDisabled: "rgba(231, 225, 229, 0.38)",
     backdrop: "rgba(52, 46, 55, 0.4)",
   },
+  fonts: configureFonts({ config: fontConfig, isV3: true }),
 };
 
 export default darkTheme;

@@ -12,9 +12,11 @@ import {
   SocialLoginButtonText,
   SocialLoginImageIcon,
 } from "../ui/SocialLoginButton";
+import { useColorScheme } from "react-native";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
+  const colorScheme = useColorScheme();
   const { startOAuthFlow: startGoogleAuthFlow } = useOAuth({
     strategy: "oauth_google",
   });
@@ -53,34 +55,36 @@ export default function Page() {
         <>
           <AppLogo
             contentFit="contain"
-            source={require("@/assets/icons/logo-negro-degradado.png")} // Ensure the correct path to your logo image file
+            source={
+              colorScheme === "light"
+                ? require("@/assets/icons/logo-negro-degradado.png")
+                : require("@/assets/icons/logo-blanco-degradado.png")
+            } // Ensure the correct path to your logo image file
           />
           <Title variant="titleLarge">Iniciar sesion</Title>
           <Subtitle variant="bodyMedium">Bienvenid@ a Coralkids!</Subtitle>
 
-          <SocialLoginButton
-            onPress={() => onPress("google")}
-            mode="elevated"
-            buttonColor="white"
-          >
+          <SocialLoginButton onPress={() => onPress("google")} mode="elevated">
             <SocialLoginButtonContent>
               <SocialLoginImageIcon
                 source={require("@/assets/icons/google.png")}
               />
-              <SocialLoginButtonText>
+              <SocialLoginButtonText variant="labelLarge">
                 Continuar con Google
               </SocialLoginButtonText>
             </SocialLoginButtonContent>
           </SocialLoginButton>
 
-          <SocialLoginButton
-            mode="elevated"
-            buttonColor="white"
-            onPress={() => onPress("apple")}
-          >
+          <SocialLoginButton mode="elevated" onPress={() => onPress("apple")}>
             <SocialLoginButtonContent>
-              <AntDesign name="apple1" size={24} color="black" />
-              <SocialLoginButtonText>Continuar con Apple</SocialLoginButtonText>
+              <AntDesign
+                name="apple1"
+                size={24}
+                color={colorScheme === "light" ? "black" : "white"}
+              />
+              <SocialLoginButtonText variant="labelLarge">
+                Continuar con Apple
+              </SocialLoginButtonText>
             </SocialLoginButtonContent>
           </SocialLoginButton>
         </>

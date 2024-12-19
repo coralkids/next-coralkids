@@ -15,12 +15,11 @@ export const SocialLoginButtonContent = styled.View`
 
 export const SocialLoginButton = styled(Button)`
   width: 300px;
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 0px;
 `;
 
 export const SocialLoginButtonText = styled(Text)`
-  font-family: SemiBold;
   text-align: center;
   width: 200px;
 `;

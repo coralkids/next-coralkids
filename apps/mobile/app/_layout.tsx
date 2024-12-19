@@ -51,10 +51,19 @@ export default function RootLayout() {
     );
   }
 
-  const paperTheme: ReactNativePaperCustomTheme =
+  const paperTheme: ReactNativePaperCustomTheme = (
     colorScheme === "dark"
-      ? { ...CombinedDarkTheme, colors: darkTheme.colors }
-      : { ...CombinedDefaultTheme, colors: lightTheme.colors };
+      ? {
+          ...CombinedDarkTheme,
+          colors: darkTheme.colors,
+          fonts: darkTheme.fonts,
+        }
+      : {
+          ...CombinedDefaultTheme,
+          colors: lightTheme.colors,
+          fonts: darkTheme.fonts,
+        }
+  ) as ReactNativePaperCustomTheme;
 
   const STATUS_BAR_HEIGHT =
     Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
@@ -77,7 +86,15 @@ export default function RootLayout() {
                 <StatusBar translucent />
               </View>
               <SafeAreaProvider>
-                <SafeAreaView style={{ flex: 1 }}>
+                <SafeAreaView
+                  style={{
+                    flex: 1,
+                    backgroundColor:
+                      colorScheme === "dark"
+                        ? darkTheme.colors?.background
+                        : lightTheme.colors?.background,
+                  }}
+                >
                   <Slot screenOptions={{ headerShown: false }} />
                 </SafeAreaView>
               </SafeAreaProvider>
