@@ -1,7 +1,7 @@
 import useUser from "@/lib/user/hooks/useUser";
 import React from "react";
 import { View } from "react-native";
-import { Appbar, Text } from "react-native-paper";
+import { Appbar, Button, Text } from "react-native-paper";
 import styled from "styled-components/native";
 import ProfileTouchableWithMenu from "./components/ProfileTouchableWithMenu";
 import OrganizationMembershipItem from "./components/OrganizationMembershipItem";
@@ -15,9 +15,13 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
         <ProfileTouchableWithMenu />
       </Appbar.Header>
       <Container>
-        <SelectedOrganizationTitle variant="titleMedium">
-          Escuela
-        </SelectedOrganizationTitle>
+        <OrganizationListContainer>
+          <SelectedOrganizationTitle variant="titleMedium">
+            Organizacion
+          </SelectedOrganizationTitle>
+          <Button icon="swap-horizontal">Cambiar de organizacion</Button>
+        </OrganizationListContainer>
+
         {user?.organizationMemberships.map((org) => (
           <OrganizationMembershipItem key={org.id} org={org} />
         ))}
@@ -26,8 +30,15 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
   );
 };
 
+const OrganizationListContainer = styled(View)`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px;
+`;
+
 const SelectedOrganizationTitle = styled(Text)`
-  margin-bottom: 10px;
+  align-items: center;
 `;
 
 const Container = styled(View)`
