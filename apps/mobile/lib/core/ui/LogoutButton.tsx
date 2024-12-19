@@ -12,7 +12,7 @@ export const LogoutButton: React.FC = (props) => {
       buttonColor={theme.colors.errorContainer}
       mode="elevated"
       icon="logout"
-      onPress={() => signOut()}
+      onPress={() => signOut({ redirectUrl: "/" })}
       {...props}
     >
       Salir

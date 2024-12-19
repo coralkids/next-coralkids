@@ -25,7 +25,6 @@ import merge from "deepmerge";
 import lightTheme from "../theme/light";
 import darkTheme from "../theme/dark";
 
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import {
   ReactNativePaperCustomTheme,
   ThemeProvider,
@@ -67,26 +66,19 @@ export default function RootLayout() {
         }
   ) as ReactNativePaperCustomTheme;
 
-  const STATUS_BAR_HEIGHT =
-    Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
-
   return (
-    <StrictMode>
-      <PaperProvider theme={paperTheme}>
-        <ThemeProvider theme={paperTheme}>
-          <ClerkConvexProvider>
-            <ExpoRouterThemeProvider
-              value={paperTheme as ReactNativePaperCustomTheme & Theme}
-            >
-              <BaseLayout>
-                <Stack screenOptions={{ headerShown: false }} />
-              </BaseLayout>
-            </ExpoRouterThemeProvider>
-          </ClerkConvexProvider>
-        </ThemeProvider>
-      </PaperProvider>
-    </StrictMode>
+    <PaperProvider theme={paperTheme}>
+      <ThemeProvider theme={paperTheme}>
+        <ClerkConvexProvider>
+          <ExpoRouterThemeProvider
+            value={paperTheme as ReactNativePaperCustomTheme & Theme}
+          >
+            <BaseLayout>
+              <Stack screenOptions={{ headerShown: false }} />
+            </BaseLayout>
+          </ExpoRouterThemeProvider>
+        </ClerkConvexProvider>
+      </ThemeProvider>
+    </PaperProvider>
   );
 }
-
-AppRegistry.registerComponent(app.expo.name, () => RootLayout);
