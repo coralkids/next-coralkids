@@ -100,6 +100,9 @@ const LogountButton = styled(Button)`
 const Container = styled(View)`
   flex: 1;
   padding: 10px;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const OrganizationContainer = styled(View)`
