@@ -1,14 +1,22 @@
 import React from "react";
 import { OrganizationMembershipResource } from "@clerk/types";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
-import { Button, Card, Text } from "react-native-paper";
+import {
+  Card,
+  Icon,
+  Text,
+  TouchableRipple,
+  useTheme,
+} from "react-native-paper";
 import styled, { ThemeStyledProps } from "styled-components/native";
 import { spacing } from "@/theme/spacing";
 
 export const OrganizationMembershipItem: React.FC<{
   org: OrganizationMembershipResource;
 }> = ({ org }) => {
+  const theme = useTheme();
+
   return (
     <OrganizationMembershipCard>
       <OrganizationMembershipItemContainer>
@@ -22,8 +30,13 @@ export const OrganizationMembershipItem: React.FC<{
           />
         </OrganizationMembershipItemAvatarWrapper>
         <OrganizationMembershipItemContent>
-          <Text variant="titleMedium">{org.organization.name}</Text>
-          <Button icon="cog">&nbsp;</Button>
+          <OrganizationMembershipItemTextWrapper>
+            <Text variant="titleMedium">{org.organization.name}</Text>
+            <Text variant="bodyMedium">Escuela infantil</Text>
+          </OrganizationMembershipItemTextWrapper>
+          <OrganizationMembershipItemConfigurationTouchable onPress={() => {}}>
+            <Icon source="cog" color={theme.colors.primary} size={20} />
+          </OrganizationMembershipItemConfigurationTouchable>
         </OrganizationMembershipItemContent>
       </OrganizationMembershipItemContainer>
     </OrganizationMembershipCard>
@@ -31,6 +44,17 @@ export const OrganizationMembershipItem: React.FC<{
 };
 
 export default OrganizationMembershipItem;
+
+const OrganizationMembershipItemConfigurationTouchable = styled(
+  TouchableRipple,
+)`
+  padding: 10px;
+  border-radius: 100%;
+`;
+
+const OrganizationMembershipItemTextWrapper = styled(View)`
+  max-width: 500px;
+`;
 
 const OrganizationMembershipCard = styled(Card)`
   width: 100%;
