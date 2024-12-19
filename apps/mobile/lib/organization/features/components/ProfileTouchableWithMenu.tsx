@@ -4,13 +4,14 @@ import { useAuth } from "@clerk/clerk-expo";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import {
   Avatar,
   Button,
   Divider,
   Menu,
   Text,
+  TouchableRipple,
   useTheme,
 } from "react-native-paper";
 import styled from "styled-components/native";
@@ -48,16 +49,18 @@ const ProfileTouchableWithMenu = () => {
         </LogountButton>
       </ProfileMenu>
       <ProfileTouchableOpacity onPress={() => setIsUserMenuVisible(true)}>
-        <ProfileAvatarImage size={40} source={{ uri: user?.imageUrl }} />
-        <ProfileFullName variant="labelMedium">
-          {user?.firstName} {user?.lastName}
-        </ProfileFullName>
-        <ProfileMenuOpenIcon
-          size={15}
-          color={theme.colors.inverseSurface}
-          onPress={() => setIsUserMenuVisible(true)}
-          name={isUserMenuVisible ? "up" : "down"}
-        ></ProfileMenuOpenIcon>
+        <React.Fragment>
+          <ProfileAvatarImage size={40} source={{ uri: user?.imageUrl }} />
+          <ProfileFullName variant="labelMedium">
+            {user?.firstName} {user?.lastName}
+          </ProfileFullName>
+          <ProfileMenuOpenIcon
+            size={15}
+            color={theme.colors.inverseSurface}
+            onPress={() => setIsUserMenuVisible(true)}
+            name={isUserMenuVisible ? "up" : "down"}
+          ></ProfileMenuOpenIcon>
+        </React.Fragment>
       </ProfileTouchableOpacity>
     </ProfileTouchableWithMenuContainer>
   );
@@ -74,10 +77,12 @@ const ProfileFullName = styled(Text)`
   margin-left: ${spacing}px;
 `;
 
-const ProfileTouchableOpacity = styled(TouchableOpacity)`
+const ProfileTouchableOpacity = styled(TouchableRipple)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding: ${spacing}px;
+  border-radius: 12px;
 `;
 
 const ProfileMenuOpenIcon = styled(AntDesign)`
