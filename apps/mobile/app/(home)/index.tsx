@@ -1,4 +1,4 @@
-import { OrganizationHome } from "@/lib/organization/features/OrganizationHome.feature";
+import { OrganizationHome } from "@/lib/organization/features/OrganizationHome";
 
 const Home = () => <OrganizationHome />;
 
