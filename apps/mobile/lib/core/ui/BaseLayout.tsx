@@ -5,10 +5,6 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
-import { ActivityIndicator } from "react-native-paper";
-import styled from "styled-components/native";
-import { View } from "react-native";
-
 export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { loaded: clerkLoaded } = useClerk();
 
