@@ -11,7 +11,7 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
 
   return (
     <>
-      <Appbar.Header>
+      <Appbar.Header elevated>
         <ProfileTouchableWithMenu />
       </Appbar.Header>
       <Container>
@@ -32,7 +32,7 @@ const SelectedOrganizationTitle = styled(Text)`
 
 const Container = styled(View)`
   flex: 1;
-  padding: 10px;
+  padding: 15px;
   max-width: 800px;
   width: 100%;
   margin: 0 auto;

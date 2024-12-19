@@ -3,7 +3,7 @@ import { useAuth } from "@clerk/clerk-expo";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { useState } from "react";
-import { Linking, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Avatar, Button, Divider, Menu, Text } from "react-native-paper";
 import styled from "styled-components/native";
 
@@ -31,14 +31,9 @@ const ProfileTouchableWithMenu = () => {
           ></ProfileMenuOpenIcon>
         }
       >
-        <Menu.Item
-          title="Perfil"
-          onPress={() => {
-            if (process.env?.EXPO_PUBLIC_CLERK_USER_ACCOUNT_URL) {
-              Linking.openURL(process.env.EXPO_PUBLIC_CLERK_USER_ACCOUNT_URL);
-            }
-          }}
-        ></Menu.Item>
+        <Menu.Item leadingIcon="account-edit" title="Mi perfil"></Menu.Item>
+        <Menu.Item leadingIcon="account-cog" title="Configuracion"></Menu.Item>
+
         <Divider />
         <LogountButton
           onPress={() => auth.signOut()}
@@ -72,8 +67,8 @@ const ProfileMenuOpenIcon = styled(AntDesign)`
 `;
 
 const ProfileMenu = styled(Menu)`
-  margin-left: -100px;
-  margin-top: 50px;
+  margin-left: -140px;
+  margin-top: 45px;
 `;
 
 const LogountButton = styled(Button)`
