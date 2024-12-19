@@ -13,11 +13,9 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
 
   const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
 
-  console.log(user?.organizationMemberships[0].organization);
-
   return (
     <>
-      <Appbar.Header elevated>
+      <Appbar.Header>
         <ProfileTouchableOpacity onPress={() => setIsUserMenuVisible(true)}>
           <ProfileAvatarImage size={40} source={{ uri: user?.imageUrl }} />
           <ProfileFullName variant="labelMedium">
@@ -45,26 +43,31 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
         </ProfileMenu>
       </Appbar.Header>
       <Container>
+        <SelectedOrganizationTitle variant="titleMedium">
+          Escuela
+        </SelectedOrganizationTitle>
         {user?.organizationMemberships.map((org) => (
           <Card>
-            <Card.Content>
-              <OrganizationContainer>
-                <OrganizationAvatarImage
-                  size={100}
-                  source={{
-                    uri: org.organization.imageUrl,
-                    headers: { Accept: "image/*" },
-                  }}
-                />
-                <Text variant="titleMedium">{org.organization.name}</Text>
-              </OrganizationContainer>
-            </Card.Content>
+            <OrganizationContainer>
+              <OrganizationAvatarImage
+                size={100}
+                source={{
+                  uri: org.organization.imageUrl,
+                  headers: { Accept: "image/*" },
+                }}
+              />
+              <Text variant="titleMedium">{org.organization.name}</Text>
+            </OrganizationContainer>
           </Card>
         ))}
       </Container>
     </>
   );
 };
+
+const SelectedOrganizationTitle = styled(Text)`
+  margin-bottom: 10px;
+`;
 
 const ProfileAvatarImage = styled(Avatar.Image)`
   margin-left: 10px;
@@ -108,7 +111,7 @@ const OrganizationContainer = styled(View)`
 const OrganizationAvatarImage = styled(Image)`
   border-radius: 0px;
   background-color: white;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 10px;
 `;
