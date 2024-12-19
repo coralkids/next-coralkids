@@ -23,7 +23,12 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
           <SelectedOrganizationTitle variant="titleMedium">
             Organizacion
           </SelectedOrganizationTitle>
-          <Button icon="swap-horizontal">Cambiar</Button>
+          <Button
+            onPress={() => console.log("change org")}
+            icon="swap-horizontal"
+          >
+            Cambiar
+          </Button>
         </OrganizationListContainer>
 
         {user?.organizationMemberships.map((org) => (

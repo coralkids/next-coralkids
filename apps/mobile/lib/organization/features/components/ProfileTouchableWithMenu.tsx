@@ -81,7 +81,7 @@ const ProfileTouchableOpacity = styled(TouchableRipple)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: ${spacing}px;
+  padding: ${spacing / 2}px;
   border-radius: 12px;
 `;
 
