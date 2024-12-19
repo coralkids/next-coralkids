@@ -1,17 +1,15 @@
 import { Stack } from "expo-router";
-import React, { StrictMode } from "react";
+import React from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { LogBox, Platform, View } from "react-native";
+import { LogBox } from "react-native";
 import ClerkConvexProvider from "@/lib/core/ui/ClerkConvexProvider";
 import BaseLayout from "@/lib/core/ui/BaseLayout";
-import { AppRegistry, StatusBar } from "react-native";
 import {
   adaptNavigationTheme,
   MD3DarkTheme,
   MD3LightTheme,
   PaperProvider,
 } from "react-native-paper";
-import * as app from "../app.json";
 import { useColorScheme } from "@/lib/core/hooks/useColorScheme.web";
 import {
   DarkTheme as NavigationDarkTheme,
