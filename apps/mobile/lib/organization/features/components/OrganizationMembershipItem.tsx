@@ -2,8 +2,9 @@ import React from "react";
 import { OrganizationMembershipResource } from "@clerk/types";
 import { View } from "react-native";
 import { Image } from "expo-image";
-import { Card, Text } from "react-native-paper";
+import { Button, Card, Text } from "react-native-paper";
 import styled, { ThemeStyledProps } from "styled-components/native";
+import { spacing } from "@/theme/spacing";
 
 export const OrganizationMembershipItem: React.FC<{
   org: OrganizationMembershipResource;
@@ -20,8 +21,10 @@ export const OrganizationMembershipItem: React.FC<{
             }}
           />
         </OrganizationMembershipItemAvatarWrapper>
-
-        <Text variant="titleMedium">{org.organization.name}</Text>
+        <OrganizationMembershipItemContent>
+          <Text variant="titleMedium">{org.organization.name}</Text>
+          <Button icon="cog">&nbsp;</Button>
+        </OrganizationMembershipItemContent>
       </OrganizationMembershipItemContainer>
     </OrganizationMembershipCard>
   );
@@ -31,6 +34,15 @@ export default OrganizationMembershipItem;
 
 const OrganizationMembershipCard = styled(Card)`
   width: 100%;
+`;
+
+const OrganizationMembershipItemContent = styled(View)`
+  float: left;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: ${spacing}px;
+  flex: 1;
 `;
 
 const OrganizationMembershipItemContainer = styled(View)`
