@@ -9,7 +9,7 @@ export const OrganizationMembershipItem: React.FC<{
   org: OrganizationMembershipResource;
 }> = ({ org }) => {
   return (
-    <Card key={org.id}>
+    <OrganizationMembershipCard>
       <OrganizationMembershipItemContainer>
         <OrganizationMembershipItemAvatarWrapper>
           <OrganizationMembershipItemAvatarImage
@@ -23,15 +23,20 @@ export const OrganizationMembershipItem: React.FC<{
 
         <Text variant="titleMedium">{org.organization.name}</Text>
       </OrganizationMembershipItemContainer>
-    </Card>
+    </OrganizationMembershipCard>
   );
 };
 
 export default OrganizationMembershipItem;
 
+const OrganizationMembershipCard = styled(Card)`
+  width: 100%;
+`;
+
 const OrganizationMembershipItemContainer = styled(View)`
   flex-direction: row;
   align-items: center;
+  width: 100%;
   gap: 10px;
 `;
 const OrganizationMembershipItemAvatarWrapper = styled(View)`

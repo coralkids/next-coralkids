@@ -3,7 +3,7 @@ import { useAuth } from "@clerk/clerk-expo";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { useState } from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import {
   Avatar,
   Button,
@@ -21,7 +21,7 @@ const ProfileTouchableWithMenu = () => {
 
   const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
   return (
-    <React.Fragment>
+    <ProfileTouchableWithMenuContainer>
       <ProfileMenu
         visible={isUserMenuVisible}
         onDismiss={() => setIsUserMenuVisible(false)}
@@ -58,13 +58,16 @@ const ProfileTouchableWithMenu = () => {
           name={isUserMenuVisible ? "up" : "down"}
         ></ProfileMenuOpenIcon>
       </ProfileTouchableOpacity>
-    </React.Fragment>
+    </ProfileTouchableWithMenuContainer>
   );
 };
 
-const ProfileAvatarImage = styled(Avatar.Image)`
-  margin-left: 10px;
+const ProfileTouchableWithMenuContainer = styled(View)`
+  align-items: start;
+  width: 100%;
 `;
+
+const ProfileAvatarImage = styled(Avatar.Image)``;
 
 const ProfileFullName = styled(Text)`
   margin-left: 10px;
@@ -82,8 +85,7 @@ const ProfileMenuOpenIcon = styled(AntDesign)`
 `;
 
 const ProfileMenu = styled(Menu)`
-  margin-top: 45px;
-  margin-left: 10px;
+  margin-top: 60px;
 `;
 
 const LogountButton = styled(Button)`
