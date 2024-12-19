@@ -23,7 +23,7 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
           <SelectedOrganizationTitle variant="titleMedium">
             Organizacion
           </SelectedOrganizationTitle>
-          <Button icon="swap-horizontal">Cambiar de organizacion</Button>
+          <Button icon="swap-horizontal">Cambiar</Button>
         </OrganizationListContainer>
 
         {user?.organizationMemberships.map((org) => (
@@ -44,4 +44,5 @@ const OrganizationListContainer = styled(View)`
 
 const SelectedOrganizationTitle = styled(Text)`
   align-items: center;
+  padding: 0px ${spacing}px;
 `;
