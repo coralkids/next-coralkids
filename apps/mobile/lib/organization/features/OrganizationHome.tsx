@@ -2,41 +2,34 @@ import useUser from "@/lib/user/hooks/useUser";
 import { useAuth } from "@clerk/clerk-expo";
 import { AntDesign } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { TouchableOpacity } from "react-native";
-import {
-  Appbar,
-  Avatar,
-  Button,
-  Divider,
-  Menu,
-  Text,
-} from "react-native-paper";
+import { TouchableOpacity, View } from "react-native";
+import { Appbar, Avatar, Button, Menu, Text } from "react-native-paper";
 import styled from "styled-components/native";
 
 export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
   const user = useUser();
   const auth = useAuth();
 
-  const [userMenuVisible, setUserMenuVisible] = useState(false);
+  const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
 
   return (
     <>
-      <Appbar.Header>
-        <ProfileTouchableOpacity onPress={() => setUserMenuVisible(true)}>
+      <Appbar.Header elevated>
+        <ProfileTouchableOpacity onPress={() => setIsUserMenuVisible(true)}>
           <ProfileAvatarImage size={40} source={{ uri: user?.imageUrl }} />
           <ProfileFullName variant="labelMedium">
             {user?.firstName} {user?.lastName}
           </ProfileFullName>
         </ProfileTouchableOpacity>
         <ProfileMenu
-          visible={userMenuVisible}
-          onDismiss={() => setUserMenuVisible(false)}
+          visible={isUserMenuVisible}
+          onDismiss={() => setIsUserMenuVisible(false)}
           anchor={
-            <AntDesign
-              size={20}
-              onPress={() => setUserMenuVisible(true)}
-              name="down"
-            ></AntDesign>
+            <ProfileMenuOpenIcon
+              size={15}
+              onPress={() => setIsUserMenuVisible(true)}
+              name={isUserMenuVisible ? "up" : "down"}
+            ></ProfileMenuOpenIcon>
           }
         >
           <LogountButton
@@ -48,7 +41,13 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
           </LogountButton>
         </ProfileMenu>
       </Appbar.Header>
-      <Text>Prueba</Text>
+      <Container>
+        {user?.organizationMemberships.map((org) => (
+          <View>
+            <Text>{org.organization.name}</Text>
+          </View>
+        ))}
+      </Container>
     </>
   );
 };
@@ -67,11 +66,21 @@ const ProfileTouchableOpacity = styled(TouchableOpacity)`
   align-items: center;
 `;
 
+const ProfileMenuOpenIcon = styled(AntDesign)`
+  margin-left: 5px;
+  margin-top: 2px;
+`;
+
 const ProfileMenu = styled(Menu)`
   margin-left: -100;
-  margin-top: 35;
+  margin-top: 50;
 `;
 
 const LogountButton = styled(Button)`
   margin: 10px;
+`;
+
+const Container = styled(View)`
+  flex: 1;
+  padding: 10px;
 `;
