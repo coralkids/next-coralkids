@@ -3,8 +3,7 @@ import { useOAuth } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
-import AppLoader from "@/lib/core/ui/AppLoader";
-import { Text } from "react-native-paper";
+import { ActivityIndicator, Text } from "react-native-paper";
 import styled, { ThemeStyledProps } from "styled-components/native";
 import {
   SocialLoginButton,
@@ -89,7 +88,7 @@ export default function Page() {
           </SocialLoginButton>
         </>
       )}
-      {loading && <AppLoader />}
+      <ActivityIndicator animating={loading} size="large" />
     </Container>
   );
 }

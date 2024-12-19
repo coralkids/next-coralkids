@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { ClerkProvider } from "@clerk/clerk-expo";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ConvexReactClient } from "convex/react";
 import { tokenCache } from "@/lib/core/utils/cache";
 import { ClerkLoaded, ClerkLoading, useAuth } from "@clerk/clerk-react";
-import Loader from "./AppLoader";
+import { ActivityIndicator } from "react-native-paper";
 
 if (!process.env.EXPO_PUBLIC_CONVEX_URL) {
   throw new Error("EXPO_PUBLIC_CONVEX_URL is not defined and is requred");
@@ -23,6 +23,10 @@ export const ClerkConvexProvider: React.FC<React.PropsWithChildren> = ({
     );
   }
 
+  const [clerkLoading, setClerkLoading] = useState(false);
+
+  React.useEffect(() => setClerkLoading(true), []);
+
   return (
     <ClerkProvider
       tokenCache={tokenCache}
@@ -31,7 +35,7 @@ export const ClerkConvexProvider: React.FC<React.PropsWithChildren> = ({
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <ClerkLoaded>{children}</ClerkLoaded>
         <ClerkLoading>
-          <Loader />
+          <ActivityIndicator animating={clerkLoading} size="large" />
         </ClerkLoading>
       </ConvexProviderWithClerk>
     </ClerkProvider>

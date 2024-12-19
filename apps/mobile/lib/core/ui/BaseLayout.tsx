@@ -5,7 +5,7 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
-import Loader from "./AppLoader";
+import { ActivityIndicator } from "react-native-paper";
 
 export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { loaded: clerkLoaded } = useClerk();
@@ -32,7 +32,7 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
     return children;
   }
 
-  return <Loader />;
+  return <ActivityIndicator animating size="large" />;
 };
 
 export default BaseLayout;
