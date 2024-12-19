@@ -1,6 +1,7 @@
 import { configureFonts } from "react-native-paper";
 import { ReactNativePaperCustomTheme } from "styled-components/native";
 import fontConfig from "./fonts";
+import { spacing } from "./spacing";
 
 export const darkTheme: Partial<ReactNativePaperCustomTheme> = {
   colors: {

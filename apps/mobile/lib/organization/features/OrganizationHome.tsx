@@ -2,10 +2,11 @@ import useUser from "@/lib/user/hooks/useUser";
 import React from "react";
 import { View } from "react-native";
 import { Appbar, Button, Text } from "react-native-paper";
-import styled from "styled-components/native";
+import styled, { ThemeStyledProps } from "styled-components/native";
 import ProfileTouchableWithMenu from "./components/ProfileTouchableWithMenu";
 import OrganizationMembershipItem from "./components/OrganizationMembershipItem";
 import Container from "@/lib/core/ui/Container";
+import { spacing } from "@/theme/spacing";
 
 export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
   const user = useUser();
@@ -38,7 +39,7 @@ const OrganizationListContainer = styled(View)`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 10px 0px;
+  padding: ${spacing}px 0px;
 `;
 
 const SelectedOrganizationTitle = styled(Text)`

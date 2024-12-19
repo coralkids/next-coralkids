@@ -1,4 +1,5 @@
 import useUser from "@/lib/user/hooks/useUser";
+import { spacing } from "@/theme/spacing";
 import { useAuth } from "@clerk/clerk-expo";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
@@ -70,7 +71,7 @@ const ProfileTouchableWithMenuContainer = styled(View)`
 const ProfileAvatarImage = styled(Avatar.Image)``;
 
 const ProfileFullName = styled(Text)`
-  margin-left: 10px;
+  margin-left: ${spacing}px;
 `;
 
 const ProfileTouchableOpacity = styled(TouchableOpacity)`
@@ -89,7 +90,8 @@ const ProfileMenu = styled(Menu)`
 `;
 
 const LogountButton = styled(Button)`
-  margin: 10px;
+  margin: ${spacing}px;
+  margin-bottom: 0;
 `;
 
 export default ProfileTouchableWithMenu;
