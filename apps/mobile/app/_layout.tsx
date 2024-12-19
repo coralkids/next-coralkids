@@ -79,30 +79,7 @@ export default function RootLayout() {
               value={paperTheme as ReactNativePaperCustomTheme & Theme}
             >
               <BaseLayout>
-                <View
-                  style={{
-                    height: STATUS_BAR_HEIGHT,
-                    backgroundColor:
-                      colorScheme === "dark"
-                        ? darkTheme.colors?.background
-                        : lightTheme.colors?.background,
-                  }}
-                >
-                  <StatusBar translucent />
-                </View>
-                <SafeAreaProvider>
-                  <SafeAreaView
-                    style={{
-                      flex: 1,
-                      backgroundColor:
-                        colorScheme === "dark"
-                          ? darkTheme.colors?.background
-                          : lightTheme.colors?.background,
-                    }}
-                  >
-                    <Stack screenOptions={{ headerShown: false }} />
-                  </SafeAreaView>
-                </SafeAreaProvider>
+                <Stack screenOptions={{ headerShown: false }} />
               </BaseLayout>
             </ExpoRouterThemeProvider>
           </ThemeProvider>

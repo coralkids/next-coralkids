@@ -1,14 +1,14 @@
 import React from "react";
 
 import { SignedIn, SignedOut } from "@clerk/clerk-expo";
-import { Redirect, Slot } from "expo-router";
+import { Redirect } from "expo-router";
 
-export const AuthProtectedSlot: React.FC<React.PropsWithChildren> = () => {
+export const AuthProtectedSlot: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
   return (
     <>
-      <SignedIn>
-        <Slot />
-      </SignedIn>
+      <SignedIn>{children}</SignedIn>
       <SignedOut>
         <Redirect href="/(auth)/sign-in" />
       </SignedOut>

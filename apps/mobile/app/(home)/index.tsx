@@ -1,10 +1,5 @@
-import NotesDashboard from "@/lib/notes/features/NotesDashboard";
-import NotesProvider from "@/lib/notes/providers/NotesProvider";
+import { OrganizationHome } from "@/lib/organizations/features/OrganizationHome.feature";
 
-const Home = () => (
-  <NotesProvider>
-    <NotesDashboard />
-  </NotesProvider>
-);
+const Home = () => <OrganizationHome />;
 
 export default Home;
