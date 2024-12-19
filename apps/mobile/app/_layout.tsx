@@ -72,9 +72,9 @@ export default function RootLayout() {
 
   return (
     <StrictMode>
-      <ClerkConvexProvider>
-        <PaperProvider theme={paperTheme}>
-          <ThemeProvider theme={paperTheme}>
+      <PaperProvider theme={paperTheme}>
+        <ThemeProvider theme={paperTheme}>
+          <ClerkConvexProvider>
             <ExpoRouterThemeProvider
               value={paperTheme as ReactNativePaperCustomTheme & Theme}
             >
@@ -82,9 +82,9 @@ export default function RootLayout() {
                 <Stack screenOptions={{ headerShown: false }} />
               </BaseLayout>
             </ExpoRouterThemeProvider>
-          </ThemeProvider>
-        </PaperProvider>
-      </ClerkConvexProvider>
+          </ClerkConvexProvider>
+        </ThemeProvider>
+      </PaperProvider>
     </StrictMode>
   );
 }

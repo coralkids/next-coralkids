@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { ActivityIndicator, Text } from "react-native-paper";
-import styled, { ThemeStyledProps } from "styled-components/native";
+import styled from "styled-components/native";
 import {
   SocialLoginButton,
   SocialLoginButtonContent,
