@@ -6,10 +6,10 @@ const Container = styled(View)`
   max-width: 1024px;
   width: 100%;
   height: 100%;
-  flex: 1;
   padding: ${spacing}px;
   align-items: start;
   margin: 0 auto;
+  display: flex;
 `;
 
 export default Container;

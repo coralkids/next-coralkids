@@ -76,8 +76,7 @@ const ProfileTouchableOpacity = styled(TouchableOpacity)`
   width: 180px;
   justify-content: start;
   align-items: center;
-  padding: ${spacing / 2}px;
-  margin-left: ${spacing / 2}px;
+  padding: 0px ${spacing}px;
 `;
 
 const ProfileMenuOpenIcon = styled(AntDesign)`

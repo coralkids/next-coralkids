@@ -23,41 +23,41 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
   const snapPoints = useMemo(() => ["50%", "100%"], []);
 
   return (
-    <SafeAreaProvider>
+    <>
       <Appbar.Header elevated>
         <ProfileTouchableWithMenu />
       </Appbar.Header>
-      <SafeAreaView
-        style={{ flex: 1, flexDirection: "column", alignItems: "flex-start" }}
-      >
-        <Container>
-          <OrganizationListContainer>
-            <SelectedOrganizationTitle variant="titleMedium">
-              Organizacion
-            </SelectedOrganizationTitle>
-            <Button onPress={() => handleSnapPress(2)} icon="swap-horizontal">
-              Cambiar
-            </Button>
-          </OrganizationListContainer>
+      <SafeAreaProvider>
+        <SafeAreaView>
+          <Container>
+            <OrganizationListContainer>
+              <SelectedOrganizationTitle variant="titleMedium">
+                Organizacion
+              </SelectedOrganizationTitle>
+              <Button onPress={() => handleSnapPress(2)} icon="swap-horizontal">
+                Cambiar
+              </Button>
+            </OrganizationListContainer>
 
-          {user?.organizationMemberships.map((org) => (
-            <OrganizationMembershipItem key={org.id} org={org} />
-          ))}
-        </Container>
-        <BottomSheet
-          backgroundComponent={OrganizationSelectorContainer as FC}
-          snapPoints={snapPoints}
-          ref={bottomSheetRef}
-          onChange={handleSheetChanges}
-        >
-          <OrganizationSelectorWrapper>
             {user?.organizationMemberships.map((org) => (
               <OrganizationMembershipItem key={org.id} org={org} />
             ))}
-          </OrganizationSelectorWrapper>
-        </BottomSheet>
-      </SafeAreaView>
-    </SafeAreaProvider>
+          </Container>
+          <BottomSheet
+            backgroundComponent={OrganizationSelectorContainer as FC}
+            snapPoints={snapPoints}
+            ref={bottomSheetRef}
+            onChange={handleSheetChanges}
+          >
+            <OrganizationSelectorWrapper>
+              {user?.organizationMemberships.map((org) => (
+                <OrganizationMembershipItem key={org.id} org={org} />
+              ))}
+            </OrganizationSelectorWrapper>
+          </BottomSheet>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </>
   );
 };
 
