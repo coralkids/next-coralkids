@@ -4,9 +4,8 @@ import { useClerk } from "@clerk/clerk-react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import styled, { ThemeStyledProps } from "styled-components/native";
-
 export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { loaded: clerkLoaded } = useClerk();
 
@@ -29,11 +28,15 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   }, [loaded, clerkLoaded]);
 
   if (loaded && clerkLoaded) {
-    return (
-      <AppScreen>
-        <AppContainer>{children}</AppContainer>
-      </AppScreen>
-    );
+    if (Platform.OS === "web") {
+      return (
+        <AppScreen>
+          <AppContainer>{children}</AppContainer>
+        </AppScreen>
+      );
+    }
+
+    return children;
   }
 };
 
