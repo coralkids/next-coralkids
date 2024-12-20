@@ -14,10 +14,11 @@ import {
 } from "@gorhom/bottom-sheet";
 import { ThemeStyledProps } from "styled-components/native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import Animated, { FadeInRight } from "react-native-reanimated";
+import { FadeInRight } from "react-native-reanimated";
 import { OrganizationMembershipResource } from "@clerk/types";
 import { OrganizationMembershipSelector } from "./components/OrganizationMembershipSelector";
 import { useActiveOrganizationMembership } from "../hooks/useActiveOrganizationMembership";
+import AnimatedFullWidthView from "@/lib/core/ui/AnimatedFullWidthView";
 
 export const OrganizationMembershipHome: React.FC<
   React.PropsWithChildren
@@ -61,14 +62,14 @@ export const OrganizationMembershipHome: React.FC<
               </Button>
             </OrganizationMembershipListContainer>
             {activeOrganizationMembership && (
-              <Animated.View entering={FadeInRight} style={{ width: "100%" }}>
+              <AnimatedFullWidthView entering={FadeInRight.delay(100)}>
                 <OrganizationMembershipItem
                   org={activeOrganizationMembership}
                   displayConfig={
                     activeOrganizationMembership.role === "org:admin"
                   }
                 />
-              </Animated.View>
+              </AnimatedFullWidthView>
             )}
           </Container>
           <BottomSheetModalProvider>

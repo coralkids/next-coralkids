@@ -6,7 +6,8 @@ import { TouchableOpacity, View } from "react-native";
 import { OrganizationMembershipResource } from "@clerk/types";
 import styled, { ThemeStyledProps } from "styled-components/native";
 import Container from "@/lib/core/ui/Container";
-import { FlatList } from "react-native";
+import Animated, { FadeIn, FadeInRight } from "react-native-reanimated";
+import AnimatedFullWidthView from "@/lib/core/ui/AnimatedFullWidthView";
 
 interface OrganizationMembershipSelectorProps {
   onPress: (orgMembership: OrganizationMembershipResource) => void;
@@ -22,21 +23,28 @@ export const OrganizationMembershipSelector: React.FC<
         <OrganizationMembershipSelectorTitle variant="titleMedium">
           Organizaciones disponibles
         </OrganizationMembershipSelectorTitle>
-        <FlatList
+        <Animated.FlatList
+          itemLayoutAnimation={FadeIn.delay(100)}
           style={{ width: "100%", height: "100%" }}
           data={organizationMemberships}
-          renderItem={({ item }) => {
+          renderItem={({ item, index }) => {
             return (
-              <TouchableOrganizationMembershipItem
-                key={item.id}
-                style={{}}
-                onPress={() => onPress(item)}
+              <AnimatedFullWidthView
+                entering={FadeInRight.delay(
+                  index === 0 ? 100 : (index + 1) * 200,
+                )}
               >
-                <OrganizationMembershipItem org={item} />
-              </TouchableOrganizationMembershipItem>
+                <TouchableOrganizationMembershipItem
+                  key={item.id}
+                  style={{}}
+                  onPress={() => onPress(item)}
+                >
+                  <OrganizationMembershipItem org={item} />
+                </TouchableOrganizationMembershipItem>
+              </AnimatedFullWidthView>
             );
           }}
-        ></FlatList>
+        ></Animated.FlatList>
       </OrganizationMembershipSelectorWrapper>
     </Container>
   );
