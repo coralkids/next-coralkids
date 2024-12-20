@@ -11,11 +11,16 @@ import AnimatedFullWidthView from "@/lib/core/ui/AnimatedFullWidthView";
 interface OrganizationMembershipSelectorProps {
   onPress: (orgMembership: OrganizationMembershipResource) => void;
   organizationMemberships?: OrganizationMembershipResource[];
+  activeOrganizationMembership?: OrganizationMembershipResource;
 }
 
 export const OrganizationMembershipSelector: React.FC<
   OrganizationMembershipSelectorProps
-> = ({ onPress, organizationMemberships = [] }) => {
+> = ({
+  onPress,
+  activeOrganizationMembership,
+  organizationMemberships = [],
+}) => {
   const [state, setState] = React.useState({ open: false });
 
   const onStateChange = ({ open }: { open: boolean }) => setState({ open });
@@ -33,7 +38,7 @@ export const OrganizationMembershipSelector: React.FC<
           data={organizationMemberships}
           renderItem={({ item, index }) => {
             return (
-              <AnimatedFullWidthView
+              <OrganizationMembershipItemContainer
                 entering={FadeInRight.delay((index + 1) * 150)}
               >
                 <TouchableOrganizationMembershipItem
@@ -42,7 +47,7 @@ export const OrganizationMembershipSelector: React.FC<
                 >
                   <OrganizationMembershipItem org={item} />
                 </TouchableOrganizationMembershipItem>
-              </AnimatedFullWidthView>
+              </OrganizationMembershipItemContainer>
             );
           }}
         ></Animated.FlatList>
@@ -93,4 +98,8 @@ const OrganizationMembershipSelectorWrapper = styled(View)`
 
 const TouchableOrganizationMembershipItem = styled(TouchableOpacity)`
   padding: ${spacing}px;
+`;
+
+const OrganizationMembershipItemContainer = styled(AnimatedFullWidthView)`
+  flex: 1;
 `;

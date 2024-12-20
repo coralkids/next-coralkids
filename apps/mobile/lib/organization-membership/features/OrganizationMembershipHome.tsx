@@ -55,6 +55,7 @@ export const OrganizationMembershipHome: React.FC<
               Organizacion
             </SelectedOrganizationMembershipTitle>
             <Button
+              mode="elevated"
               onPress={() => handlePresentModalPress()}
               icon="swap-horizontal"
             >
@@ -88,9 +89,8 @@ export const OrganizationMembershipHome: React.FC<
               onChange={handleSheetChanges}
             >
               <OrganizationMembershipSelector
-                organizationMemberships={user?.organizationMemberships.filter(
-                  (i) => i.id !== activeOrganizationMembership?.id,
-                )}
+                activeOrganizationMembership={activeOrganizationMembership}
+                organizationMemberships={user?.organizationMemberships}
                 onPress={onOrganizationChange}
               />
             </BottomSheetModal>
