@@ -43,8 +43,7 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
 const AppScreen = styled(View)`
   flex: 1;
   width: 100%;
-  background-color: ${({ theme }: ThemeStyledProps) =>
-    theme.colors.elevation.level1};
+  background-color: ${({ theme }: ThemeStyledProps) => theme.colors.onSurface};
 `;
 
 const AppContainer = styled(View)`
