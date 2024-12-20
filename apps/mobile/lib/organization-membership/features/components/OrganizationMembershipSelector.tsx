@@ -1,11 +1,10 @@
 import React from "react";
 import OrganizationMembershipItem from "./OrganizationMembershipItem";
-import { Button, FAB, Portal, Text, useTheme } from "react-native-paper";
+import { FAB, Text } from "react-native-paper";
 import { spacing } from "@/theme/spacing";
 import { TouchableOpacity, View } from "react-native";
 import { OrganizationMembershipResource } from "@clerk/types";
-import styled, { ThemeStyledProps } from "styled-components/native";
-import Container from "@/lib/core/ui/Container";
+import styled from "styled-components/native";
 import Animated, { FadeIn, FadeInRight } from "react-native-reanimated";
 import AnimatedFullWidthView from "@/lib/core/ui/AnimatedFullWidthView";
 
@@ -17,8 +16,6 @@ interface OrganizationMembershipSelectorProps {
 export const OrganizationMembershipSelector: React.FC<
   OrganizationMembershipSelectorProps
 > = ({ onPress, organizationMemberships = [] }) => {
-  const theme = useTheme();
-
   const [state, setState] = React.useState({ open: false });
 
   const onStateChange = ({ open }: { open: boolean }) => setState({ open });

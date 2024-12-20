@@ -88,7 +88,9 @@ export const OrganizationMembershipHome: React.FC<
               onChange={handleSheetChanges}
             >
               <OrganizationMembershipSelector
-                organizationMemberships={user?.organizationMemberships}
+                organizationMemberships={user?.organizationMemberships.filter(
+                  (i) => i.id !== activeOrganizationMembership?.id,
+                )}
                 onPress={onOrganizationChange}
               />
             </BottomSheetModal>
