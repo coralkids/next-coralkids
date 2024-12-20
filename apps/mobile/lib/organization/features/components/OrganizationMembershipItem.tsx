@@ -2,13 +2,7 @@ import React from "react";
 import { OrganizationMembershipResource } from "@clerk/types";
 import { TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
-import {
-  Card,
-  Icon,
-  Text,
-  TouchableRipple,
-  useTheme,
-} from "react-native-paper";
+import { Card, Icon, Text, useTheme } from "react-native-paper";
 import styled, { ThemeStyledProps } from "styled-components/native";
 import { spacing } from "@/theme/spacing";
 
