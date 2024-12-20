@@ -17,6 +17,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Animated, { FadeInRight } from "react-native-reanimated";
 import { OrganizationMembershipResource } from "@clerk/types";
 import OrganizationSelector from "./components/OrganizationSelector";
+import { useActiveOrganization } from "../hooks/useActiveOrganization";
 
 export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
   const user = useUser();
@@ -29,10 +30,12 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
   }, []);
   const snapPoints = useMemo(() => ["100%"], []);
   const onOrganizationChange = (org: OrganizationMembershipResource) => {
-    console.log("selected org", org.organization.name);
+    setActiveOrganization(org);
 
     bottomSheetRef?.current?.close();
   };
+  const { activeOrganization, setActiveOrganization } = useActiveOrganization();
+
   return (
     <>
       <Appbar.Header dark={true} elevated>
@@ -52,13 +55,11 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
                 Cambiar
               </Button>
             </OrganizationListContainer>
-            {user?.organizationMemberships[0] && (
+            {activeOrganization && (
               <Animated.View entering={FadeInRight} style={{ width: "100%" }}>
                 <OrganizationMembershipItem
-                  org={user?.organizationMemberships[0]}
-                  displayConfig={
-                    user?.organizationMemberships[0].role === "org:admin"
-                  }
+                  org={activeOrganization}
+                  displayConfig={activeOrganization.role === "org:admin"}
                 />
               </Animated.View>
             )}
