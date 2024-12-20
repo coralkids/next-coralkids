@@ -8,14 +8,15 @@ import { spacing } from "@/theme/spacing";
 
 export const OrganizationMembershipItem: React.FC<{
   org: OrganizationMembershipResource;
+  elevation?: number;
   displayConfig?: boolean;
-}> = ({ org, displayConfig = false }) => {
+}> = ({ org, displayConfig = false, elevation = 1 }) => {
   const theme = useTheme();
 
   return (
-    <OrganizationMembershipCard>
+    <OrganizationMembershipCard elevation={elevation}>
       <OrganizationMembershipItemContainer>
-        <OrganizationMembershipItemAvatarWrapper>
+        <OrganizationMembershipItemAvatarWrapper elevation={elevation}>
           <OrganizationMembershipItemAvatarImage
             size={100}
             source={{
@@ -74,20 +75,18 @@ const OrganizationMembershipItemContent = styled(View)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: ${spacing}px;
   flex: 1;
+  padding-left: ${spacing / 2}px;
+  padding-right: ${spacing}px;
 `;
 
 const OrganizationMembershipItemContainer = styled(View)`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  gap: 10px;
 `;
 const OrganizationMembershipItemAvatarWrapper = styled(View)`
-  background-color: ${({ theme }: ThemeStyledProps) =>
-    theme.colors.elevation.level3};
-  padding: 10px;
+  padding: ${spacing}px;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
 `;
@@ -95,4 +94,5 @@ const OrganizationMembershipItemAvatarImage = styled(Image)`
   width: 100px;
   height: 100px;
   border-radius: 12px;
+  background-color: ${({ theme }: ThemeStyledProps) => theme.colors.background};
 `;
