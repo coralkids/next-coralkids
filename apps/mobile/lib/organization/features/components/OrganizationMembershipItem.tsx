@@ -2,7 +2,7 @@ import React from "react";
 import { OrganizationMembershipResource } from "@clerk/types";
 import { TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
-import { Card, Icon, Text, useTheme } from "react-native-paper";
+import { Badge, Card, Icon, Text, useTheme } from "react-native-paper";
 import styled, { ThemeStyledProps } from "styled-components/native";
 import { spacing } from "@/theme/spacing";
 
@@ -27,6 +27,16 @@ export const OrganizationMembershipItem: React.FC<{
           <OrganizationMembershipItemTextWrapper>
             <Text variant="titleMedium">{org.organization.name}</Text>
             <Text variant="bodyMedium">Escuela infantil</Text>
+            <View style={{ alignSelf: "flex-start" }}>
+              <Badge
+                style={{
+                  backgroundColor: theme.colors.primary,
+                  marginTop: 10,
+                }}
+              >
+                {org.role}
+              </Badge>
+            </View>
           </OrganizationMembershipItemTextWrapper>
           <OrganizationMembershipItemConfigurationTouchable onPress={() => {}}>
             <Icon source="cog" color={theme.colors.primary} size={20} />

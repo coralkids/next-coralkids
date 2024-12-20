@@ -72,20 +72,20 @@ export default function RootLayout() {
   ) as ReactNativePaperCustomTheme;
 
   return (
-    <PaperProvider theme={paperTheme}>
-      <StyledComponentsThemeProvider theme={paperTheme}>
-        <ClerkConvexProvider>
-          <ExpoRouterThemeProvider
-            value={paperTheme as ReactNativePaperCustomTheme & Theme}
-          >
-            <GestureHandlerRootView>
+    <GestureHandlerRootView>
+      <PaperProvider theme={paperTheme}>
+        <StyledComponentsThemeProvider theme={paperTheme}>
+          <ClerkConvexProvider>
+            <ExpoRouterThemeProvider
+              value={paperTheme as ReactNativePaperCustomTheme & Theme}
+            >
               <BaseLayout>
                 <Stack screenOptions={{ headerShown: false }} />
               </BaseLayout>
-            </GestureHandlerRootView>
-          </ExpoRouterThemeProvider>
-        </ClerkConvexProvider>
-      </StyledComponentsThemeProvider>
-    </PaperProvider>
+            </ExpoRouterThemeProvider>
+          </ClerkConvexProvider>
+        </StyledComponentsThemeProvider>
+      </PaperProvider>
+    </GestureHandlerRootView>
   );
 }
