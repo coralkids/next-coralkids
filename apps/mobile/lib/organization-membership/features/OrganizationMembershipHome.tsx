@@ -4,7 +4,6 @@ import { Appbar, Button, Text } from "react-native-paper";
 import styled from "styled-components/native";
 import ProfileTouchableWithMenu from "./components/ProfileTouchableWithMenu";
 import OrganizationMembershipItem from "./components/OrganizationMembershipItem";
-import Container from "@/lib/core/ui/Container";
 import { spacing } from "@/theme/spacing";
 import {
   BottomSheetModal,
@@ -49,18 +48,20 @@ export const OrganizationMembershipHome: React.FC<
       </Appbar.Header>
       <SafeAreaProvider>
         <SafeAreaView style={{ flex: 1 }}>
-          <Container>
-            <OrganizationMembershipListContainer entering={FadeIn.delay(100)}>
-              <SelectedOrganizationMembershipTitle variant="titleMedium">
-                Organizacion
-              </SelectedOrganizationMembershipTitle>
-              <Button
-                onPress={() => handlePresentModalPress()}
-                icon="swap-horizontal"
-              >
-                Cambiar
-              </Button>
-            </OrganizationMembershipListContainer>
+          <OrganizationMembershipListHeaderContainer
+            entering={FadeIn.delay(100)}
+          >
+            <SelectedOrganizationMembershipTitle variant="titleMedium">
+              Organizacion
+            </SelectedOrganizationMembershipTitle>
+            <Button
+              onPress={() => handlePresentModalPress()}
+              icon="swap-horizontal"
+            >
+              Cambiar
+            </Button>
+          </OrganizationMembershipListHeaderContainer>
+          <OrganizationMembershipListContainer>
             {activeOrganizationMembership && (
               <AnimatedFullWidthView
                 exiting={FadeInLeft.delay(100)}
@@ -74,7 +75,7 @@ export const OrganizationMembershipHome: React.FC<
                 />
               </AnimatedFullWidthView>
             )}
-          </Container>
+          </OrganizationMembershipListContainer>
           <BottomSheetModalProvider>
             <BottomSheetModal
               animateOnMount={true}
@@ -100,12 +101,15 @@ export const OrganizationMembershipHome: React.FC<
 
 export default OrganizationMembershipHome;
 
-const OrganizationMembershipListContainer = styled(AnimatedFullWidthView)`
+const OrganizationMembershipListHeaderContainer = styled(AnimatedFullWidthView)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: ${spacing}px 0px;
+  padding: ${spacing}px;
+`;
+
+const OrganizationMembershipListContainer = styled(AnimatedFullWidthView)`
+  padding: 0px ${spacing}px;
 `;
 
 const SelectedOrganizationMembershipTitle = styled(Text)`

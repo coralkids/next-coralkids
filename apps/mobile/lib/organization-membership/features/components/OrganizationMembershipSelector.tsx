@@ -1,6 +1,6 @@
 import React from "react";
 import OrganizationMembershipItem from "./OrganizationMembershipItem";
-import { Button, Text, useTheme } from "react-native-paper";
+import { Button, FAB, Portal, Text, useTheme } from "react-native-paper";
 import { spacing } from "@/theme/spacing";
 import { TouchableOpacity, View } from "react-native";
 import { OrganizationMembershipResource } from "@clerk/types";
@@ -19,6 +19,12 @@ export const OrganizationMembershipSelector: React.FC<
 > = ({ onPress, organizationMemberships = [] }) => {
   const theme = useTheme();
 
+  const [state, setState] = React.useState({ open: false });
+
+  const onStateChange = ({ open }: { open: boolean }) => setState({ open });
+
+  const { open } = state;
+
   return (
     <OrganizationMembershipSelectorContainer>
       <OrganizationMembershipSelectorWrapper>
@@ -27,7 +33,6 @@ export const OrganizationMembershipSelector: React.FC<
         </OrganizationMembershipSelectorTitle>
         <Animated.FlatList
           itemLayoutAnimation={FadeIn.delay(100)}
-          style={{ width: "100%", height: "auto" }}
           data={organizationMemberships}
           renderItem={({ item, index }) => {
             return (
@@ -36,7 +41,6 @@ export const OrganizationMembershipSelector: React.FC<
               >
                 <TouchableOrganizationMembershipItem
                   key={item.id}
-                  style={{}}
                   onPress={() => onPress(item)}
                 >
                   <OrganizationMembershipItem org={item} />
@@ -45,17 +49,30 @@ export const OrganizationMembershipSelector: React.FC<
             );
           }}
         ></Animated.FlatList>
-        <AddOrganizationMembershipActionsContainer>
-          <Button
-            onPress={() => console.log("Create org")}
-            buttonColor={theme.colors.tertiaryContainer}
-            textColor={theme.colors.tertiary}
-            mode="elevated"
-            icon="link-variant-plus"
-          >
-            Vincular organizacion
-          </Button>
-        </AddOrganizationMembershipActionsContainer>
+        <FAB.Group
+          label="Vincular nueva organizacion"
+          open={open}
+          visible
+          icon={open ? "link-variant-minus" : "link-variant-plus"}
+          actions={[
+            {
+              icon: "qrcode",
+              label: "Escanear QR",
+              onPress: () => console.log("Pressed star"),
+            },
+            {
+              icon: "plus",
+              label: "Crear nueva",
+              onPress: () => console.log("Pressed email"),
+            },
+          ]}
+          onStateChange={onStateChange}
+          onPress={() => {
+            if (open) {
+              // do something if the speed dial is open
+            }
+          }}
+        />
       </OrganizationMembershipSelectorWrapper>
     </OrganizationMembershipSelectorContainer>
   );
@@ -63,27 +80,21 @@ export const OrganizationMembershipSelector: React.FC<
 
 export default OrganizationMembershipSelector;
 
-const OrganizationMembershipSelectorContainer = styled(Container)`
+const OrganizationMembershipSelectorContainer = styled(View)`
   padding: 0px;
-`;
-
-const AddOrganizationMembershipActionsContainer = styled(View)`
-  margin-top: ${spacing}px;
-  padding: ${spacing}px;
+  flex: 1;
 `;
 
 const OrganizationMembershipSelectorTitle = styled(AnimatedFullWidthView)`
   margin-bottom: ${spacing}px;
+  padding: ${spacing}px;
 `;
 
 const OrganizationMembershipSelectorWrapper = styled(View)`
   flex: 1;
   border-radius: 12px;
-  width: 100%;
-  margin-bottom: 20px;
-  padding: ${spacing}px;
 `;
 
 const TouchableOrganizationMembershipItem = styled(TouchableOpacity)`
-  padding: ${spacing / 2}px;
+  padding: ${spacing}px;
 `;

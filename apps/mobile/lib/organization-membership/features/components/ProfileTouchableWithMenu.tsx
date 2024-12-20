@@ -22,7 +22,7 @@ const ProfileTouchableWithMenu = () => {
 
   const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
   return (
-    <View>
+    <ProfileTouchableWithMenuContainer>
       <ProfileMenu
         visible={isUserMenuVisible}
         onDismiss={() => setIsUserMenuVisible(false)}
@@ -61,11 +61,13 @@ const ProfileTouchableWithMenu = () => {
           ></ProfileMenuOpenIcon>
         </React.Fragment>
       </ProfileTouchableOpacity>
-    </View>
+    </ProfileTouchableWithMenuContainer>
   );
 };
 
 const ProfileAvatarImage = styled(Avatar.Image)``;
+
+const ProfileTouchableWithMenuContainer = styled(View)``;
 
 const ProfileFullName = styled(Text)`
   margin-left: ${spacing}px;
@@ -74,7 +76,6 @@ const ProfileFullName = styled(Text)`
 const ProfileTouchableOpacity = styled(TouchableOpacity)`
   flex-direction: row;
   width: 180px;
-  justify-content: start;
   align-items: center;
   padding: 0px ${spacing}px;
 `;
