@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import React from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { AppRegistry, LogBox } from "react-native";
+import { LogBox } from "react-native";
 import ClerkConvexProvider from "@/lib/core/ui/ClerkConvexProvider";
 import BaseLayout from "@/lib/core/ui/BaseLayout";
 import {

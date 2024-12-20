@@ -33,13 +33,13 @@ export default function Page() {
         const { createdSessionId, setActive } = await startGoogleAuthFlow();
         if (createdSessionId && setActive) {
           await setActive({ session: createdSessionId });
-          router.navigate("/(home)");
+          router.navigate("/");
         }
       } else if (authType === "apple") {
         const { createdSessionId, setActive } = await startAppleAuthFlow();
         if (createdSessionId && setActive) {
           await setActive({ session: createdSessionId });
-          router.navigate("/(home)");
+          router.navigate("/");
         }
       }
     } catch (err) {

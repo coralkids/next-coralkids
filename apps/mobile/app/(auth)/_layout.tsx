@@ -6,7 +6,7 @@ export default function AuthRoutesLayout() {
   return (
     <>
       <SignedIn>
-        <Redirect href="/(home)" />
+        <Redirect href="/" />
       </SignedIn>
       <SignedOut>
         <Slot />
