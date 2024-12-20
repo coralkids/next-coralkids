@@ -52,16 +52,16 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
                 Cambiar
               </Button>
             </OrganizationListContainer>
-
-            {user?.organizationMemberships.map((org) => (
+            {user?.organizationMemberships[0] && (
               <Animated.View entering={FadeInRight} style={{ width: "100%" }}>
                 <OrganizationMembershipItem
-                  key={org.id}
-                  org={org}
-                  displayConfig={org.role === "org:admin"}
+                  org={user?.organizationMemberships[0]}
+                  displayConfig={
+                    user?.organizationMemberships[0].role === "org:admin"
+                  }
                 />
               </Animated.View>
-            ))}
+            )}
           </Container>
           <BottomSheetModalProvider>
             <BottomSheetModal
