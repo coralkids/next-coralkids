@@ -86,7 +86,6 @@ const OrganizationMembershipSelectorContainer = styled(View)`
 `;
 
 const OrganizationMembershipSelectorTitle = styled(AnimatedFullWidthView)`
-  margin-bottom: ${spacing}px;
   padding: ${spacing}px;
 `;
 
