@@ -55,6 +55,7 @@ const OrganizationSelectorWrapper = styled(View)`
   flex: 1;
   padding: ${spacing}px;
   border-radius: 12px;
+  width: 100%;
   background-color: ${({ theme }: ThemeStyledProps) => theme.colors.background};
 `;
 
