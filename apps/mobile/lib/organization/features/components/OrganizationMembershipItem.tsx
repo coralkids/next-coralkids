@@ -8,7 +8,8 @@ import { spacing } from "@/theme/spacing";
 
 export const OrganizationMembershipItem: React.FC<{
   org: OrganizationMembershipResource;
-}> = ({ org }) => {
+  displayConfig?: boolean;
+}> = ({ org, displayConfig = false }) => {
   const theme = useTheme();
 
   return (
@@ -38,9 +39,13 @@ export const OrganizationMembershipItem: React.FC<{
               </Badge>
             </View>
           </OrganizationMembershipItemTextWrapper>
-          <OrganizationMembershipItemConfigurationTouchable onPress={() => {}}>
-            <Icon source="cog" color={theme.colors.primary} size={20} />
-          </OrganizationMembershipItemConfigurationTouchable>
+          {displayConfig && (
+            <OrganizationMembershipItemConfigurationTouchable
+              onPress={() => {}}
+            >
+              <Icon source="cog" color={theme.colors.primary} size={20} />
+            </OrganizationMembershipItemConfigurationTouchable>
+          )}
         </OrganizationMembershipItemContent>
       </OrganizationMembershipItemContainer>
     </OrganizationMembershipCard>

@@ -40,7 +40,11 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
             </OrganizationListContainer>
 
             {user?.organizationMemberships.map((org) => (
-              <OrganizationMembershipItem key={org.id} org={org} />
+              <OrganizationMembershipItem
+                key={org.id}
+                org={org}
+                displayConfig={org.role === "org:admin"}
+              />
             ))}
           </Container>
           <BottomSheet
