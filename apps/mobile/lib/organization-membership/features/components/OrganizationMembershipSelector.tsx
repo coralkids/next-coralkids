@@ -1,7 +1,6 @@
 import React from "react";
 import OrganizationMembershipItem from "./OrganizationMembershipItem";
 import { Text } from "react-native-paper";
-import Animated, { FadeInUp } from "react-native-reanimated";
 import { spacing } from "@/theme/spacing";
 import { TouchableOpacity, View } from "react-native";
 import { OrganizationMembershipResource } from "@clerk/types";
@@ -9,21 +8,20 @@ import styled, { ThemeStyledProps } from "styled-components/native";
 import Container from "@/lib/core/ui/Container";
 import { FlatList } from "react-native";
 
-interface OrganizationSelectorProps {
-  onPress: (org: OrganizationMembershipResource) => void;
+interface OrganizationMembershipSelectorProps {
+  onPress: (orgMembership: OrganizationMembershipResource) => void;
   organizationMemberships?: OrganizationMembershipResource[];
 }
 
-export const OrganizationSelector: React.FC<OrganizationSelectorProps> = ({
-  onPress,
-  organizationMemberships = [],
-}) => {
+export const OrganizationMembershipSelector: React.FC<
+  OrganizationMembershipSelectorProps
+> = ({ onPress, organizationMemberships = [] }) => {
   return (
     <Container>
-      <OrganizationSelectorWrapper>
-        <OrganizationSelectorTitle variant="titleMedium">
+      <OrganizationMembershipSelectorWrapper>
+        <OrganizationMembershipSelectorTitle variant="titleMedium">
           Organizaciones disponibles
-        </OrganizationSelectorTitle>
+        </OrganizationMembershipSelectorTitle>
         <FlatList
           style={{ width: "100%", height: "100%" }}
           data={organizationMemberships}
@@ -39,19 +37,19 @@ export const OrganizationSelector: React.FC<OrganizationSelectorProps> = ({
             );
           }}
         ></FlatList>
-      </OrganizationSelectorWrapper>
+      </OrganizationMembershipSelectorWrapper>
     </Container>
   );
 };
 
-export default OrganizationSelector;
+export default OrganizationMembershipSelector;
 
-const OrganizationSelectorTitle = styled(Text)`
+const OrganizationMembershipSelectorTitle = styled(Text)`
   margin-bottom: ${spacing}px;
   margin-left: ${spacing / 2}px;
 `;
 
-const OrganizationSelectorWrapper = styled(View)`
+const OrganizationMembershipSelectorWrapper = styled(View)`
   flex: 1;
   padding: ${spacing}px;
   border-radius: 12px;

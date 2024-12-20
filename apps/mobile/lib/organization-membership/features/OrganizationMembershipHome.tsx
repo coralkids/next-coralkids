@@ -16,10 +16,12 @@ import { ThemeStyledProps } from "styled-components/native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Animated, { FadeInRight } from "react-native-reanimated";
 import { OrganizationMembershipResource } from "@clerk/types";
-import OrganizationSelector from "./components/OrganizationSelector";
-import { useActiveOrganization } from "../hooks/useActiveOrganization";
+import { OrganizationMembershipSelector } from "./components/OrganizationMembershipSelector";
+import { useActiveOrganizationMembership } from "../hooks/useActiveOrganizationMembership";
 
-export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
+export const OrganizationMembershipHome: React.FC<
+  React.PropsWithChildren
+> = () => {
   const user = useUser();
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const handleSheetChanges = useCallback((index: number) => {
@@ -29,12 +31,15 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
     bottomSheetRef.current?.present();
   }, []);
   const snapPoints = useMemo(() => ["100%"], []);
-  const onOrganizationChange = (org: OrganizationMembershipResource) => {
-    setActiveOrganization(org);
+  const onOrganizationChange = (
+    orgMembership: OrganizationMembershipResource,
+  ) => {
+    setActiveOrganizationMembership(orgMembership);
 
     bottomSheetRef?.current?.close();
   };
-  const { activeOrganization, setActiveOrganization } = useActiveOrganization();
+  const { activeOrganizationMembership, setActiveOrganizationMembership } =
+    useActiveOrganizationMembership();
 
   return (
     <>
@@ -44,22 +49,24 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
       <SafeAreaProvider>
         <SafeAreaView style={{ flex: 1 }}>
           <Container>
-            <OrganizationListContainer>
-              <SelectedOrganizationTitle variant="titleMedium">
+            <OrganizationMembershipListContainer>
+              <SelectedOrganizationMembershipTitle variant="titleMedium">
                 Organizacion
-              </SelectedOrganizationTitle>
+              </SelectedOrganizationMembershipTitle>
               <Button
                 onPress={() => handlePresentModalPress()}
                 icon="swap-horizontal"
               >
                 Cambiar
               </Button>
-            </OrganizationListContainer>
-            {activeOrganization && (
+            </OrganizationMembershipListContainer>
+            {activeOrganizationMembership && (
               <Animated.View entering={FadeInRight} style={{ width: "100%" }}>
                 <OrganizationMembershipItem
-                  org={activeOrganization}
-                  displayConfig={activeOrganization.role === "org:admin"}
+                  org={activeOrganizationMembership}
+                  displayConfig={
+                    activeOrganizationMembership.role === "org:admin"
+                  }
                 />
               </Animated.View>
             )}
@@ -68,12 +75,14 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
             <BottomSheetModal
               animateOnMount={true}
               enablePanDownToClose
-              backgroundComponent={OrganizationSelectorBottomSheetPanArea as FC}
+              backgroundComponent={
+                OrganizationMembershipSelectorBottomSheetPanArea as FC
+              }
               snapPoints={snapPoints}
               ref={bottomSheetRef}
               onChange={handleSheetChanges}
             >
-              <OrganizationSelector
+              <OrganizationMembershipSelector
                 organizationMemberships={user?.organizationMemberships}
                 onPress={onOrganizationChange}
               />
@@ -85,7 +94,9 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
   );
 };
 
-const OrganizationListContainer = styled(View)`
+export default OrganizationMembershipHome;
+
+const OrganizationMembershipListContainer = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -93,11 +104,13 @@ const OrganizationListContainer = styled(View)`
   padding: ${spacing}px 0px;
 `;
 
-const SelectedOrganizationTitle = styled(Text)`
+const SelectedOrganizationMembershipTitle = styled(Text)`
   align-items: center;
 `;
 
-const OrganizationSelectorBottomSheetPanArea = styled(BottomSheetView)`
+const OrganizationMembershipSelectorBottomSheetPanArea = styled(
+  BottomSheetView,
+)`
   background-color: ${({ theme }: ThemeStyledProps) =>
     theme.colors.primaryContainer};
 `;

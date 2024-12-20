@@ -1,11 +1,14 @@
 import AuthProtect from "@/lib/core/ui/AuthProtect";
-import { OrganizationHome } from "@/lib/organization/features/OrganizationHome";
+import OrganizationMemberhipHome from "@/lib/organization-membership/features/OrganizationMembershipHome";
+import ActiveOrganizationMembershipProvider from "@/lib/organization-membership/providers/ActiveOrganizationMembershipProvider";
 import UserProvider from "@/lib/user/providers/UserProvider";
 
 const Home = () => (
   <AuthProtect>
     <UserProvider>
-      <OrganizationHome />
+      <ActiveOrganizationMembershipProvider>
+        <OrganizationMemberhipHome />
+      </ActiveOrganizationMembershipProvider>
     </UserProvider>
   </AuthProtect>
 );
