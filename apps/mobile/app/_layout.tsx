@@ -27,13 +27,7 @@ import darkTheme from "../theme/dark";
 import {
   ReactNativePaperCustomTheme,
   ThemeProvider,
-  ThemeStyledProps,
 } from "styled-components/native";
-
-const StyledComponentsThemeProvider =
-  ThemeProvider as React.JSXElementConstructor<
-    React.PropsWithChildren<ThemeStyledProps>
-  >;
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -74,7 +68,7 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView>
       <PaperProvider theme={paperTheme}>
-        <StyledComponentsThemeProvider theme={paperTheme}>
+        <ThemeProvider theme={paperTheme}>
           <ClerkConvexProvider>
             <ExpoRouterThemeProvider
               value={paperTheme as ReactNativePaperCustomTheme & Theme}
@@ -84,7 +78,7 @@ export default function RootLayout() {
               </BaseLayout>
             </ExpoRouterThemeProvider>
           </ClerkConvexProvider>
-        </StyledComponentsThemeProvider>
+        </ThemeProvider>
       </PaperProvider>
     </GestureHandlerRootView>
   );

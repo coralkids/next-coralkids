@@ -35,7 +35,7 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
   };
   return (
     <>
-      <Appbar.Header elevated>
+      <Appbar.Header dark={true} elevated>
         <ProfileTouchableWithMenu />
       </Appbar.Header>
       <SafeAreaProvider>
