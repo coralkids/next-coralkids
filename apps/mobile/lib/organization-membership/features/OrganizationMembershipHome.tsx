@@ -1,6 +1,5 @@
 import useUser from "@/lib/user/hooks/useUser";
 import React, { FC, useCallback, useMemo, useRef } from "react";
-import { View } from "react-native";
 import { Appbar, Button, Text } from "react-native-paper";
 import styled from "styled-components/native";
 import ProfileTouchableWithMenu from "./components/ProfileTouchableWithMenu";
@@ -24,12 +23,12 @@ export const OrganizationMembershipHome: React.FC<
   React.PropsWithChildren
 > = () => {
   const user = useUser();
+  const { activeOrganizationMembership, setActiveOrganizationMembership } =
+    useActiveOrganizationMembership();
+
   const bottomSheetRef = useRef<BottomSheetModal>(null);
-  const handleSheetChanges = useCallback((index: number) => {}, []);
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetRef.current?.present();
-  }, []);
-  const snapPoints = useMemo(() => ["50%", "100%"], []);
+  const snapPoints = useMemo(() => ["100%"], []);
+
   const onOrganizationChange = (
     orgMembership: OrganizationMembershipResource,
   ) => {
@@ -37,8 +36,11 @@ export const OrganizationMembershipHome: React.FC<
 
     bottomSheetRef?.current?.close();
   };
-  const { activeOrganizationMembership, setActiveOrganizationMembership } =
-    useActiveOrganizationMembership();
+
+  const handleSheetChanges = useCallback((index: number) => {}, []);
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetRef.current?.present();
+  }, []);
 
   return (
     <>
@@ -115,5 +117,5 @@ const OrganizationMembershipSelectorBottomSheetPanArea = styled(
 )`
   background-color: ${({ theme }: ThemeStyledProps) =>
     theme.colors.primaryContainer};
-  opacity: 0.6;
+  opacity: 0.8;
 `;

@@ -1,6 +1,6 @@
 import React from "react";
 import OrganizationMembershipItem from "./OrganizationMembershipItem";
-import { Text } from "react-native-paper";
+import { Button, Text, useTheme } from "react-native-paper";
 import { spacing } from "@/theme/spacing";
 import { TouchableOpacity, View } from "react-native";
 import { OrganizationMembershipResource } from "@clerk/types";
@@ -17,22 +17,22 @@ interface OrganizationMembershipSelectorProps {
 export const OrganizationMembershipSelector: React.FC<
   OrganizationMembershipSelectorProps
 > = ({ onPress, organizationMemberships = [] }) => {
+  const theme = useTheme();
+
   return (
     <Container>
       <OrganizationMembershipSelectorWrapper>
         <OrganizationMembershipSelectorTitle entering={FadeIn.delay(100)}>
-          <Text variant="titleMedium">Organizaciones disponibles</Text>
+          <Text variant="titleMedium">Organizaciones vinculadas</Text>
         </OrganizationMembershipSelectorTitle>
         <Animated.FlatList
           itemLayoutAnimation={FadeIn.delay(100)}
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "100%", height: "auto" }}
           data={organizationMemberships}
           renderItem={({ item, index }) => {
             return (
               <AnimatedFullWidthView
-                entering={FadeInRight.delay(
-                  index === 0 ? 100 : (index + 1) * 200,
-                )}
+                entering={FadeInRight.delay((index + 1) * 150)}
               >
                 <TouchableOrganizationMembershipItem
                   key={item.id}
@@ -45,6 +45,17 @@ export const OrganizationMembershipSelector: React.FC<
             );
           }}
         ></Animated.FlatList>
+        <AddOrganizationMembershipActionsContainer>
+          <Button
+            onPress={() => console.log("Create org")}
+            buttonColor={theme.colors.tertiaryContainer}
+            textColor={theme.colors.tertiary}
+            mode="elevated"
+            icon="plus"
+          >
+            Vincular nueva organizacion
+          </Button>
+        </AddOrganizationMembershipActionsContainer>
       </OrganizationMembershipSelectorWrapper>
     </Container>
   );
@@ -52,8 +63,11 @@ export const OrganizationMembershipSelector: React.FC<
 
 export default OrganizationMembershipSelector;
 
+const AddOrganizationMembershipActionsContainer = styled(View)`
+  margin-top: ${spacing}px;
+`;
+
 const OrganizationMembershipSelectorTitle = styled(AnimatedFullWidthView)`
-  padding-top: ${spacing}px;
   margin-bottom: ${spacing}px;
   margin-left: ${spacing / 2}px;
 `;
