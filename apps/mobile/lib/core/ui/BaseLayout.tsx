@@ -4,6 +4,8 @@ import { useClerk } from "@clerk/clerk-react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { View } from "react-native";
+import styled, { ThemeStyledProps } from "styled-components/native";
 
 export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { loaded: clerkLoaded } = useClerk();
@@ -27,8 +29,26 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   }, [loaded, clerkLoaded]);
 
   if (loaded && clerkLoaded) {
-    return children;
+    return (
+      <AppScreen>
+        <AppContainer>{children}</AppContainer>
+      </AppScreen>
+    );
   }
 };
+
+const AppScreen = styled(View)`
+  flex: 1;
+  width: 100%;
+  background-color: ${({ theme }: ThemeStyledProps) =>
+    theme.colors.elevation.level1};
+`;
+
+const AppContainer = styled(View)`
+  max-width: 1024px;
+  flex: 1;
+  width: 100%;
+  margin: 0 auto;
+`;
 
 export default BaseLayout;
