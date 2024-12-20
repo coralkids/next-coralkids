@@ -98,5 +98,5 @@ const SelectedOrganizationTitle = styled(Text)`
 
 const OrganizationSelectorBottomSheetPanArea = styled(BottomSheetView)`
   background-color: ${({ theme }: ThemeStyledProps) =>
-    theme.colors.elevation.level5};
+    theme.colors.primaryContainer};
 `;

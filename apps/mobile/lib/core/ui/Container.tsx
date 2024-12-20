@@ -5,6 +5,7 @@ import styled from "styled-components/native";
 const Container = styled(View)`
   max-width: 1024px;
   width: 100%;
+  flex: 1;
   padding: ${spacing}px;
   align-items: start;
   margin: 0 auto;

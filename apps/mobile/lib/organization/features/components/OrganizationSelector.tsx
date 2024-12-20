@@ -19,26 +19,28 @@ export const OrganizationSelector: React.FC<OrganizationSelectorProps> = ({
   organizationMemberships = [],
 }) => {
   return (
-    <OrganizationSelectorWrapper>
-      <OrganizationSelectorTitle variant="titleMedium">
-        Organizaciones disponibles
-      </OrganizationSelectorTitle>
-      <FlatList
-        style={{ width: "100%", height: "100%" }}
-        data={organizationMemberships}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOrganizationMembershipItem
-              key={item.id}
-              style={{}}
-              onPress={() => onPress(item)}
-            >
-              <OrganizationMembershipItem org={item} elevation={2} />
-            </TouchableOrganizationMembershipItem>
-          );
-        }}
-      ></FlatList>
-    </OrganizationSelectorWrapper>
+    <Container>
+      <OrganizationSelectorWrapper>
+        <OrganizationSelectorTitle variant="titleMedium">
+          Organizaciones disponibles
+        </OrganizationSelectorTitle>
+        <FlatList
+          style={{ width: "100%", height: "100%" }}
+          data={organizationMemberships}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOrganizationMembershipItem
+                key={item.id}
+                style={{}}
+                onPress={() => onPress(item)}
+              >
+                <OrganizationMembershipItem org={item} />
+              </TouchableOrganizationMembershipItem>
+            );
+          }}
+        ></FlatList>
+      </OrganizationSelectorWrapper>
+    </Container>
   );
 };
 
@@ -52,8 +54,8 @@ const OrganizationSelectorTitle = styled(Text)`
 const OrganizationSelectorWrapper = styled(View)`
   flex: 1;
   padding: ${spacing}px;
-  background-color: ${({ theme }: ThemeStyledProps) =>
-    theme.colors.elevation.level1};
+  border-radius: 12px;
+  background-color: ${({ theme }: ThemeStyledProps) => theme.colors.background};
 `;
 
 const TouchableOrganizationMembershipItem = styled(TouchableOpacity)`
