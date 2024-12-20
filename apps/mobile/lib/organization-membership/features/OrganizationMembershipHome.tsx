@@ -115,7 +115,10 @@ const SelectedOrganizationMembershipTitle = styled(Text)`
 const OrganizationMembershipSelectorBottomSheetPanArea = styled(
   BottomSheetView,
 )`
-  background-color: ${({ theme }: ThemeStyledProps) =>
-    theme.colors.primaryContainer};
-  opacity: 0.8;
+  padding: 0px;
+  margin: 0px;
+  background-color: ${({ theme }: ThemeStyledProps) => theme.colors.background};
+  border-top-width: 25px;
+  border-color: ${({ theme }: ThemeStyledProps) =>
+    theme.colors.elevation.level2};
 `;

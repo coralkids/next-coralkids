@@ -20,7 +20,7 @@ export const OrganizationMembershipSelector: React.FC<
   const theme = useTheme();
 
   return (
-    <Container>
+    <OrganizationMembershipSelectorContainer>
       <OrganizationMembershipSelectorWrapper>
         <OrganizationMembershipSelectorTitle entering={FadeIn.delay(100)}>
           <Text variant="titleMedium">Organizaciones vinculadas</Text>
@@ -51,34 +51,37 @@ export const OrganizationMembershipSelector: React.FC<
             buttonColor={theme.colors.tertiaryContainer}
             textColor={theme.colors.tertiary}
             mode="elevated"
-            icon="plus"
+            icon="link-variant-plus"
           >
-            Vincular nueva organizacion
+            Vincular organizacion
           </Button>
         </AddOrganizationMembershipActionsContainer>
       </OrganizationMembershipSelectorWrapper>
-    </Container>
+    </OrganizationMembershipSelectorContainer>
   );
 };
 
 export default OrganizationMembershipSelector;
 
+const OrganizationMembershipSelectorContainer = styled(Container)`
+  padding: 0px;
+`;
+
 const AddOrganizationMembershipActionsContainer = styled(View)`
   margin-top: ${spacing}px;
+  padding: ${spacing}px;
 `;
 
 const OrganizationMembershipSelectorTitle = styled(AnimatedFullWidthView)`
   margin-bottom: ${spacing}px;
-  margin-left: ${spacing / 2}px;
 `;
 
 const OrganizationMembershipSelectorWrapper = styled(View)`
   flex: 1;
-  padding: ${spacing}px;
   border-radius: 12px;
   width: 100%;
   margin-bottom: 20px;
-  background-color: ${({ theme }: ThemeStyledProps) => theme.colors.background};
+  padding: ${spacing}px;
 `;
 
 const TouchableOrganizationMembershipItem = styled(TouchableOpacity)`
