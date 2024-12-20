@@ -1,10 +1,9 @@
 import { useOAuth } from "@clerk/clerk-expo";
-import { useClerk } from "@clerk/clerk-react";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { Platform, useColorScheme } from "react-native";
+import { useColorScheme } from "react-native";
 import { ActivityIndicator, Text } from "react-native-paper";
 import styled from "styled-components/native";
 import {
@@ -13,13 +12,9 @@ import {
   SocialLoginButtonText,
   SocialLoginImageIcon,
 } from "../ui/SocialLoginButton";
-import * as WebBrowser from "expo-web-browser";
-import * as AuthSession from "expo-auth-session";
 
-WebBrowser.maybeCompleteAuthSession();
-
-export default function Page() {
-  const [loading, setLoading] = useState(Platform.OS === "web");
+export default function SignInFeature() {
+  const [loading, setLoading] = useState(false);
   const colorScheme = useColorScheme();
   const { startOAuthFlow: startGoogleAuthFlow } = useOAuth({
     strategy: "oauth_google",
@@ -29,14 +24,6 @@ export default function Page() {
   });
 
   const router = useRouter();
-  const clerk = useClerk();
-
-  if (Platform.OS === "web") {
-    const uri = AuthSession.makeRedirectUri();
-    window.location.href = clerk.buildSignInUrl({
-      signInForceRedirectUrl: uri,
-    });
-  }
 
   const onPress = async (authType: string) => {
     setLoading(true);
@@ -57,8 +44,9 @@ export default function Page() {
       }
     } catch (err) {
       console.error("OAuth error", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
