@@ -14,7 +14,7 @@ import {
 } from "@gorhom/bottom-sheet";
 import { ThemeStyledProps } from "styled-components/native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { FadeInRight } from "react-native-reanimated";
+import { FadeIn, FadeInLeft, FadeInRight } from "react-native-reanimated";
 import { OrganizationMembershipResource } from "@clerk/types";
 import { OrganizationMembershipSelector } from "./components/OrganizationMembershipSelector";
 import { useActiveOrganizationMembership } from "../hooks/useActiveOrganizationMembership";
@@ -25,13 +25,11 @@ export const OrganizationMembershipHome: React.FC<
 > = () => {
   const user = useUser();
   const bottomSheetRef = useRef<BottomSheetModal>(null);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
-  }, []);
+  const handleSheetChanges = useCallback((index: number) => {}, []);
   const handlePresentModalPress = useCallback(() => {
     bottomSheetRef.current?.present();
   }, []);
-  const snapPoints = useMemo(() => ["100%"], []);
+  const snapPoints = useMemo(() => ["50%", "100%"], []);
   const onOrganizationChange = (
     orgMembership: OrganizationMembershipResource,
   ) => {
@@ -50,7 +48,7 @@ export const OrganizationMembershipHome: React.FC<
       <SafeAreaProvider>
         <SafeAreaView style={{ flex: 1 }}>
           <Container>
-            <OrganizationMembershipListContainer>
+            <OrganizationMembershipListContainer entering={FadeIn.delay(100)}>
               <SelectedOrganizationMembershipTitle variant="titleMedium">
                 Organizacion
               </SelectedOrganizationMembershipTitle>
@@ -62,7 +60,10 @@ export const OrganizationMembershipHome: React.FC<
               </Button>
             </OrganizationMembershipListContainer>
             {activeOrganizationMembership && (
-              <AnimatedFullWidthView entering={FadeInRight.delay(100)}>
+              <AnimatedFullWidthView
+                exiting={FadeInLeft.delay(100)}
+                entering={FadeInRight.delay(100)}
+              >
                 <OrganizationMembershipItem
                   org={activeOrganizationMembership}
                   displayConfig={
@@ -97,7 +98,7 @@ export const OrganizationMembershipHome: React.FC<
 
 export default OrganizationMembershipHome;
 
-const OrganizationMembershipListContainer = styled(View)`
+const OrganizationMembershipListContainer = styled(AnimatedFullWidthView)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -114,4 +115,5 @@ const OrganizationMembershipSelectorBottomSheetPanArea = styled(
 )`
   background-color: ${({ theme }: ThemeStyledProps) =>
     theme.colors.primaryContainer};
+  opacity: 0.6;
 `;

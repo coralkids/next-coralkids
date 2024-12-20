@@ -20,8 +20,8 @@ export const OrganizationMembershipSelector: React.FC<
   return (
     <Container>
       <OrganizationMembershipSelectorWrapper>
-        <OrganizationMembershipSelectorTitle variant="titleMedium">
-          Organizaciones disponibles
+        <OrganizationMembershipSelectorTitle entering={FadeIn.delay(100)}>
+          <Text variant="titleMedium">Organizaciones disponibles</Text>
         </OrganizationMembershipSelectorTitle>
         <Animated.FlatList
           itemLayoutAnimation={FadeIn.delay(100)}
@@ -52,7 +52,8 @@ export const OrganizationMembershipSelector: React.FC<
 
 export default OrganizationMembershipSelector;
 
-const OrganizationMembershipSelectorTitle = styled(Text)`
+const OrganizationMembershipSelectorTitle = styled(AnimatedFullWidthView)`
+  padding-top: ${spacing}px;
   margin-bottom: ${spacing}px;
   margin-left: ${spacing / 2}px;
 `;
@@ -62,6 +63,7 @@ const OrganizationMembershipSelectorWrapper = styled(View)`
   padding: ${spacing}px;
   border-radius: 12px;
   width: 100%;
+  margin-bottom: 20px;
   background-color: ${({ theme }: ThemeStyledProps) => theme.colors.background};
 `;
 
