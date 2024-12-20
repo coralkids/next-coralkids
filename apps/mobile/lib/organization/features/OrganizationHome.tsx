@@ -28,13 +28,13 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
         <ProfileTouchableWithMenu />
       </Appbar.Header>
       <SafeAreaProvider>
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
           <Container>
             <OrganizationListContainer>
               <SelectedOrganizationTitle variant="titleMedium">
                 Organizacion
               </SelectedOrganizationTitle>
-              <Button onPress={() => handleSnapPress(2)} icon="swap-horizontal">
+              <Button onPress={() => handleSnapPress(0)} icon="swap-horizontal">
                 Cambiar
               </Button>
             </OrganizationListContainer>
@@ -48,6 +48,7 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
             ))}
           </Container>
           <BottomSheet
+            enablePanDownToClose
             backgroundComponent={OrganizationSelectorContainer as FC}
             snapPoints={snapPoints}
             ref={bottomSheetRef}
