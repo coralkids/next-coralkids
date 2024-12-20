@@ -11,6 +11,7 @@ import {
   PaperProvider,
 } from "react-native-paper";
 import { useColorScheme } from "@/lib/core/hooks/useColorScheme.web";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
@@ -26,7 +27,13 @@ import darkTheme from "../theme/dark";
 import {
   ReactNativePaperCustomTheme,
   ThemeProvider,
+  ThemeStyledProps,
 } from "styled-components/native";
+
+const StyledComponentsThemeProvider =
+  ThemeProvider as React.JSXElementConstructor<
+    React.PropsWithChildren<ThemeStyledProps>
+  >;
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -66,17 +73,19 @@ export default function RootLayout() {
 
   return (
     <PaperProvider theme={paperTheme}>
-      <ThemeProvider theme={paperTheme}>
+      <StyledComponentsThemeProvider theme={paperTheme}>
         <ClerkConvexProvider>
           <ExpoRouterThemeProvider
             value={paperTheme as ReactNativePaperCustomTheme & Theme}
           >
-            <BaseLayout>
-              <Stack screenOptions={{ headerShown: false }} />
-            </BaseLayout>
+            <GestureHandlerRootView>
+              <BaseLayout>
+                <Stack screenOptions={{ headerShown: false }} />
+              </BaseLayout>
+            </GestureHandlerRootView>
           </ExpoRouterThemeProvider>
         </ClerkConvexProvider>
-      </ThemeProvider>
+      </StyledComponentsThemeProvider>
     </PaperProvider>
   );
 }
