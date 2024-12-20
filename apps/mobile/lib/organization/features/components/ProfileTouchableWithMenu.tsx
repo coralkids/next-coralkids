@@ -4,14 +4,13 @@ import { useAuth } from "@clerk/clerk-expo";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { useState } from "react";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import {
   Avatar,
   Button,
   Divider,
   Menu,
   Text,
-  TouchableRipple,
   useTheme,
 } from "react-native-paper";
 import styled from "styled-components/native";
@@ -23,7 +22,7 @@ const ProfileTouchableWithMenu = () => {
 
   const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
   return (
-    <ProfileTouchableWithMenuContainer>
+    <View>
       <ProfileMenu
         visible={isUserMenuVisible}
         onDismiss={() => setIsUserMenuVisible(false)}
@@ -62,14 +61,9 @@ const ProfileTouchableWithMenu = () => {
           ></ProfileMenuOpenIcon>
         </React.Fragment>
       </ProfileTouchableOpacity>
-    </ProfileTouchableWithMenuContainer>
+    </View>
   );
 };
-
-const ProfileTouchableWithMenuContainer = styled(View)`
-  align-items: start;
-  width: 100%;
-`;
 
 const ProfileAvatarImage = styled(Avatar.Image)``;
 
@@ -77,12 +71,13 @@ const ProfileFullName = styled(Text)`
   margin-left: ${spacing}px;
 `;
 
-const ProfileTouchableOpacity = styled(TouchableRipple)`
+const ProfileTouchableOpacity = styled(TouchableOpacity)`
   flex-direction: row;
-  justify-content: center;
+  width: 180px;
+  justify-content: start;
   align-items: center;
   padding: ${spacing / 2}px;
-  border-radius: 12px;
+  margin-left: ${spacing / 2}px;
 `;
 
 const ProfileMenuOpenIcon = styled(AntDesign)`
@@ -92,6 +87,7 @@ const ProfileMenuOpenIcon = styled(AntDesign)`
 
 const ProfileMenu = styled(Menu)`
   margin-top: 60px;
+  margin-left: ${spacing / 2}px;
 `;
 
 const LogountButton = styled(Button)`

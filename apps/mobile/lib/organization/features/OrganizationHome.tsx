@@ -14,9 +14,7 @@ export const OrganizationHome: React.FC<React.PropsWithChildren> = () => {
   return (
     <>
       <Appbar.Header elevated>
-        <Container>
-          <ProfileTouchableWithMenu />
-        </Container>
+        <ProfileTouchableWithMenu />
       </Appbar.Header>
       <Container>
         <OrganizationListContainer>

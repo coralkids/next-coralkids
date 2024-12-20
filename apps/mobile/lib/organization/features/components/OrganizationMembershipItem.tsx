@@ -1,6 +1,6 @@
 import React from "react";
 import { OrganizationMembershipResource } from "@clerk/types";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 import {
   Card,
@@ -46,7 +46,7 @@ export const OrganizationMembershipItem: React.FC<{
 export default OrganizationMembershipItem;
 
 const OrganizationMembershipItemConfigurationTouchable = styled(
-  TouchableRipple,
+  TouchableOpacity,
 )`
   padding: 10px;
   border-radius: 100%;
