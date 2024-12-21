@@ -1,3 +1,4 @@
+import React from "react";
 import AnimatedFullWidthView from "@/lib/core/ui/AnimatedFullWidthView";
 import { spacing } from "@/theme/spacing";
 import { OrganizationMembershipResource } from "@clerk/types";
