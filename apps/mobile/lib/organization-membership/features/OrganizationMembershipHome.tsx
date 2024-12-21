@@ -1,6 +1,6 @@
 import useUser from "@/lib/user/hooks/useUser";
 import React, { FC, useCallback, useMemo, useRef } from "react";
-import { Appbar, Button, Divider } from "react-native-paper";
+import { Appbar, Button } from "react-native-paper";
 import styled from "styled-components/native";
 import ProfileTouchableWithMenu from "../../core/features/ProfileTouchableWithMenu";
 import {
@@ -47,13 +47,13 @@ export const OrganizationMembershipHome: React.FC<
       </Appbar.Header>
       <SafeAreaProvider>
         <SafeAreaView style={{ flex: 1 }}>
-          {user?.organizationMemberships.length && (
+          {!!user?.organizationMemberships?.length && (
             <ActiveOrganizationMembership
               activeOrganizationMembership={activeOrganizationMembership}
               onChangePress={handlePresentModalPress}
             />
           )}
-          {user?.organizationMemberships.length === 0 && (
+          {user?.organizationMemberships?.length === 0 && (
             <OrganizationMembershipEmpty entering={FadeIn.delay(100)}>
               <OrganizationMembershipEmptyText variant="titleMedium">
                 Soy lider de una organizacion (escuela/academia/colegio)
@@ -84,7 +84,7 @@ export const OrganizationMembershipHome: React.FC<
                 asociada pide al lider de la organizacion que te invite, despues
                 puedes volver a entrar para disfurtar de la app.
               </OrganizationMembershipEmptyText>
-              <OrganizationMembershipEmptyText>
+              <OrganizationMembershipEmptyText variant="bodyMedium">
                 Si tienes un codigo de invitacion usa el boton de abajo para
                 introducirlo, tambien si tienes un QR puedes escanearlo para
                 entrar a la organizacion.
@@ -103,24 +103,26 @@ export const OrganizationMembershipHome: React.FC<
               </OrganizationMembershipCreateOrganization>
             </OrganizationMembershipEmpty>
           )}
-          <BottomSheetModalProvider>
-            <BottomSheetModal
-              animateOnMount={true}
-              enablePanDownToClose
-              backgroundComponent={
-                OrganizationMembershipSelectorBottomSheetPanArea as FC
-              }
-              snapPoints={snapPoints}
-              ref={bottomSheetRef}
-              onChange={handleSheetChanges}
-            >
-              <OrganizationMembershipSelector
-                activeOrganizationMembership={activeOrganizationMembership}
-                organizationMemberships={user?.organizationMemberships}
-                onPress={onOrganizationChange}
-              />
-            </BottomSheetModal>
-          </BottomSheetModalProvider>
+          {!!user?.organizationMemberships?.length && (
+            <BottomSheetModalProvider>
+              <BottomSheetModal
+                animateOnMount={true}
+                enablePanDownToClose
+                backgroundComponent={
+                  OrganizationMembershipSelectorBottomSheetPanArea as FC
+                }
+                snapPoints={snapPoints}
+                ref={bottomSheetRef}
+                onChange={handleSheetChanges}
+              >
+                <OrganizationMembershipSelector
+                  activeOrganizationMembership={activeOrganizationMembership}
+                  organizationMemberships={user?.organizationMemberships}
+                  onPress={onOrganizationChange}
+                />
+              </BottomSheetModal>
+            </BottomSheetModalProvider>
+          )}
         </SafeAreaView>
       </SafeAreaProvider>
     </>

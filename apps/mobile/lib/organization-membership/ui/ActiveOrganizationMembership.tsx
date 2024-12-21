@@ -44,7 +44,9 @@ export default function ActiveOrganizationMembership({
         )}
         {!activeOrganizationMembership && (
           <>
-            <Text>No hay ninguna organizacion seleccionada actualmente.</Text>
+            <Text variant="bodyMedium">
+              No hay ninguna organizacion seleccionada actualmente.
+            </Text>
             <OrganizationMembershipButtonSelect
               mode="contained-tonal"
               onPress={onChangePress}
