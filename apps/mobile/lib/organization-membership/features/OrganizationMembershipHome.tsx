@@ -14,9 +14,6 @@ import { OrganizationMembershipResource } from "@clerk/types";
 import { useActiveOrganizationMembership } from "../hooks/useActiveOrganizationMembership";
 import ActiveOrganizationMembership from "../ui/ActiveOrganizationMembership";
 import OrganizationMembershipSelector from "../ui/OrganizationMembershipSelector";
-import { Text } from "react-native-paper";
-import Animated, { FadeIn } from "react-native-reanimated";
-import { spacing } from "@/theme/spacing";
 import OrganizationMembershipEmpty from "../ui/OrganizationMembershipEmpty";
 export const OrganizationMembershipHome: React.FC<
   React.PropsWithChildren
@@ -27,7 +24,6 @@ export const OrganizationMembershipHome: React.FC<
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["100%"], []);
-  const theme = useTheme();
 
   const onOrganizationChange = (
     orgMembership: OrganizationMembershipResource,
