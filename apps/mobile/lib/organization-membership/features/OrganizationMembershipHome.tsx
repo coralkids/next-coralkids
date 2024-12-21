@@ -1,6 +1,6 @@
 import useUser from "@/lib/user/hooks/useUser";
 import React, { FC, useCallback, useMemo, useRef } from "react";
-import { Appbar, Button, Card, Icon, useTheme } from "react-native-paper";
+import { Appbar } from "react-native-paper";
 import styled from "styled-components/native";
 import ProfileTouchableWithMenu from "../../core/features/ProfileTouchableWithMenu";
 import {

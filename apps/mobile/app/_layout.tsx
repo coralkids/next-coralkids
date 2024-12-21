@@ -28,6 +28,7 @@ import {
   ReactNativePaperCustomTheme,
   ThemeProvider,
 } from "styled-components/native";
+import { StatusBar } from "expo-status-bar";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -73,6 +74,7 @@ export default function RootLayout() {
             <ExpoRouterThemeProvider
               value={paperTheme as ReactNativePaperCustomTheme & Theme}
             >
+              <StatusBar />
               <BaseLayout>
                 <Stack screenOptions={{ headerShown: false }} />
               </BaseLayout>
