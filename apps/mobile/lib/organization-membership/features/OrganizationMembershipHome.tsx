@@ -1,6 +1,6 @@
 import useUser from "@/lib/user/hooks/useUser";
 import React, { FC, useCallback, useMemo, useRef } from "react";
-import { Appbar, Button } from "react-native-paper";
+import { Appbar, Button, Icon, useTheme } from "react-native-paper";
 import styled from "styled-components/native";
 import ProfileTouchableWithMenu from "../../core/features/ProfileTouchableWithMenu";
 import {
@@ -26,6 +26,7 @@ export const OrganizationMembershipHome: React.FC<
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["100%"], []);
+  const theme = useTheme();
 
   const onOrganizationChange = (
     orgMembership: OrganizationMembershipResource,
@@ -55,9 +56,14 @@ export const OrganizationMembershipHome: React.FC<
           )}
           {user?.organizationMemberships?.length === 0 && (
             <OrganizationMembershipEmpty entering={FadeIn.delay(100)}>
-              <OrganizationMembershipEmptyText variant="titleMedium">
-                Soy lider de escuela
-              </OrganizationMembershipEmptyText>
+              <OrganizationMembershipEmptyTextTitle variant="titleMedium">
+                <Icon
+                  color={theme.colors.secondary}
+                  source="school"
+                  size={24}
+                />{" "}
+                &nbsp; Soy lider de escuela
+              </OrganizationMembershipEmptyTextTitle>
               <OrganizationMembershipEmptyText variant="bodyMedium">
                 En ese caso bienvenido, estamos muy contentos de tenerte con
                 nosotros, puedes empezar el proceso de alta directamente desde
@@ -76,27 +82,31 @@ export const OrganizationMembershipHome: React.FC<
               >
                 Solicitar una demostración
               </OrganizationMembershipCreateOrganization>
-              <OrganizationMembershipEmptyText
+              <OrganizationMembershipEmptyTextTitle
                 style={{ marginTop: spacing }}
                 variant="titleMedium"
               >
-                Soy familiar o profesor
-              </OrganizationMembershipEmptyText>
-              <OrganizationMembershipEmptyText variant="bodyMedium">
-                Si eres familiar de uno de los alumnos o profesor en una escuela
-                asociada pide al lider que te invite, despues puedes volver a
-                entrar para disfurtar de la app.
-              </OrganizationMembershipEmptyText>
+                <Icon
+                  color={theme.colors.secondary}
+                  source="account-child"
+                  size={24}
+                />{" "}
+                &nbsp; Soy familiar o profesor
+              </OrganizationMembershipEmptyTextTitle>
               <OrganizationMembershipEmptyText variant="bodyMedium">
                 Si tienes un codigo de invitacion usa el boton de abajo para
-                introducirlo, tambien si tienes un QR puedes escanearlo para
-                entrar a la escuela.
+                introducirlo o también si tienes un QR puedes escanearlo.
               </OrganizationMembershipEmptyText>
+              <OrganizationMembershipEmptyText variant="bodyMedium">
+                Pide al lider de la escuela que te invite, despues puedes volver
+                a entrar para disfurtar de la app.
+              </OrganizationMembershipEmptyText>
+
               <OrganizationMembershipCreateOrganization
                 icon="link"
                 mode="elevated"
               >
-                Vincular escuela con codigo
+                Vincular escuela con código
               </OrganizationMembershipCreateOrganization>
               <OrganizationMembershipCreateOrganization
                 icon="qrcode"
@@ -144,8 +154,17 @@ const OrganizationMembershipEmpty = styled(Animated.ScrollView)`
 `;
 
 const OrganizationMembershipEmptyText = styled(Text)`
-  padding-top: ${spacing}px;
+  padding: ${spacing}px;
   text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+`;
+
+const OrganizationMembershipEmptyTextTitle = styled(
+  OrganizationMembershipEmptyText,
+)`
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const OrganizationMembershipSelectorBottomSheetPanArea = styled(
