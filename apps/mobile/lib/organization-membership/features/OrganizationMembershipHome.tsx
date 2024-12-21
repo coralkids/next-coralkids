@@ -17,6 +17,7 @@ import { OrganizationMembershipResource } from "@clerk/types";
 import { OrganizationMembershipSelector } from "./components/OrganizationMembershipSelector";
 import { useActiveOrganizationMembership } from "../hooks/useActiveOrganizationMembership";
 import AnimatedFullWidthView from "@/lib/core/ui/AnimatedFullWidthView";
+import ActiveOrganizationMembership from "./components/ActiveOrganizationMembership";
 
 export const OrganizationMembershipHome: React.FC<
   React.PropsWithChildren
@@ -48,35 +49,10 @@ export const OrganizationMembershipHome: React.FC<
       </Appbar.Header>
       <SafeAreaProvider>
         <SafeAreaView style={{ flex: 1 }}>
-          <OrganizationMembershipListHeaderContainer
-            entering={FadeIn.delay(100)}
-          >
-            <SelectedOrganizationMembershipTitle variant="titleMedium">
-              Organizacion
-            </SelectedOrganizationMembershipTitle>
-            <Button
-              mode="elevated"
-              onPress={() => handlePresentModalPress()}
-              icon="swap-horizontal"
-            >
-              Cambiar
-            </Button>
-          </OrganizationMembershipListHeaderContainer>
-          <OrganizationMembershipListContainer>
-            {activeOrganizationMembership && (
-              <AnimatedFullWidthView
-                exiting={FadeInLeft.delay(100)}
-                entering={FadeInRight.delay(100)}
-              >
-                <OrganizationMembershipItem
-                  org={activeOrganizationMembership}
-                  displayConfig={
-                    activeOrganizationMembership.role === "org:admin"
-                  }
-                />
-              </AnimatedFullWidthView>
-            )}
-          </OrganizationMembershipListContainer>
+          <ActiveOrganizationMembership
+            activeOrganizationMembership={activeOrganizationMembership}
+            onChangePress={handlePresentModalPress}
+          />
           <BottomSheetModalProvider>
             <BottomSheetModal
               animateOnMount={true}
@@ -102,21 +78,6 @@ export const OrganizationMembershipHome: React.FC<
 };
 
 export default OrganizationMembershipHome;
-
-const OrganizationMembershipListHeaderContainer = styled(AnimatedFullWidthView)`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: ${spacing}px;
-`;
-
-const OrganizationMembershipListContainer = styled(AnimatedFullWidthView)`
-  padding: 0px ${spacing}px;
-`;
-
-const SelectedOrganizationMembershipTitle = styled(Text)`
-  align-items: center;
-`;
 
 const OrganizationMembershipSelectorBottomSheetPanArea = styled(
   BottomSheetView,
