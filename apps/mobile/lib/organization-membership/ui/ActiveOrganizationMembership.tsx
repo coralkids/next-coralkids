@@ -20,9 +20,15 @@ export default function ActiveOrganizationMembership({
         <SelectedOrganizationMembershipTitle variant="titleMedium">
           Organizacion
         </SelectedOrganizationMembershipTitle>
-        <Button mode="elevated" onPress={onChangePress} icon="swap-horizontal">
-          Cambiar
-        </Button>
+        {activeOrganizationMembership && (
+          <Button
+            mode="elevated"
+            onPress={onChangePress}
+            icon="swap-horizontal"
+          >
+            Cambiar
+          </Button>
+        )}
       </OrganizationMembershipListHeaderContainer>
       <OrganizationMembershipListContainer>
         {activeOrganizationMembership && (
@@ -36,10 +42,26 @@ export default function ActiveOrganizationMembership({
             />
           </AnimatedFullWidthView>
         )}
+        {!activeOrganizationMembership && (
+          <>
+            <Text>No hay ninguna organizacion seleccionada actualmente.</Text>
+            <OrganizationMembershipButtonSelect
+              mode="contained-tonal"
+              onPress={onChangePress}
+              icon="account-group"
+            >
+              Seleccionar organizacion
+            </OrganizationMembershipButtonSelect>
+          </>
+        )}
       </OrganizationMembershipListContainer>
     </>
   );
 }
+
+const OrganizationMembershipButtonSelect = styled(Button)`
+  margin-top: ${spacing}px;
+`;
 
 const OrganizationMembershipListHeaderContainer = styled(AnimatedFullWidthView)`
   flex-direction: row;
