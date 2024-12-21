@@ -87,7 +87,6 @@ const ProfileMenuOpenIcon = styled(AntDesign)`
 
 const ProfileMenu = styled(Menu)`
   margin-top: 60px;
-  margin-left: ${spacing / 2}px;
 `;
 
 const LogountButton = styled(Button)`
