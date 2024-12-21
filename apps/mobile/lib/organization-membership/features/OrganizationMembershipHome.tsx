@@ -56,7 +56,7 @@ export const OrganizationMembershipHome: React.FC<
           {user?.organizationMemberships?.length === 0 && (
             <OrganizationMembershipEmpty entering={FadeIn.delay(100)}>
               <OrganizationMembershipEmptyText variant="titleMedium">
-                Soy lider de una organizacion (escuela/academia/colegio)
+                Soy lider de escuela
               </OrganizationMembershipEmptyText>
               <OrganizationMembershipEmptyText variant="bodyMedium">
                 En ese caso bienvenido, estamos muy contentos de tenerte con
@@ -68,7 +68,7 @@ export const OrganizationMembershipHome: React.FC<
                 icon="plus"
                 mode="elevated"
               >
-                Registrar organizacion
+                Registrar escuela
               </OrganizationMembershipCreateOrganization>
               <OrganizationMembershipCreateOrganization
                 icon="calendar"
@@ -76,24 +76,27 @@ export const OrganizationMembershipHome: React.FC<
               >
                 Solicitar una demostración
               </OrganizationMembershipCreateOrganization>
-              <OrganizationMembershipEmptyText variant="titleMedium">
-                Soy familiar o profesor en una organizacion
+              <OrganizationMembershipEmptyText
+                style={{ marginTop: spacing }}
+                variant="titleMedium"
+              >
+                Soy familiar o profesor
               </OrganizationMembershipEmptyText>
               <OrganizationMembershipEmptyText variant="bodyMedium">
                 Si eres familiar de uno de los alumnos o profesor en una escuela
-                asociada pide al lider de la organizacion que te invite, despues
-                puedes volver a entrar para disfurtar de la app.
+                asociada pide al lider que te invite, despues puedes volver a
+                entrar para disfurtar de la app.
               </OrganizationMembershipEmptyText>
               <OrganizationMembershipEmptyText variant="bodyMedium">
                 Si tienes un codigo de invitacion usa el boton de abajo para
                 introducirlo, tambien si tienes un QR puedes escanearlo para
-                entrar a la organizacion.
+                entrar a la escuela.
               </OrganizationMembershipEmptyText>
               <OrganizationMembershipCreateOrganization
                 icon="link"
                 mode="elevated"
               >
-                Vincular organizacion con codigo
+                Vincular escuela con codigo
               </OrganizationMembershipCreateOrganization>
               <OrganizationMembershipCreateOrganization
                 icon="qrcode"
