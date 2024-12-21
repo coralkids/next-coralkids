@@ -56,7 +56,7 @@ export const OrganizationMembershipHome: React.FC<
           {user?.organizationMemberships.length === 0 && (
             <OrganizationMembershipEmpty entering={FadeIn.delay(100)}>
               <OrganizationMembershipEmptyText variant="titleMedium">
-                Soy lider de una organizacion (escuela/academia/colegio, etc)
+                Soy lider de una organizacion (escuela/academia/colegio)
               </OrganizationMembershipEmptyText>
               <OrganizationMembershipEmptyText variant="bodyMedium">
                 En ese caso bienvenido, estamos muy contentos de tenerte con
@@ -77,7 +77,7 @@ export const OrganizationMembershipHome: React.FC<
                 Solicitar una demostración
               </OrganizationMembershipCreateOrganization>
               <OrganizationMembershipEmptyText variant="titleMedium">
-                Soy familiar de un alumno o profesor en una organizacion
+                Soy familiar o profesor en una organizacion
               </OrganizationMembershipEmptyText>
               <OrganizationMembershipEmptyText variant="bodyMedium">
                 Si eres familiar de uno de los alumnos o profesor en una escuela
