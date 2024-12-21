@@ -1,10 +1,8 @@
 import useUser from "@/lib/user/hooks/useUser";
 import React, { FC, useCallback, useMemo, useRef } from "react";
-import { Appbar, Button, Text } from "react-native-paper";
+import { Appbar } from "react-native-paper";
 import styled from "styled-components/native";
-import ProfileTouchableWithMenu from "./components/ProfileTouchableWithMenu";
-import OrganizationMembershipItem from "./components/OrganizationMembershipItem";
-import { spacing } from "@/theme/spacing";
+import ProfileTouchableWithMenu from "../../core/features/ProfileTouchableWithMenu";
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -12,12 +10,10 @@ import {
 } from "@gorhom/bottom-sheet";
 import { ThemeStyledProps } from "styled-components/native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { FadeIn, FadeInLeft, FadeInRight } from "react-native-reanimated";
 import { OrganizationMembershipResource } from "@clerk/types";
-import { OrganizationMembershipSelector } from "./components/OrganizationMembershipSelector";
 import { useActiveOrganizationMembership } from "../hooks/useActiveOrganizationMembership";
-import AnimatedFullWidthView from "@/lib/core/ui/AnimatedFullWidthView";
-import ActiveOrganizationMembership from "./components/ActiveOrganizationMembership";
+import ActiveOrganizationMembership from "../ui/ActiveOrganizationMembership";
+import OrganizationMembershipSelector from "../ui/OrganizationMembershipSelector";
 
 export const OrganizationMembershipHome: React.FC<
   React.PropsWithChildren
