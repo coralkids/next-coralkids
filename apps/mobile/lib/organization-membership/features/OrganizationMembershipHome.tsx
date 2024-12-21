@@ -65,10 +65,9 @@ export const OrganizationMembershipHome: React.FC<
                 &nbsp; Soy lider de escuela
               </OrganizationMembershipEmptyTextTitle>
               <OrganizationMembershipEmptyText variant="bodyMedium">
-                En ese caso bienvenido, estamos muy contentos de tenerte con
-                nosotros, puedes empezar el proceso de alta directamente desde
-                aquí, o puedes contactar con nosotros si necesitas más
-                información.
+                Estamos muy contentos de tenerte con nosotros, puedes empezar el
+                proceso de alta directamente desde aquí, o puedes contactar con
+                nosotros si necesitas más información.
               </OrganizationMembershipEmptyText>
               <OrganizationMembershipCreateOrganization
                 icon="plus"
@@ -94,12 +93,8 @@ export const OrganizationMembershipHome: React.FC<
                 &nbsp; Soy familiar o profesor
               </OrganizationMembershipEmptyTextTitle>
               <OrganizationMembershipEmptyText variant="bodyMedium">
-                Si tienes un codigo de invitacion usa el boton de abajo para
+                Si tienes un código de invitación usa el boton de abajo para
                 introducirlo o también si tienes un QR puedes escanearlo.
-              </OrganizationMembershipEmptyText>
-              <OrganizationMembershipEmptyText variant="bodyMedium">
-                Pide al lider de la escuela que te invite, despues puedes volver
-                a entrar para disfurtar de la app.
               </OrganizationMembershipEmptyText>
 
               <OrganizationMembershipCreateOrganization
