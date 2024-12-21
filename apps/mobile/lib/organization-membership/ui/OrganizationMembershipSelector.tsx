@@ -31,7 +31,7 @@ export const OrganizationMembershipSelector: React.FC<
     <OrganizationMembershipSelectorContainer>
       <OrganizationMembershipSelectorWrapper>
         <OrganizationMembershipSelectorTitle entering={FadeIn.delay(100)}>
-          <Text variant="titleMedium">Organizaciones vinculadas</Text>
+          <Text variant="titleMedium">Mis escuelas</Text>
         </OrganizationMembershipSelectorTitle>
         <Animated.FlatList
           itemLayoutAnimation={FadeIn.delay(100)}
@@ -56,11 +56,16 @@ export const OrganizationMembershipSelector: React.FC<
           }}
         ></Animated.FlatList>
         <FAB.Group
-          label="Vincular nueva organizacion"
+          label="Vincular nueva escuela"
           open={open}
           visible
           icon={open ? "link-variant-minus" : "link-variant-plus"}
           actions={[
+            {
+              icon: "link",
+              label: "Introducir código",
+              onPress: () => console.log("Pressed star"),
+            },
             {
               icon: "qrcode",
               label: "Escanear QR",
@@ -68,7 +73,7 @@ export const OrganizationMembershipSelector: React.FC<
             },
             {
               icon: "plus",
-              label: "Crear nueva",
+              label: "Registrar nueva",
               onPress: () => console.log("Pressed email"),
             },
           ]}

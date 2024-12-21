@@ -18,7 +18,7 @@ export default function ActiveOrganizationMembership({
     <>
       <OrganizationMembershipListHeaderContainer entering={FadeIn.delay(100)}>
         <SelectedOrganizationMembershipTitle variant="titleMedium">
-          Organizacion
+          Escuela
         </SelectedOrganizationMembershipTitle>
         {activeOrganizationMembership && (
           <Button
@@ -45,14 +45,14 @@ export default function ActiveOrganizationMembership({
         {!activeOrganizationMembership && (
           <>
             <Text variant="bodyMedium">
-              No hay ninguna organizacion seleccionada actualmente.
+              No hay ninguna escuela seleccionada actualmente.
             </Text>
             <OrganizationMembershipButtonSelect
               mode="contained-tonal"
               onPress={onChangePress}
               icon="account-group"
             >
-              Seleccionar organizacion
+              Seleccionar escuela
             </OrganizationMembershipButtonSelect>
           </>
         )}
