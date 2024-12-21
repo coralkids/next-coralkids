@@ -2,21 +2,34 @@ import React from "react";
 import { OrganizationMembershipResource } from "@clerk/types";
 import { TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
-import { Badge, Card, Icon, Text, useTheme } from "react-native-paper";
+import {
+  Badge,
+  Card,
+  Icon,
+  MD3Elevation,
+  Text,
+  useTheme,
+} from "react-native-paper";
 import styled, { ThemeStyledProps } from "styled-components/native";
 import { spacing } from "@/theme/spacing";
 
 export const OrganizationMembershipItem: React.FC<{
   org: OrganizationMembershipResource;
-  elevation?: number;
+  elevation?: MD3Elevation;
   displayConfig?: boolean;
-}> = ({ org, displayConfig = false, elevation = 1 }) => {
+  isActive?: boolean;
+}> = ({
+  org,
+  displayConfig = false,
+  elevation = 1 as MD3Elevation,
+  isActive = false,
+}) => {
   const theme = useTheme();
 
   return (
-    <OrganizationMembershipCard elevation={elevation}>
+    <OrganizationMembershipCard isActive={isActive} elevation={elevation}>
       <OrganizationMembershipItemContainer>
-        <OrganizationMembershipItemAvatarWrapper elevation={elevation}>
+        <OrganizationMembershipItemAvatarWrapper>
           <OrganizationMembershipItemAvatarImage
             size={100}
             source={{
@@ -66,8 +79,12 @@ const OrganizationMembershipItemTextWrapper = styled(View)`
   max-width: 500px;
 `;
 
-const OrganizationMembershipCard = styled(Card)`
+const OrganizationMembershipCard = styled(Card)<{
+  isActive: boolean;
+}>`
   width: 100%;
+  border-width: ${(props) => (props.isActive ? "1px" : "0px")};
+  border-color: ${(props) => props.theme.colors.primary};
 `;
 
 const OrganizationMembershipItemContent = styled(View)`
@@ -89,6 +106,7 @@ const OrganizationMembershipItemAvatarWrapper = styled(View)`
   padding: ${spacing}px;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
+  flex-direction: row;
 `;
 const OrganizationMembershipItemAvatarImage = styled(Image)`
   width: 100px;

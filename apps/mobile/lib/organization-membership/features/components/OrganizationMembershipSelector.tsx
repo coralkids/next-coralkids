@@ -43,9 +43,13 @@ export const OrganizationMembershipSelector: React.FC<
               >
                 <TouchableOrganizationMembershipItem
                   key={item.id}
+                  disabled={item.id === activeOrganizationMembership?.id}
                   onPress={() => onPress(item)}
                 >
-                  <OrganizationMembershipItem org={item} />
+                  <OrganizationMembershipItem
+                    isActive={item.id === activeOrganizationMembership?.id}
+                    org={item}
+                  />
                 </TouchableOrganizationMembershipItem>
               </OrganizationMembershipItemContainer>
             );
