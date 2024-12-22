@@ -4,6 +4,7 @@ import React from "react";
 import { View } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 import styled from "styled-components/native";
+import OrganizationNameStep from "./OrganizationNameStep";
 
 export default function OrganizationOnboarding() {
   const router = useRouter();
@@ -22,7 +23,7 @@ export default function OrganizationOnboarding() {
         <MultiStepFormWizard
           steps={[
             {
-              render: () => <Text>Paso 1</Text>,
+              render: () => <OrganizationNameStep />,
               onNext: async () =>
                 new Promise((resolve) => {
                   global.setTimeout(function () {
