@@ -35,5 +35,6 @@ const OrganizationLogoStepStepLogoImage = styled(Image)`
     props.theme.colors.secondaryContainer};
   border-radius: 12px;
   width: 200px;
+  margin-top: ${spacing}px;
   height: 200px;
 `;
