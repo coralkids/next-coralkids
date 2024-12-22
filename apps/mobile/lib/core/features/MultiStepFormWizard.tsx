@@ -1,6 +1,6 @@
 import { spacing } from "@/theme/spacing";
 import React, { useMemo } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Button, ProgressBar } from "react-native-paper";
 import Animated, { FadeInLeft, FadeInRight } from "react-native-reanimated";
 import { WithSafeAreaInsetsProps } from "react-native-safe-area-context";
@@ -121,7 +121,7 @@ interface MultiStepFormWizardStepContainerProps extends ThemeStyledProps {
 }
 
 const MultiStepFormWizardStepContainer = styled(
-  Animated.ScrollView,
+  ScrollView,
 )<MultiStepFormWizardStepContainerProps>`
   flex: 1;
   padding: ${spacing}px;
