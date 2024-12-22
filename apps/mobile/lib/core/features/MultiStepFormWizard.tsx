@@ -73,7 +73,7 @@ export default function MultiStepFormWizard({
           <MultiStepFormWizardNextActions>
             {currentStepIndex < steps.length - 1 &&
               steps[currentStepIndex].canSkip && (
-                <Button disabled={loading} onPress={goNext} mode="text">
+                <Button disabled={loading} onPress={goNext} mode="outlined">
                   Saltar
                 </Button>
               )}
@@ -83,6 +83,7 @@ export default function MultiStepFormWizard({
                 loading={loading}
                 onPress={onNextStepPress}
                 mode="contained"
+                elevation={2}
               >
                 Siguiente
               </Button>
@@ -90,8 +91,11 @@ export default function MultiStepFormWizard({
           </MultiStepFormWizardNextActions>
           {currentStepIndex > 0 && (
             <Button
-              style={{ marginTop: 51 }}
-              mode="elevated"
+              style={{
+                height: "auto",
+                justifyContent: "flex-end",
+              }}
+              mode="text"
               disabled={loading}
               onPress={onPreviusStatePress}
             >
@@ -123,7 +127,7 @@ const MultiStepFormWizardActionsContainer = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   flex-direction: row-reverse;
-  padding: ${spacing}px 0px;
+  padding: ${spacing}px;
 `;
 
 const MultiStepFormWizardNextActions = styled(View)`
