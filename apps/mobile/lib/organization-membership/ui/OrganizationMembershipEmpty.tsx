@@ -28,13 +28,15 @@ export default function OrganizationMembershipEmpty({
             <Icon color={theme.colors.primary} source="account-box" size={24} />
             &nbsp; Soy responsable de escuela
           </OrganizationMembershipEmptyTextTitle>
-          <OrganizationMembershipEmptyText variant="bodyMedium">
-            Estamos muy contentos de tenerte con nosotros, puedes empezar el
-            proceso de alta directamente desde aquí, o puedes contactar con
-            nosotros si necesitas más información.
+          <OrganizationMembershipEmptyText variant="bodyLarge">
+            Puedes empezar el proceso de alta directamente desde aquí, o puedes
+            contactar con nosotros si necesitas más información.
           </OrganizationMembershipEmptyText>
-          <OrganizationMembershipCreateOrganization icon="calendar" mode="text">
-            Solicitar una demostración
+          <OrganizationMembershipCreateOrganization
+            icon="whatsapp"
+            mode="elevated"
+          >
+            Contactar
           </OrganizationMembershipCreateOrganization>
           <OrganizationMembershipCreateOrganization
             icon="plus"
@@ -58,11 +60,10 @@ export default function OrganizationMembershipEmpty({
             />
             &nbsp; Soy familiar o profesor
           </OrganizationMembershipEmptyTextTitle>
-          <OrganizationMembershipEmptyText variant="bodyMedium">
+          <OrganizationMembershipEmptyText variant="bodyLarge">
             Si tienes un código de invitación usa el boton de abajo para
-            introducirlo o también si tienes un QR puedes escanearlo. Si no
-            tienes nada de esto, contacta con el lider de tu escuela para que te
-            invite.
+            introducirlo, si tienes un QR puedes escanearlo. Si no tienes nada
+            de esto, contacta con el lider de tu escuela para que te invite.
           </OrganizationMembershipEmptyText>
 
           <OrganizationMembershipCreateOrganization
