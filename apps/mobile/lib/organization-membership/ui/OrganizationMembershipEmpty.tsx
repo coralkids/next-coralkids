@@ -29,14 +29,14 @@ export default function OrganizationMembershipEmpty({
             &nbsp; Soy responsable de escuela
           </OrganizationMembershipEmptyTextTitle>
           <OrganizationMembershipEmptyText variant="bodyLarge">
-            Puedes empezar el proceso de alta directamente desde aquí, o puedes
-            contactar con nosotros si necesitas más información.
+            Empieza el proceso de registro tu mismo o agenda una reunión con
+            nosotros. Te haremos una demo gratuita sin compromiso.
           </OrganizationMembershipEmptyText>
           <OrganizationMembershipCreateOrganization
-            icon="whatsapp"
+            icon="calendar"
             mode="elevated"
           >
-            Contactar
+            Agendar una demo
           </OrganizationMembershipCreateOrganization>
           <OrganizationMembershipCreateOrganization
             icon="plus"
@@ -61,9 +61,8 @@ export default function OrganizationMembershipEmpty({
             &nbsp; Soy familiar o profesor
           </OrganizationMembershipEmptyTextTitle>
           <OrganizationMembershipEmptyText variant="bodyLarge">
-            Si tienes un código de invitación usa el boton de abajo para
-            introducirlo, si tienes un QR puedes escanearlo. Si no tienes nada
-            de esto, contacta con el lider de tu escuela para que te invite.
+            Si no tienes código de invitación, ni código QR, contacta con el
+            lider de tu escuela para que te invite.
           </OrganizationMembershipEmptyText>
 
           <OrganizationMembershipCreateOrganization
