@@ -68,10 +68,10 @@ export default function OrganizationMembershipEmpty({
 
           <OrganizationMembershipCreateOrganization
             textColor={theme.colors.secondary}
-            icon="link"
+            icon="keyboard-variant"
             mode="text"
           >
-            Vincular escuela con código
+            Introducir código
           </OrganizationMembershipCreateOrganization>
           <OrganizationMembershipCreateOrganization
             icon="qrcode"
