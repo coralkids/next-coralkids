@@ -24,6 +24,7 @@ export default function MultiStepFormWizard({
   showProgressBar = true,
   currentIndex = 0,
 }: MultiStepFormWizardProps) {
+  console.log("Render");
   const [currentStepIndex, setCurrentStepIndex] = React.useState(currentIndex);
   const [loading, setLoading] = React.useState(false);
   const currentStep = useMemo(
@@ -42,6 +43,8 @@ export default function MultiStepFormWizard({
 
     if (currentStepIndex < steps.length - 1) {
       goNext();
+    } else {
+      setCurrentStepIndex(currentIndex);
     }
   };
 
