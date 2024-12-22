@@ -3,8 +3,12 @@ import React, { useMemo } from "react";
 import { View } from "react-native";
 import { Button, ProgressBar } from "react-native-paper";
 import Animated, { FadeInLeft, FadeInRight } from "react-native-reanimated";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  WithSafeAreaInsetsProps,
+} from "react-native-safe-area-context";
 import styled from "styled-components/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface Step {
   render: (currentStep: number) => React.ReactNode;
@@ -23,6 +27,8 @@ export default function MultiStepFormWizard({
 }: MultiStepFormWizardProps) {
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
+
+  const insets = useSafeAreaInsets();
 
   const onNextStepPress = async () => {
     if (steps[currentStepIndex].onNext) {
@@ -49,15 +55,17 @@ export default function MultiStepFormWizard({
     <>
       <View>{showProgressBar && <ProgressBar progress={progress} />}</View>
 
-      <MultiStepFormWizardWrapper>
+      <MultiStepFormWizardWrapper insets={insets}>
         {!!steps && steps.length > 0 && !!steps[currentStepIndex] && (
-          <MultiStepFormWizardStepContainer
-            isLoading={loading}
+          <Animated.View
+            style={{ flex: 1 }}
             entering={FadeInRight.delay(200)}
             exiting={FadeInLeft.delay(299)}
           >
-            {steps[currentStepIndex].render(currentStepIndex)}
-          </MultiStepFormWizardStepContainer>
+            <MultiStepFormWizardStepContainer isLoading={loading}>
+              {steps[currentStepIndex].render(currentStepIndex)}
+            </MultiStepFormWizardStepContainer>
+          </Animated.View>
         )}
         <MultiStepFormWizardActionsContainer>
           {currentStepIndex === steps.length - 1 && (
@@ -112,15 +120,15 @@ const MultiStepFormWizardStepContainer = styled(Animated.ScrollView)<{
   isLoading: boolean;
 }>`
   flex: 1;
-  height: 100%;
+  padding: ${spacing}px;
   opacity: ${(props) => (props.isLoading ? 0.5 : 1)};
 `;
 
-const MultiStepFormWizardWrapper = styled(SafeAreaView)`
+const MultiStepFormWizardWrapper = styled(View)<WithSafeAreaInsetsProps>`
   flex: 1;
   height: 100%;
-  padding: ${spacing}px;
   background-color: ${(props) => props.theme.colors.onPrimary};
+  padding-bottom: ${(props) => props.insets.bottom}px;
 `;
 
 const MultiStepFormWizardActionsContainer = styled(View)`
