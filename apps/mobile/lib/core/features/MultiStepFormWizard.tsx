@@ -1,7 +1,7 @@
 import { spacing } from "@/theme/spacing";
 import React, { useMemo } from "react";
 import { ScrollView, View } from "react-native";
-import { Button, ProgressBar } from "react-native-paper";
+import { ActivityIndicator, Button, ProgressBar } from "react-native-paper";
 import Animated, { FadeInLeft, FadeInRight } from "react-native-reanimated";
 import { WithSafeAreaInsetsProps } from "react-native-safe-area-context";
 import styled, { ThemeStyledProps } from "styled-components/native";
@@ -53,14 +53,25 @@ export default function MultiStepFormWizard({
   return (
     <>
       <View>{showProgressBar && <ProgressBar progress={progress} />}</View>
-
       <MultiStepFormWizardWrapper insets={insets}>
         {!!steps && steps.length > 0 && !!steps[currentStepIndex] && (
           <Animated.View
-            style={{ flex: 1 }}
+            style={{
+              flex: 1,
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100%",
+            }}
             entering={FadeInRight.delay(200)}
             exiting={FadeInLeft.delay(299)}
           >
+            <ActivityIndicator
+              style={{ position: "absolute" }}
+              size="large"
+              animating={loading}
+            />
+
             <MultiStepFormWizardStepContainer isLoading={loading}>
               {steps[currentStepIndex].render(currentStepIndex)}
             </MultiStepFormWizardStepContainer>
@@ -124,9 +135,12 @@ const MultiStepFormWizardStepContainer = styled(
   ScrollView,
 )<MultiStepFormWizardStepContainerProps>`
   flex: 1;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
   padding: ${spacing}px;
   opacity: ${(props: MultiStepFormWizardStepContainerProps) =>
-    props.isLoading ? 0.5 : 1};
+    props.isLoading ? 0.05 : 1};
 `;
 
 const MultiStepFormWizardWrapper = styled(View)<WithSafeAreaInsetsProps>`
