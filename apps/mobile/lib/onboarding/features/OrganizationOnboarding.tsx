@@ -1,7 +1,8 @@
+import MultiStepFormWizard from "@/lib/core/features/MultiStepFormWizard";
 import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import { Appbar, ProgressBar } from "react-native-paper";
+import { Appbar, Text } from "react-native-paper";
 import styled from "styled-components/native";
 
 export default function OrganizationOnboarding() {
@@ -18,7 +19,19 @@ export default function OrganizationOnboarding() {
         <Appbar.Content title="Registar nueva escuela"></Appbar.Content>
       </Appbar.Header>
       <OrganizationOnboardingContainer>
-        <ProgressBar progress={0} />
+        <MultiStepFormWizard
+          steps={[
+            {
+              render: () => <Text>Paso 1</Text>,
+            },
+            {
+              render: () => <Text>Paso 2</Text>,
+            },
+            {
+              render: () => <Text>Paso 3</Text>,
+            },
+          ]}
+        />
       </OrganizationOnboardingContainer>
     </>
   );
