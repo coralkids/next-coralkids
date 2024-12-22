@@ -11,7 +11,7 @@ export default function OrganizationOnboarding() {
 
   return (
     <>
-      <Appbar.Header>
+      <Appbar.Header elevated>
         <Appbar.BackAction
           onPress={() =>
             router.canGoBack() ? router.back() : router.navigate("/")

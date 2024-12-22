@@ -1,16 +1,14 @@
 import React from "react";
 import { OrganizationMembershipResource } from "@clerk/types";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { Image } from "expo-image";
 import {
-  Badge,
   Card,
   Chip,
   Icon,
   IconButton,
   MD3Elevation,
   Text,
-  useTheme,
 } from "react-native-paper";
 import styled, { ThemeStyledProps } from "styled-components/native";
 import { spacing } from "@/theme/spacing";
@@ -26,8 +24,6 @@ export const OrganizationMembershipItem: React.FC<{
   elevation = 1 as MD3Elevation,
   isActive = false,
 }) => {
-  const theme = useTheme();
-
   return (
     <OrganizationMembershipCard isActive={isActive} elevation={elevation}>
       <OrganizationMembershipItemContainer>
@@ -44,9 +40,10 @@ export const OrganizationMembershipItem: React.FC<{
           <OrganizationMembershipItemTextWrapper>
             <Text variant="titleMedium">{org.organization.name}</Text>
             <Text variant="bodyMedium">Escuela infantil</Text>
-            <View style={{ alignSelf: "flex-start" }}>
-              <Chip>{org.role}</Chip>
-            </View>
+            <OrganizationMembershipItemRoleChip>
+              <Icon size={15} source="account-box" />
+              Responsable
+            </OrganizationMembershipItemRoleChip>
           </OrganizationMembershipItemTextWrapper>
           {displayConfig && (
             <IconButton
@@ -64,16 +61,26 @@ export const OrganizationMembershipItem: React.FC<{
 
 export default OrganizationMembershipItem;
 
+const OrganizationMembershipItemRoleChip = styled(Chip)`
+  margin-top: 20px;
+`;
+
 const OrganizationMembershipItemTextWrapper = styled(View)`
   max-width: 500px;
 `;
 
-const OrganizationMembershipCard = styled(Card)<{
+interface OrganizationMembershipCardProps extends ThemeStyledProps {
   isActive: boolean;
-}>`
+}
+
+const OrganizationMembershipCard = styled(
+  Card,
+)<OrganizationMembershipCardProps>`
   width: 100%;
-  border-width: ${(props) => (props.isActive ? "1px" : "0px")};
-  border-color: ${(props) => props.theme.colors.primary};
+  border-width: ${(props: OrganizationMembershipCardProps) =>
+    props.isActive ? "1px" : "0px"};
+  border-color: ${(props: OrganizationMembershipCardProps) =>
+    props.theme.colors.primary};
 `;
 
 const OrganizationMembershipItemContent = styled(View)`

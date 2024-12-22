@@ -89,9 +89,7 @@ export const OrganizationMembershipHome: React.FC<
 
 export default OrganizationMembershipHome;
 
-const OrganizationMembershipHomeWrapper = styled(SafeAreaView)`
-  background-color: ${(props) => props.theme.colors.onPrimary};
-`;
+const OrganizationMembershipHomeWrapper = styled(SafeAreaView)``;
 
 const OrganizationMembershipSelectorBottomSheetPanArea = styled(
   BottomSheetView,
