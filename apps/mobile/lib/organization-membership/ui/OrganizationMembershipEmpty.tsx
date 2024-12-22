@@ -1,5 +1,5 @@
 import { spacing } from "@/theme/spacing";
-import { ScrollView } from "react-native";
+import { Platform, ScrollView } from "react-native";
 import { Button, Card, Icon, useTheme, Text } from "react-native-paper";
 import Animated, { FadeInRight } from "react-native-reanimated";
 import styled from "styled-components/native";
@@ -14,7 +14,11 @@ export default function OrganizationMembershipEmpty({
   const theme = useTheme();
 
   return (
-    <OrganizationMembershipEmptyContainer>
+    <OrganizationMembershipEmptyContainer
+      contentContainerStyle={{
+        alignItems: Platform.OS === "web" ? "center" : undefined,
+      }}
+    >
       <Animated.View entering={FadeInRight.delay(200)}>
         <OrganizationMembershipEmptyCard>
           <OrganizationMembershipEmptyTextTitle variant="titleMedium">
@@ -80,6 +84,7 @@ export default function OrganizationMembershipEmpty({
 const OrganizationMembershipEmptyCard = styled(Card)`
   padding: ${spacing}px;
   margin: ${spacing}px 0px;
+  max-width: 425px;
 `;
 
 const OrganizationMembershipCreateOrganization = styled(Button)`

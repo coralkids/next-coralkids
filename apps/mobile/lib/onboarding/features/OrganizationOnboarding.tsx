@@ -1,7 +1,8 @@
 import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import { Appbar, ProgressBar, Text } from "react-native-paper";
+import { Appbar, ProgressBar } from "react-native-paper";
+import styled from "styled-components/native";
 
 export default function OrganizationOnboarding() {
   const router = useRouter();
@@ -16,10 +17,13 @@ export default function OrganizationOnboarding() {
         ></Appbar.BackAction>
         <Appbar.Content title="Registar nueva escuela"></Appbar.Content>
       </Appbar.Header>
-      <View>
-        <ProgressBar progress={0.2} />
-        <Text variant="titleLarge">Crear org</Text>
-      </View>
+      <OrganizationOnboardingContainer>
+        <ProgressBar progress={0} />
+      </OrganizationOnboardingContainer>
     </>
   );
 }
+
+const OrganizationOnboardingContainer = styled(View)`
+  flex: 1;
+`;
