@@ -47,7 +47,7 @@ export const OrganizationMembershipHome: React.FC<
         <ProfileTouchableWithMenu />
       </Appbar.Header>
       <SafeAreaProvider>
-        <SafeAreaView style={{ flex: 1 }}>
+        <OrganizationMembershipHomeWrapper style={{ flex: 1 }}>
           {!!user?.organizationMemberships?.length && (
             <ActiveOrganizationMembership
               activeOrganizationMembership={activeOrganizationMembership}
@@ -81,13 +81,17 @@ export const OrganizationMembershipHome: React.FC<
               </BottomSheetModal>
             </BottomSheetModalProvider>
           )}
-        </SafeAreaView>
+        </OrganizationMembershipHomeWrapper>
       </SafeAreaProvider>
     </>
   );
 };
 
 export default OrganizationMembershipHome;
+
+const OrganizationMembershipHomeWrapper = styled(SafeAreaView)`
+  background-color: ${(props) => props.theme.colors.onPrimary};
+`;
 
 const OrganizationMembershipSelectorBottomSheetPanArea = styled(
   BottomSheetView,

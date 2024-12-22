@@ -21,12 +21,8 @@ export default function ActiveOrganizationMembership({
           Escuela
         </SelectedOrganizationMembershipTitle>
         {activeOrganizationMembership && (
-          <Button
-            mode="elevated"
-            onPress={onChangePress}
-            icon="swap-horizontal"
-          >
-            Cambiar
+          <Button mode="text" onPress={onChangePress} icon="swap-horizontal">
+            Cambiar de escuela
           </Button>
         )}
       </OrganizationMembershipListHeaderContainer>

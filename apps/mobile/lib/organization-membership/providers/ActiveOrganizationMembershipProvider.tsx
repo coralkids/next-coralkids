@@ -1,4 +1,5 @@
 import useUser from "@/lib/user/hooks/useUser";
+import { useClerk } from "@clerk/clerk-expo";
 import { OrganizationMembershipResource } from "@clerk/types";
 import React, { createContext, useState } from "react";
 
@@ -16,6 +17,13 @@ const ActiveOrganizationMembershipProvider: React.FC<
   const user = useUser();
   const [activeOrganizationMembership, setActiveOrganizationMembership] =
     useState(user?.organizationMemberships?.at(0));
+  const clerk = useClerk();
+
+  if (activeOrganizationMembership?.organization) {
+    clerk.setActive({
+      organization: activeOrganizationMembership.organization.id,
+    });
+  }
 
   return (
     <ActiveOrganizationMembershipContext.Provider

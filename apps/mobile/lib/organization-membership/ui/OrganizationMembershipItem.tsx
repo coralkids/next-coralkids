@@ -5,7 +5,9 @@ import { Image } from "expo-image";
 import {
   Badge,
   Card,
+  Chip,
   Icon,
+  IconButton,
   MD3Elevation,
   Text,
   useTheme,
@@ -43,22 +45,16 @@ export const OrganizationMembershipItem: React.FC<{
             <Text variant="titleMedium">{org.organization.name}</Text>
             <Text variant="bodyMedium">Escuela infantil</Text>
             <View style={{ alignSelf: "flex-start" }}>
-              <Badge
-                style={{
-                  backgroundColor: theme.colors.primary,
-                  marginTop: 10,
-                }}
-              >
-                {org.role}
-              </Badge>
+              <Chip>{org.role}</Chip>
             </View>
           </OrganizationMembershipItemTextWrapper>
           {displayConfig && (
-            <OrganizationMembershipItemConfigurationTouchable
-              onPress={() => {}}
-            >
-              <Icon source="cog" color={theme.colors.primary} size={20} />
-            </OrganizationMembershipItemConfigurationTouchable>
+            <IconButton
+              onPress={() => console.log("open org config")}
+              icon="cog"
+              mode="contained-tonal"
+              size={20}
+            />
           )}
         </OrganizationMembershipItemContent>
       </OrganizationMembershipItemContainer>
@@ -67,13 +63,6 @@ export const OrganizationMembershipItem: React.FC<{
 };
 
 export default OrganizationMembershipItem;
-
-const OrganizationMembershipItemConfigurationTouchable = styled(
-  TouchableOpacity,
-)`
-  padding: 10px;
-  border-radius: 100%;
-`;
 
 const OrganizationMembershipItemTextWrapper = styled(View)`
   max-width: 500px;

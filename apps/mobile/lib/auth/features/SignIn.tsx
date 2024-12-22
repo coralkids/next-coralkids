@@ -99,6 +99,7 @@ const Container = styled.View`
   align-items: center;
   justify-content: center;
   display: flex;
+  background-color: ${(props) => props.theme.colors.onPrimary};
 `;
 
 const AppLogo = styled(Image)`

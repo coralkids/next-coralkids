@@ -4,7 +4,7 @@ import React from "react";
 import { View } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 import styled from "styled-components/native";
-import OrganizationNameStep from "./OrganizationNameStep";
+import OrganizationNameStep from "./OrganizationNameAndLogoStep";
 
 export default function OrganizationOnboarding() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function OrganizationOnboarding() {
       </Appbar.Header>
       <OrganizationOnboardingContainer>
         <MultiStepFormWizard
-          currentIndex={1}
+          currentIndex={0}
           steps={[
             {
               render: () => <OrganizationNameStep />,
