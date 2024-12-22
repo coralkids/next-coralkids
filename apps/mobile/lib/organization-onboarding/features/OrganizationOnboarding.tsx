@@ -5,6 +5,7 @@ import { View } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 import styled from "styled-components/native";
 import OrganizationLogoStep from "./OrganizationLogoStep";
+import OrganizationNameStep from "./OrganizationNameStep";
 
 export default function OrganizationOnboarding() {
   const router = useRouter();
@@ -24,44 +25,16 @@ export default function OrganizationOnboarding() {
           currentIndex={0}
           steps={[
             {
+              render: () => <OrganizationNameStep />,
+              onNext: async () =>
+                new Promise((resolve) => {
+                  global.setTimeout(function () {
+                    resolve();
+                  }, 1000);
+                }),
+            },
+            {
               render: () => <OrganizationLogoStep />,
-              onNext: async () =>
-                new Promise((resolve) => {
-                  global.setTimeout(function () {
-                    resolve();
-                  }, 1000);
-                }),
-            },
-            {
-              render: () => <Text>Paso 2</Text>,
-              canSkip: true,
-              onNext: async () =>
-                new Promise((resolve) => {
-                  global.setTimeout(function () {
-                    resolve();
-                  }, 1000);
-                }),
-            },
-            {
-              render: () => <Text>Paso 3</Text>,
-              onNext: async () =>
-                new Promise((resolve) => {
-                  global.setTimeout(function () {
-                    resolve();
-                  }, 1000);
-                }),
-            },
-            {
-              render: () => <Text>Paso 4</Text>,
-              onNext: async () =>
-                new Promise((resolve) => {
-                  global.setTimeout(function () {
-                    resolve();
-                  }, 1000);
-                }),
-            },
-            {
-              render: () => <Text>Paso 5</Text>,
               onNext: async () =>
                 new Promise((resolve) => {
                   global.setTimeout(function () {

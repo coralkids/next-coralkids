@@ -40,7 +40,9 @@ export default function MultiStepFormWizard({
       setLoading(false);
     }
 
-    goNext();
+    if (currentStepIndex < steps.length - 1) {
+      goNext();
+    }
   };
 
   const goNext = () => setCurrentStepIndex(currentStepIndex + 1);
@@ -74,31 +76,20 @@ export default function MultiStepFormWizard({
           </MultiStepFormWizardStep>
         </MultiStepFormWizardStepContainer>
         <MultiStepFormWizardActionsContainer>
-          {currentStepIndex === steps.length - 1 && (
-            <Button
-              style={{ marginTop: 50 }}
-              disabled={loading}
-              loading={loading}
-              mode="contained"
-            >
-              Finalizar
-            </Button>
-          )}
           <MultiStepFormWizardNextActions>
             {currentStepIndex < steps.length - 1 && currentStep.canSkip && (
               <Button disabled={loading} onPress={goNext} mode="text">
                 Saltar
               </Button>
             )}
-            {currentStepIndex < steps.length - 1 && (
+            {currentStepIndex <= steps.length && (
               <Button
                 disabled={loading}
-                loading={loading}
                 onPress={onNextStepPress}
                 mode="contained"
                 elevation={2}
               >
-                Siguiente
+                Continuar
               </Button>
             )}
           </MultiStepFormWizardNextActions>
