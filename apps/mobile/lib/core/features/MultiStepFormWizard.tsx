@@ -5,9 +5,10 @@ import { ActivityIndicator, Button, ProgressBar } from "react-native-paper";
 import { WithSafeAreaInsetsProps } from "react-native-safe-area-context";
 import styled, { ThemeStyledProps } from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import MultiStepFormWizardStep from "./MultiStepFormWizardStep";
 
 interface Step {
-  render: (currentStep: number) => React.ReactNode;
+  render: () => React.ReactNode;
   canSkip?: boolean;
   onNext?: () => Promise<void>;
 }
@@ -65,7 +66,9 @@ export default function MultiStepFormWizard({
           />
         </MultiStepFormWizardStepLoaderWrapper>
         <MultiStepFormWizardStepContainer isLoading={loading}>
-          {currentStep.render(currentStepIndex)}
+          <MultiStepFormWizardStep key={currentStepIndex}>
+            {currentStep.render()}
+          </MultiStepFormWizardStep>
         </MultiStepFormWizardStepContainer>
         <MultiStepFormWizardActionsContainer>
           {currentStepIndex === steps.length - 1 && (

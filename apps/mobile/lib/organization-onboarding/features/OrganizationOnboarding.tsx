@@ -25,11 +25,7 @@ export default function OrganizationOnboarding() {
           currentIndex={0}
           steps={[
             {
-              render: (index) => (
-                <MultiStepFormWizardStep key={index}>
-                  <OrganizationNameStep />
-                </MultiStepFormWizardStep>
-              ),
+              render: () => <OrganizationNameStep />,
               onNext: async () =>
                 new Promise((resolve) => {
                   global.setTimeout(function () {
@@ -38,11 +34,7 @@ export default function OrganizationOnboarding() {
                 }),
             },
             {
-              render: (index) => (
-                <MultiStepFormWizardStep key={index}>
-                  <Text>Paso 2</Text>
-                </MultiStepFormWizardStep>
-              ),
+              render: () => <Text>Paso 2</Text>,
               canSkip: true,
               onNext: async () =>
                 new Promise((resolve) => {
@@ -52,11 +44,7 @@ export default function OrganizationOnboarding() {
                 }),
             },
             {
-              render: (index) => (
-                <MultiStepFormWizardStep key={index}>
-                  <Text>Paso 3</Text>
-                </MultiStepFormWizardStep>
-              ),
+              render: () => <Text>Paso 3</Text>,
               onNext: async () =>
                 new Promise((resolve) => {
                   global.setTimeout(function () {
@@ -65,11 +53,7 @@ export default function OrganizationOnboarding() {
                 }),
             },
             {
-              render: (index) => (
-                <MultiStepFormWizardStep key={index}>
-                  <Text>Paso 4</Text>
-                </MultiStepFormWizardStep>
-              ),
+              render: () => <Text>Paso 4</Text>,
               onNext: async () =>
                 new Promise((resolve) => {
                   global.setTimeout(function () {
@@ -78,11 +62,7 @@ export default function OrganizationOnboarding() {
                 }),
             },
             {
-              render: (index) => (
-                <MultiStepFormWizardStep key={index}>
-                  <Text>Paso 5</Text>
-                </MultiStepFormWizardStep>
-              ),
+              render: () => <Text>Paso 5</Text>,
               onNext: async () =>
                 new Promise((resolve) => {
                   global.setTimeout(function () {
