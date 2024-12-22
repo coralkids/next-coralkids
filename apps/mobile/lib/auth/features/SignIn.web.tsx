@@ -1,14 +1,18 @@
-import * as WebBrowser from "expo-web-browser";
-import * as AuthSession from "expo-auth-session";
-import { useClerk } from "@clerk/clerk-expo";
-
-WebBrowser.maybeCompleteAuthSession();
+import { SignIn } from "@clerk/clerk-react";
+import { View } from "react-native";
+import styled from "styled-components/native";
 
 export default function SingInFeature() {
-  const clerk = useClerk();
-
-  const uri = AuthSession.makeRedirectUri();
-  window.location.href = clerk.buildSignInUrl({
-    signInForceRedirectUrl: uri,
-  });
+  return (
+    <WebSignInContainer>
+      <SignIn />
+    </WebSignInContainer>
+  );
 }
+
+const WebSignInContainer = styled(View)`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  font-family: "MRegular";
+`;
