@@ -1,6 +1,9 @@
 import { spacing } from "@/theme/spacing";
 import React from "react";
-import Animated, { SlideInRight, SlideOutLeft } from "react-native-reanimated";
+import Animated, {
+  LightSpeedInRight,
+  LightSpeedOutLeft,
+} from "react-native-reanimated";
 import styled from "styled-components/native";
 
 export default function MultiStepFormWizardStep({
@@ -8,8 +11,8 @@ export default function MultiStepFormWizardStep({
 }: React.PropsWithChildren) {
   return (
     <MultiStepFormWizardStepWrapper
-      entering={SlideInRight}
-      exiting={SlideOutLeft}
+      entering={LightSpeedInRight}
+      exiting={LightSpeedOutLeft}
     >
       {children}
     </MultiStepFormWizardStepWrapper>
