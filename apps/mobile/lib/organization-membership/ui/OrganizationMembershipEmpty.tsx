@@ -4,7 +4,13 @@ import { Button, Card, Icon, useTheme, Text } from "react-native-paper";
 import Animated, { FadeInRight } from "react-native-reanimated";
 import styled from "styled-components/native";
 
-export default function OrganizationMembershipEmpty() {
+interface OrganizationMembershipEmptyProps {
+  onCreateOrganizationPress: () => void;
+}
+
+export default function OrganizationMembershipEmpty({
+  onCreateOrganizationPress,
+}: OrganizationMembershipEmptyProps) {
   const theme = useTheme();
 
   return (
@@ -29,6 +35,7 @@ export default function OrganizationMembershipEmpty() {
           </OrganizationMembershipCreateOrganization>
           <OrganizationMembershipCreateOrganization
             icon="plus"
+            onPress={onCreateOrganizationPress}
             mode="contained-tonal"
           >
             Registrar escuela
