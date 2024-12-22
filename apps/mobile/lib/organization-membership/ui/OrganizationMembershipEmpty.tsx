@@ -21,12 +21,11 @@ export default function OrganizationMembershipEmpty({
     >
       <Animated.View entering={FadeInRight.delay(200)}>
         <OrganizationMembershipEmptyCard>
-          <OrganizationMembershipEmptyTextTitle variant="titleMedium">
-            <Icon
-              color={theme.colors.secondary}
-              source="account-box"
-              size={24}
-            />
+          <OrganizationMembershipEmptyTextTitle
+            variant="titleMedium"
+            isPrimary={true}
+          >
+            <Icon color={theme.colors.primary} source="account-box" size={24} />
             &nbsp; Soy responsable de escuela
           </OrganizationMembershipEmptyTextTitle>
           <OrganizationMembershipEmptyText variant="bodyMedium">
@@ -40,7 +39,7 @@ export default function OrganizationMembershipEmpty({
           <OrganizationMembershipCreateOrganization
             icon="plus"
             onPress={onCreateOrganizationPress}
-            mode="contained-tonal"
+            mode="contained"
           >
             Registrar escuela
           </OrganizationMembershipCreateOrganization>
@@ -66,7 +65,11 @@ export default function OrganizationMembershipEmpty({
             invite.
           </OrganizationMembershipEmptyText>
 
-          <OrganizationMembershipCreateOrganization icon="link" mode="text">
+          <OrganizationMembershipCreateOrganization
+            textColor={theme.colors.secondary}
+            icon="link"
+            mode="text"
+          >
             Vincular escuela con código
           </OrganizationMembershipCreateOrganization>
           <OrganizationMembershipCreateOrganization
@@ -85,6 +88,7 @@ const OrganizationMembershipEmptyCard = styled(Card)`
   padding: ${spacing}px;
   margin: ${spacing}px 0px;
   max-width: 425px;
+  background-color: ${(props) => props.theme.colors.onPrimary};
 `;
 
 const OrganizationMembershipCreateOrganization = styled(Button)`
@@ -107,6 +111,11 @@ const OrganizationMembershipEmptyText = styled(Text)`
 
 const OrganizationMembershipEmptyTextTitle = styled(
   OrganizationMembershipEmptyText,
-)`
-  color: ${(props) => props.theme.colors.secondary};
+)<{
+  isPrimary?: boolean;
+}>`
+  color: ${(props) =>
+    props.isPrimary
+      ? props.theme.colors.primary
+      : props.theme.colors.secondary};
 `;

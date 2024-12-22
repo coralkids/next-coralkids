@@ -73,6 +73,7 @@ const MultiStepFormWizardWrapper = styled(SafeAreaView)`
   flex: 1;
   justify-content: space-between;
   padding: ${spacing}px;
+  background-color: ${(props) => props.theme.colors.onPrimary};
 `;
 
 const MultiStepFormWizardActionsContainer = styled(View)`
