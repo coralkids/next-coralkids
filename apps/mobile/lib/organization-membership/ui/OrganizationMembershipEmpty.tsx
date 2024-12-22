@@ -12,8 +12,12 @@ export default function OrganizationMembershipEmpty() {
       <Animated.View entering={FadeInRight.delay(200)}>
         <OrganizationMembershipEmptyCard>
           <OrganizationMembershipEmptyTextTitle variant="titleMedium">
-            <Icon color={theme.colors.secondary} source="school" size={24} />
-            &nbsp; Soy lider de escuela
+            <Icon
+              color={theme.colors.secondary}
+              source="account-box"
+              size={24}
+            />
+            &nbsp; Soy responsable de escuela
           </OrganizationMembershipEmptyTextTitle>
           <OrganizationMembershipEmptyText variant="bodyMedium">
             Estamos muy contentos de tenerte con nosotros, puedes empezar el

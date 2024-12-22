@@ -40,7 +40,10 @@ export const OrganizationMembershipHome: React.FC<
 
   return (
     <>
-      <Appbar.Header dark={true} elevated>
+      <Appbar.Header
+        dark={true}
+        elevated={!!user?.organizationMemberships?.length}
+      >
         <ProfileTouchableWithMenu />
       </Appbar.Header>
       <SafeAreaProvider>
