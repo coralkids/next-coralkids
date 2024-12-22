@@ -35,16 +35,17 @@ const ProfileTouchableWithMenu = () => {
           ></ProfileMenuOpenIcon>
         }
       >
-        <Menu.Item leadingIcon="account-edit" title="Mi perfil"></Menu.Item>
-        <Menu.Item leadingIcon="account-cog" title="Configuracion"></Menu.Item>
+        <Menu.Item leadingIcon="account-edit" title="Perfil"></Menu.Item>
+        <Menu.Item leadingIcon="cog" title="Configuracion"></Menu.Item>
 
         <Divider />
         <LogountButton
           onPress={() => auth.signOut()}
           icon="logout"
-          mode="contained-tonal"
+          textColor={theme.colors.error}
+          mode="text"
         >
-          Salir
+          Cerrar sesión
         </LogountButton>
       </ProfileMenu>
       <ProfileTouchableOpacity onPress={() => setIsUserMenuVisible(true)}>
