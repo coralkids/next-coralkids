@@ -25,7 +25,11 @@ export default function OrganizationOnboarding() {
           currentIndex={0}
           steps={[
             {
-              render: (index) => <OrganizationNameStep key={index} />,
+              render: (index) => (
+                <MultiStepFormWizardStep key={index}>
+                  <OrganizationNameStep />
+                </MultiStepFormWizardStep>
+              ),
               onNext: async () =>
                 new Promise((resolve) => {
                   global.setTimeout(function () {

@@ -2,12 +2,12 @@ import styled from "styled-components/native";
 import { Image } from "expo-image";
 import { spacing } from "@/theme/spacing";
 import { Button } from "react-native-paper";
-import MultiStepFormWizardStep from "@/lib/core/features/MultiStepFormWizardStep";
 import { ThemeStyledProps } from "styled-components/native";
+import { View } from "react-native";
 
 export default function OrganizationNameAndLogoStep() {
   return (
-    <MultiStepFormWizardStep>
+    <OrganizationNameAndLogoStepWrapper>
       <OrganizationNameAndLogoStepLogoImage
         source={require("@/assets/images/icon.png")}
       />
@@ -17,9 +17,16 @@ export default function OrganizationNameAndLogoStep() {
       >
         Cambiar logo
       </OrganizationNameAndLogoStepUploadLogoButton>
-    </MultiStepFormWizardStep>
+    </OrganizationNameAndLogoStepWrapper>
   );
 }
+
+const OrganizationNameAndLogoStepWrapper = styled(View)`
+  flex: 1;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
 
 const OrganizationNameAndLogoStepUploadLogoButton = styled(Button)`
   margin-top: ${spacing * 2}px;
