@@ -3,10 +3,7 @@ import React, { useMemo } from "react";
 import { View } from "react-native";
 import { Button, ProgressBar } from "react-native-paper";
 import Animated, { FadeInLeft, FadeInRight } from "react-native-reanimated";
-import {
-  SafeAreaView,
-  WithSafeAreaInsetsProps,
-} from "react-native-safe-area-context";
+import { WithSafeAreaInsetsProps } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -81,7 +78,7 @@ export default function MultiStepFormWizard({
           <MultiStepFormWizardNextActions>
             {currentStepIndex < steps.length - 1 &&
               steps[currentStepIndex].canSkip && (
-                <Button disabled={loading} onPress={goNext} mode="outlined">
+                <Button disabled={loading} onPress={goNext} mode="text">
                   Saltar
                 </Button>
               )}
@@ -100,10 +97,11 @@ export default function MultiStepFormWizard({
           {currentStepIndex > 0 && (
             <Button
               style={{
-                height: "auto",
+                height: 40,
+                display: "flex",
                 justifyContent: "flex-end",
               }}
-              mode="text"
+              mode="outlined"
               disabled={loading}
               onPress={onPreviusStatePress}
             >
@@ -134,6 +132,7 @@ const MultiStepFormWizardWrapper = styled(View)<WithSafeAreaInsetsProps>`
 const MultiStepFormWizardActionsContainer = styled(View)`
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-end;
   flex-direction: row-reverse;
   padding: ${spacing}px;
 `;
