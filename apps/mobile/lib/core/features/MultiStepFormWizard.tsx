@@ -22,10 +22,6 @@ export default function MultiStepFormWizard({
 }: MultiStepFormWizardProps) {
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
-  const [wrapperDimensions, setWrapperDimensions] = React.useState({
-    width: 0,
-    height: 0,
-  });
 
   const onNextStepPress = async () => {
     if (steps[currentStepIndex].onNext) {
@@ -54,10 +50,6 @@ export default function MultiStepFormWizard({
         {!!steps && steps.length > 0 && !!steps[currentStepIndex] && (
           <MultiStepFormWizardStepContainer
             isLoading={loading}
-            onLayout={(event) => {
-              const dimensions = event.nativeEvent.layout;
-              setWrapperDimensions(dimensions);
-            }}
             entering={FadeInRight.delay(200)}
             exiting={FadeInLeft.delay(299)}
           >
