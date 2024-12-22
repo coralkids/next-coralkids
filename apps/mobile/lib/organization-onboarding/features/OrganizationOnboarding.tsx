@@ -5,6 +5,7 @@ import { View } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 import styled from "styled-components/native";
 import OrganizationNameStep from "./OrganizationNameAndLogoStep";
+import MultiStepFormWizardStep from "@/lib/core/features/MultiStepFormWizardStep";
 
 export default function OrganizationOnboarding() {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function OrganizationOnboarding() {
           currentIndex={0}
           steps={[
             {
-              render: () => <OrganizationNameStep />,
+              render: (index) => <OrganizationNameStep key={index} />,
               onNext: async () =>
                 new Promise((resolve) => {
                   global.setTimeout(function () {
@@ -33,7 +34,11 @@ export default function OrganizationOnboarding() {
                 }),
             },
             {
-              render: () => <Text>Paso 2</Text>,
+              render: (index) => (
+                <MultiStepFormWizardStep key={index}>
+                  <Text>Paso 2</Text>
+                </MultiStepFormWizardStep>
+              ),
               canSkip: true,
               onNext: async () =>
                 new Promise((resolve) => {
@@ -43,7 +48,37 @@ export default function OrganizationOnboarding() {
                 }),
             },
             {
-              render: () => <Text>Paso 3</Text>,
+              render: (index) => (
+                <MultiStepFormWizardStep key={index}>
+                  <Text>Paso 3</Text>
+                </MultiStepFormWizardStep>
+              ),
+              onNext: async () =>
+                new Promise((resolve) => {
+                  global.setTimeout(function () {
+                    resolve();
+                  }, 1000);
+                }),
+            },
+            {
+              render: (index) => (
+                <MultiStepFormWizardStep key={index}>
+                  <Text>Paso 4</Text>
+                </MultiStepFormWizardStep>
+              ),
+              onNext: async () =>
+                new Promise((resolve) => {
+                  global.setTimeout(function () {
+                    resolve();
+                  }, 1000);
+                }),
+            },
+            {
+              render: (index) => (
+                <MultiStepFormWizardStep key={index}>
+                  <Text>Paso 5</Text>
+                </MultiStepFormWizardStep>
+              ),
               onNext: async () =>
                 new Promise((resolve) => {
                   global.setTimeout(function () {

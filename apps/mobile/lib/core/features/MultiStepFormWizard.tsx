@@ -2,7 +2,6 @@ import { spacing } from "@/theme/spacing";
 import React, { useMemo } from "react";
 import { ScrollView, View } from "react-native";
 import { ActivityIndicator, Button, ProgressBar } from "react-native-paper";
-import Animated, { FadeInLeft, FadeInRight } from "react-native-reanimated";
 import { WithSafeAreaInsetsProps } from "react-native-safe-area-context";
 import styled, { ThemeStyledProps } from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -26,13 +25,17 @@ export default function MultiStepFormWizard({
 }: MultiStepFormWizardProps) {
   const [currentStepIndex, setCurrentStepIndex] = React.useState(currentIndex);
   const [loading, setLoading] = React.useState(false);
+  const currentStep = useMemo(
+    () => steps[currentStepIndex],
+    [currentStepIndex, steps],
+  );
 
   const insets = useSafeAreaInsets();
 
   const onNextStepPress = async () => {
-    if (steps[currentStepIndex].onNext) {
+    if (currentStep.onNext) {
       setLoading(true);
-      await steps[currentStepIndex].onNext();
+      await currentStep.onNext();
       setLoading(false);
     }
 
@@ -54,29 +57,16 @@ export default function MultiStepFormWizard({
     <>
       <View>{showProgressBar && <ProgressBar progress={progress} />}</View>
       <MultiStepFormWizardWrapper insets={insets}>
-        {!!steps && steps.length > 0 && !!steps[currentStepIndex] && (
-          <Animated.View
-            style={{
-              flex: 1,
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100%",
-            }}
-            entering={FadeInRight.delay(200)}
-            exiting={FadeInLeft.delay(299)}
-          >
-            <ActivityIndicator
-              style={{ position: "absolute" }}
-              size="large"
-              animating={loading}
-            />
-
-            <MultiStepFormWizardStepContainer isLoading={loading}>
-              {steps[currentStepIndex].render(currentStepIndex)}
-            </MultiStepFormWizardStepContainer>
-          </Animated.View>
-        )}
+        <MultiStepFormWizardStepLoaderWrapper>
+          <ActivityIndicator
+            style={{ position: "absolute" }}
+            size="large"
+            animating={loading}
+          />
+        </MultiStepFormWizardStepLoaderWrapper>
+        <MultiStepFormWizardStepContainer isLoading={loading}>
+          {currentStep.render(currentStepIndex)}
+        </MultiStepFormWizardStepContainer>
         <MultiStepFormWizardActionsContainer>
           {currentStepIndex === steps.length - 1 && (
             <Button
@@ -89,12 +79,11 @@ export default function MultiStepFormWizard({
             </Button>
           )}
           <MultiStepFormWizardNextActions>
-            {currentStepIndex < steps.length - 1 &&
-              steps[currentStepIndex].canSkip && (
-                <Button disabled={loading} onPress={goNext} mode="text">
-                  Saltar
-                </Button>
-              )}
+            {currentStepIndex < steps.length - 1 && currentStep.canSkip && (
+              <Button disabled={loading} onPress={goNext} mode="text">
+                Saltar
+              </Button>
+            )}
             {currentStepIndex < steps.length - 1 && (
               <Button
                 disabled={loading}
@@ -126,6 +115,16 @@ export default function MultiStepFormWizard({
     </>
   );
 }
+
+const MultiStepFormWizardStepLoaderWrapper = styled(View)`
+  flex: 1;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: absolute;
+`;
 
 interface MultiStepFormWizardStepContainerProps extends ThemeStyledProps {
   isLoading: boolean;
