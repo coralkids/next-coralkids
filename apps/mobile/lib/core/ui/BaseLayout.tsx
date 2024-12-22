@@ -32,8 +32,9 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
     if (Platform.OS === "web") {
       return (
         <AppScreen
+          resizeMode="repeat"
           source={require("@/assets/images/welcome-bg-hue.png")}
-          imageStyle={{ opacity: 0.4 }}
+          imageStyle={{ opacity: 0.75 }}
         >
           <AppContainer>{children}</AppContainer>
         </AppScreen>
