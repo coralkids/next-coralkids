@@ -22,8 +22,19 @@ export default function MultiStepFormWizard({
 }: MultiStepFormWizardProps) {
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
+  const [wrapperDimensions, setWrapperDimensions] = React.useState({
+    width: 0,
+    height: 0,
+  });
 
-  const onNextStepPress = () => {
+  const onNextStepPress = async () => {
+    if (steps[currentStepIndex].onNext) {
+      console.log("onNext");
+      setLoading(true);
+      await steps[currentStepIndex].onNext();
+      setLoading(false);
+    }
+
     setCurrentStepIndex(currentStepIndex + 1);
   };
   const onPreviusStatePress = () => {
@@ -38,9 +49,15 @@ export default function MultiStepFormWizard({
   return (
     <>
       {showProgressBar && <ProgressBar progress={progress} />}
+
       <MultiStepFormWizardWrapper>
         {!!steps && steps.length > 0 && !!steps[currentStepIndex] && (
           <MultiStepFormWizardStepContainer
+            isLoading={loading}
+            onLayout={(event) => {
+              const dimensions = event.nativeEvent.layout;
+              setWrapperDimensions(dimensions);
+            }}
             entering={FadeInRight.delay(200)}
             exiting={FadeInLeft.delay(299)}
           >
@@ -49,15 +66,24 @@ export default function MultiStepFormWizard({
         )}
         <MultiStepFormWizardActionsContainer>
           {currentStepIndex > 0 && (
-            <Button onPress={onPreviusStatePress}>Atrás</Button>
+            <Button disabled={loading} onPress={onPreviusStatePress}>
+              Atrás
+            </Button>
           )}
           {currentStepIndex < steps.length - 1 && (
-            <Button onPress={onNextStepPress} mode="contained">
+            <Button
+              disabled={loading}
+              loading={loading}
+              onPress={onNextStepPress}
+              mode="contained"
+            >
               Siguiente
             </Button>
           )}
           {currentStepIndex === steps.length - 1 && (
-            <Button mode="contained">Finalizar</Button>
+            <Button disabled={loading} loading={loading} mode="contained">
+              Finalizar
+            </Button>
           )}
         </MultiStepFormWizardActionsContainer>
       </MultiStepFormWizardWrapper>
@@ -65,12 +91,17 @@ export default function MultiStepFormWizard({
   );
 }
 
-const MultiStepFormWizardStepContainer = styled(Animated.View)`
+const MultiStepFormWizardStepContainer = styled(Animated.View)<{
+  isLoading: boolean;
+}>`
   flex: 1;
+  height: 100%;
+  opacity: ${(props) => (props.isLoading ? 0.5 : 1)};
 `;
 
 const MultiStepFormWizardWrapper = styled(SafeAreaView)`
   flex: 1;
+  height: 100%;
   justify-content: space-between;
   padding: ${spacing}px;
   background-color: ${(props) => props.theme.colors.onPrimary};

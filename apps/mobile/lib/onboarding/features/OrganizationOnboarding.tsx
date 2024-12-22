@@ -23,12 +23,30 @@ export default function OrganizationOnboarding() {
           steps={[
             {
               render: () => <Text>Paso 1</Text>,
+              onNext: async () =>
+                new Promise((resolve) => {
+                  global.setTimeout(function () {
+                    resolve();
+                  }, 1000);
+                }),
             },
             {
               render: () => <Text>Paso 2</Text>,
+              onNext: async () =>
+                new Promise((resolve) => {
+                  global.setTimeout(function () {
+                    resolve();
+                  }, 1000);
+                }),
             },
             {
               render: () => <Text>Paso 3</Text>,
+              onNext: async () =>
+                new Promise((resolve) => {
+                  global.setTimeout(function () {
+                    resolve();
+                  }, 1000);
+                }),
             },
           ]}
         />
