@@ -20,8 +20,7 @@ export default function MultiStepFormWizardStep({
 }
 
 const MultiStepFormWizardStepWrapper = styled(Animated.View)`
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
   padding: ${spacing}px;
+  height: 100%;
+  flex: 1;
 `;

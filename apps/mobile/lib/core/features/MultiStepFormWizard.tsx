@@ -65,7 +65,10 @@ export default function MultiStepFormWizard({
             animating={loading}
           />
         </MultiStepFormWizardStepLoaderWrapper>
-        <MultiStepFormWizardStepContainer isLoading={loading}>
+        <MultiStepFormWizardStepContainer
+          isLoading={loading}
+          contentContainerStyle={{ flex: 1 }}
+        >
           <MultiStepFormWizardStep key={currentStepIndex}>
             {currentStep.render()}
           </MultiStepFormWizardStep>
@@ -137,6 +140,7 @@ const MultiStepFormWizardStepContainer = styled(
   ScrollView,
 )<MultiStepFormWizardStepContainerProps>`
   flex: 1;
+  display: flex;
   height: 100%;
   width: 100%;
   flex-direction: column;
