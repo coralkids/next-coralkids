@@ -56,7 +56,9 @@ export const OrganizationMembershipHome: React.FC<
           )}
           {user?.organizationMemberships?.length === 0 && (
             <OrganizationMembershipEmpty
-              onCreateOrganizationPress={() => router.navigate("/onboarding")}
+              onCreateOrganizationPress={() =>
+                router.navigate("/organization-onboarding")
+              }
             />
           )}
           {!!user?.organizationMemberships?.length && (
