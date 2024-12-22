@@ -4,7 +4,6 @@ import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ConvexReactClient } from "convex/react";
 import { tokenCache } from "@/lib/core/utils/cache";
 import { ClerkLoaded, useAuth } from "@clerk/clerk-react";
-import { esES } from "@clerk/localizations";
 import { LocalizationResource } from "@clerk/types";
 
 if (!process.env.EXPO_PUBLIC_CONVEX_URL) {

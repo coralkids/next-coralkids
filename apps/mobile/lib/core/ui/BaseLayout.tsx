@@ -6,6 +6,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { Platform, View } from "react-native";
 import styled, { ThemeStyledProps } from "styled-components/native";
+import { ImageBackground } from "expo-image";
 export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { loaded: clerkLoaded } = useClerk();
 
@@ -30,7 +31,10 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   if (loaded && clerkLoaded) {
     if (Platform.OS === "web") {
       return (
-        <AppScreen>
+        <AppScreen
+          source={require("@/assets/images/welcome-bg-hue.png")}
+          imageStyle={{ opacity: 0.5 }}
+        >
           <AppContainer>{children}</AppContainer>
         </AppScreen>
       );
@@ -40,10 +44,10 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   }
 };
 
-const AppScreen = styled(View)`
+const AppScreen = styled(ImageBackground)`
   flex: 1;
   width: 100%;
-  background-color: ${({ theme }: ThemeStyledProps) => theme.colors.onSurface};
+  background-color: ${({ theme }: ThemeStyledProps) => theme.colors.background};
 `;
 
 const AppContainer = styled(View)`
