@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { Button, ProgressBar } from "react-native-paper";
 import Animated, { FadeInLeft, FadeInRight } from "react-native-reanimated";
 import { WithSafeAreaInsetsProps } from "react-native-safe-area-context";
-import styled from "styled-components/native";
+import styled, { ThemeStyledProps } from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface Step {
@@ -116,19 +116,23 @@ export default function MultiStepFormWizard({
   );
 }
 
-const MultiStepFormWizardStepContainer = styled(Animated.ScrollView)<{
+interface MultiStepFormWizardStepContainerProps extends ThemeStyledProps {
   isLoading: boolean;
-}>`
+}
+
+const MultiStepFormWizardStepContainer = styled(
+  Animated.ScrollView,
+)<MultiStepFormWizardStepContainerProps>`
   flex: 1;
   padding: ${spacing}px;
-  opacity: ${(props) => (props.isLoading ? 0.5 : 1)};
+  opacity: ${(props: MultiStepFormWizardStepContainerProps) =>
+    props.isLoading ? 0.5 : 1};
 `;
 
 const MultiStepFormWizardWrapper = styled(View)<WithSafeAreaInsetsProps>`
   flex: 1;
   height: 100%;
-  background-color: ${(props) => props.theme.colors.onPrimary};
-  padding-bottom: ${(props) => props.insets.bottom}px;
+  padding-bottom: ${(props: WithSafeAreaInsetsProps) => props.insets.bottom}px;
 `;
 
 const MultiStepFormWizardActionsContainer = styled(View)`
