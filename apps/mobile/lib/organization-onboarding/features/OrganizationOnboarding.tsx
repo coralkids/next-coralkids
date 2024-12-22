@@ -2,7 +2,7 @@ import MultiStepFormWizard from "@/lib/core/features/MultiStepFormWizard";
 import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import { Appbar, Text } from "react-native-paper";
+import { Appbar } from "react-native-paper";
 import styled from "styled-components/native";
 import OrganizationLogoStep from "./OrganizationLogoStep";
 import OrganizationNameStep from "./OrganizationNameStep";
@@ -39,6 +39,7 @@ export default function OrganizationOnboarding() {
                 new Promise((resolve) => {
                   global.setTimeout(function () {
                     resolve();
+                    router.navigate("/");
                   }, 1000);
                 }),
             },

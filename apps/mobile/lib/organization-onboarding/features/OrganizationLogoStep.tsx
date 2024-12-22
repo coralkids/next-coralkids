@@ -13,7 +13,7 @@ export default function OrganizationLogoStep() {
         source={require("@/assets/images/icon.png")}
       />
       <OrganizationLogoStepStepUploadLogoButton icon="upload" mode="elevated">
-        Cambiar logo
+        Subir logo
       </OrganizationLogoStepStepUploadLogoButton>
     </OrganizationLogoStepStepWrapper>
   );
