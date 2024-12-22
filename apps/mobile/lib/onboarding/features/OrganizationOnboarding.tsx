@@ -32,6 +32,7 @@ export default function OrganizationOnboarding() {
             },
             {
               render: () => <Text>Paso 2</Text>,
+              canSkip: true,
               onNext: async () =>
                 new Promise((resolve) => {
                   global.setTimeout(function () {

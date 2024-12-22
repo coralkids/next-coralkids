@@ -8,6 +8,7 @@ import styled from "styled-components/native";
 
 interface Step {
   render: (currentStep: number) => React.ReactNode;
+  canSkip?: boolean;
   onNext?: () => Promise<void>;
 }
 
@@ -25,14 +26,16 @@ export default function MultiStepFormWizard({
 
   const onNextStepPress = async () => {
     if (steps[currentStepIndex].onNext) {
-      console.log("onNext");
       setLoading(true);
       await steps[currentStepIndex].onNext();
       setLoading(false);
     }
 
-    setCurrentStepIndex(currentStepIndex + 1);
+    goNext();
   };
+
+  const goNext = () => setCurrentStepIndex(currentStepIndex + 1);
+
   const onPreviusStatePress = () => {
     setCurrentStepIndex(currentStepIndex - 1);
   };
@@ -57,24 +60,32 @@ export default function MultiStepFormWizard({
           </MultiStepFormWizardStepContainer>
         )}
         <MultiStepFormWizardActionsContainer>
-          {currentStepIndex > 0 && (
-            <Button disabled={loading} onPress={onPreviusStatePress}>
-              Atrás
-            </Button>
-          )}
-          {currentStepIndex < steps.length - 1 && (
-            <Button
-              disabled={loading}
-              loading={loading}
-              onPress={onNextStepPress}
-              mode="contained"
-            >
-              Siguiente
-            </Button>
-          )}
           {currentStepIndex === steps.length - 1 && (
             <Button disabled={loading} loading={loading} mode="contained">
               Finalizar
+            </Button>
+          )}
+          <MultiStepFormWizardNextActions>
+            {currentStepIndex < steps.length - 1 &&
+              steps[currentStepIndex].canSkip && (
+                <Button disabled={loading} onPress={goNext} mode="text">
+                  Saltar
+                </Button>
+              )}
+            {currentStepIndex < steps.length - 1 && (
+              <Button
+                disabled={loading}
+                loading={loading}
+                onPress={onNextStepPress}
+                mode="contained"
+              >
+                Siguiente
+              </Button>
+            )}
+          </MultiStepFormWizardNextActions>
+          {currentStepIndex > 0 && (
+            <Button disabled={loading} onPress={onPreviusStatePress}>
+              Anterior
             </Button>
           )}
         </MultiStepFormWizardActionsContainer>
@@ -83,7 +94,7 @@ export default function MultiStepFormWizard({
   );
 }
 
-const MultiStepFormWizardStepContainer = styled(Animated.View)<{
+const MultiStepFormWizardStepContainer = styled(Animated.ScrollView)<{
   isLoading: boolean;
 }>`
   flex: 1;
@@ -94,15 +105,21 @@ const MultiStepFormWizardStepContainer = styled(Animated.View)<{
 const MultiStepFormWizardWrapper = styled(SafeAreaView)`
   flex: 1;
   height: 100%;
-  justify-content: space-between;
   padding: ${spacing}px;
   background-color: ${(props) => props.theme.colors.onPrimary};
 `;
 
 const MultiStepFormWizardActionsContainer = styled(View)`
   flex-direction: row;
-  justify-content: space-evenly;
-  padding: ${spacing}px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+  padding: ${spacing}px 0px;
+`;
+
+const MultiStepFormWizardNextActions = styled(View)`
+  flex-direction: column;
+  justify-content: center;
   align-items: end;
-  width: 100%;
+  gap: ${spacing}px;
 `;
