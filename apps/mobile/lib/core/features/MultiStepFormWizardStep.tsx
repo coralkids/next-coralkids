@@ -11,7 +11,7 @@ export default function MultiStepFormWizardStep({
 }: React.PropsWithChildren) {
   return (
     <MultiStepFormWizardStepWrapper
-      entering={LightSpeedInRight}
+      entering={LightSpeedInRight.delay(125)}
       exiting={ZoomOutEasyUp}
     >
       {children}
