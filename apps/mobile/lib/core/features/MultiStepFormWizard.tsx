@@ -44,7 +44,7 @@ export default function MultiStepFormWizard({
 
   return (
     <>
-      {showProgressBar && <ProgressBar progress={progress} />}
+      <View>{showProgressBar && <ProgressBar progress={progress} />}</View>
 
       <MultiStepFormWizardWrapper>
         {!!steps && steps.length > 0 && !!steps[currentStepIndex] && (
