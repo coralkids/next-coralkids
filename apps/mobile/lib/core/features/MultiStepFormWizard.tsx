@@ -61,7 +61,12 @@ export default function MultiStepFormWizard({
         )}
         <MultiStepFormWizardActionsContainer>
           {currentStepIndex === steps.length - 1 && (
-            <Button disabled={loading} loading={loading} mode="contained">
+            <Button
+              style={{ marginTop: 50 }}
+              disabled={loading}
+              loading={loading}
+              mode="contained"
+            >
               Finalizar
             </Button>
           )}
@@ -84,7 +89,12 @@ export default function MultiStepFormWizard({
             )}
           </MultiStepFormWizardNextActions>
           {currentStepIndex > 0 && (
-            <Button disabled={loading} onPress={onPreviusStatePress}>
+            <Button
+              style={{ marginTop: 51 }}
+              mode="elevated"
+              disabled={loading}
+              onPress={onPreviusStatePress}
+            >
               Anterior
             </Button>
           )}
@@ -112,14 +122,11 @@ const MultiStepFormWizardWrapper = styled(SafeAreaView)`
 const MultiStepFormWizardActionsContainer = styled(View)`
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   flex-direction: row-reverse;
   padding: ${spacing}px 0px;
 `;
 
 const MultiStepFormWizardNextActions = styled(View)`
   flex-direction: column;
-  justify-content: center;
-  align-items: end;
   gap: ${spacing}px;
 `;
