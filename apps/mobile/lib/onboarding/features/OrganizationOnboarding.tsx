@@ -21,6 +21,7 @@ export default function OrganizationOnboarding() {
       </Appbar.Header>
       <OrganizationOnboardingContainer>
         <MultiStepFormWizard
+          currentIndex={1}
           steps={[
             {
               render: () => <OrganizationNameStep />,

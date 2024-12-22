@@ -16,13 +16,15 @@ interface Step {
 interface MultiStepFormWizardProps extends React.PropsWithChildren {
   steps: Step[];
   showProgressBar?: boolean;
+  currentIndex?: number;
 }
 
 export default function MultiStepFormWizard({
   steps,
   showProgressBar = true,
+  currentIndex = 0,
 }: MultiStepFormWizardProps) {
-  const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
+  const [currentStepIndex, setCurrentStepIndex] = React.useState(currentIndex);
   const [loading, setLoading] = React.useState(false);
 
   const insets = useSafeAreaInsets();

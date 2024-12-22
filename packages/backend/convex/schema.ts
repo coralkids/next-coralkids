@@ -8,4 +8,10 @@ export default defineSchema({
     content: v.string(),
     summary: v.optional(v.string()),
   }),
+  organizationOnboarding: defineTable({
+    userId: v.string(),
+    organizationId: v.string(),
+    currentStep: v.number(),
+    finished: v.boolean()
+  }),
 });
