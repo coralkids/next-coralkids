@@ -29,8 +29,8 @@ export default function OrganizationMembershipEmpty({
             &nbsp; Soy responsable de escuela
           </OrganizationMembershipEmptyTextTitle>
           <OrganizationMembershipEmptyText variant="bodyLarge">
-            Empieza el proceso de registro tu mismo o agenda una reunión con
-            nosotros. Te haremos una demo gratuita sin compromiso.
+            ¡Registra tu mism@! o agenda una reunión con nosotros. Te haremos
+            una demo gratuita sin compromiso.
           </OrganizationMembershipEmptyText>
           <OrganizationMembershipCreateOrganization
             icon="calendar"
