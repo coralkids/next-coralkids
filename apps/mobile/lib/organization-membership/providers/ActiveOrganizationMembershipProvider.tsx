@@ -19,11 +19,13 @@ const ActiveOrganizationMembershipProvider: React.FC<
     useState(user?.organizationMemberships?.at(0));
   const clerk = useClerk();
 
-  if (activeOrganizationMembership?.organization) {
-    clerk.setActive({
-      organization: activeOrganizationMembership.organization.id,
-    });
-  }
+  React.useEffect(() => {
+    if (activeOrganizationMembership?.organization) {
+      clerk.setActive({
+        organization: activeOrganizationMembership.organization.id,
+      });
+    }
+  }, [activeOrganizationMembership, clerk]);
 
   return (
     <ActiveOrganizationMembershipContext.Provider

@@ -2,7 +2,7 @@ import { spacing } from "@/theme/spacing";
 import { Platform, ScrollView } from "react-native";
 import { Button, Card, Icon, useTheme, Text } from "react-native-paper";
 import Animated, { FadeInRight } from "react-native-reanimated";
-import styled from "styled-components/native";
+import styled, { ThemeStyledProps } from "styled-components/native";
 
 interface OrganizationMembershipEmptyProps {
   onCreateOrganizationPress: () => void;
@@ -84,11 +84,12 @@ export default function OrganizationMembershipEmpty({
     </OrganizationMembershipEmptyContainer>
   );
 }
-const OrganizationMembershipEmptyCard = styled(Card)`
+const OrganizationMembershipEmptyCard = styled(Card)<ThemeStyledProps>`
   padding: ${spacing}px;
   margin: ${spacing}px 0px;
   max-width: 425px;
-  background-color: ${(props) => props.theme.colors.onPrimary};
+  background-color: ${(props: ThemeStyledProps) =>
+    props.theme.colors.onPrimary};
 `;
 
 const OrganizationMembershipCreateOrganization = styled(Button)`
@@ -109,12 +110,14 @@ const OrganizationMembershipEmptyText = styled(Text)`
   flex: 1;
 `;
 
+interface OrganizationMembershipEmptyTextTitleProps extends ThemeStyledProps {
+  isPrimary?: boolean;
+}
+
 const OrganizationMembershipEmptyTextTitle = styled(
   OrganizationMembershipEmptyText,
-)<{
-  isPrimary?: boolean;
-}>`
-  color: ${(props) =>
+)<OrganizationMembershipEmptyTextTitleProps>`
+  color: ${(props: OrganizationMembershipEmptyTextTitleProps) =>
     props.isPrimary
       ? props.theme.colors.primary
       : props.theme.colors.secondary};
