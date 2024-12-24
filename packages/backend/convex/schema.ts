@@ -10,7 +10,8 @@ export default defineSchema({
   }),
   organizationOnboarding: defineTable({
     userId: v.string(),
-    organizationId: v.string(),
+    frontendGeneratedUuid: v.string(),
+    organizationId: v.optional(v.string()),
     currentStep: v.number(),
     finished: v.boolean()
   }),

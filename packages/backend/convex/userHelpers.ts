@@ -9,6 +9,8 @@ export const useAuthenticatedGuard = async (ctx: { auth: Auth}) => {
       if (!userId) {
       throw new Error("Not authenticated");
     }
+
+    return identity;
 }
 
 export const useAuthenticatedInOrganizationGuard = async (ctx: { auth: Auth}, organizationId: string, permission?: string) => {
