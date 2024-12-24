@@ -1,5 +1,5 @@
 import MultiStepFormWizard from "@/lib/core/features/MultiStepFormWizard";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import { Appbar } from "react-native-paper";
@@ -9,6 +9,7 @@ import OrganizationNameStep from "./OrganizationNameStep";
 
 export default function OrganizationOnboarding() {
   const router = useRouter();
+  const { id } = useLocalSearchParams<{ id: string }>();
 
   return (
     <>
@@ -22,6 +23,8 @@ export default function OrganizationOnboarding() {
       </Appbar.Header>
       <OrganizationOnboardingContainer>
         <MultiStepFormWizard
+          key={id}
+          onFinish={async () => router.navigate("/")}
           currentIndex={0}
           steps={[
             {
@@ -39,7 +42,6 @@ export default function OrganizationOnboarding() {
                 new Promise((resolve) => {
                   global.setTimeout(function () {
                     resolve();
-                    router.navigate("/");
                   }, 1000);
                 }),
             },

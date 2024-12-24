@@ -17,14 +17,15 @@ interface MultiStepFormWizardProps extends React.PropsWithChildren {
   steps: Step[];
   showProgressBar?: boolean;
   currentIndex?: number;
+  onFinish?: () => Promise<void>;
 }
 
 export default function MultiStepFormWizard({
   steps,
+  onFinish,
   showProgressBar = true,
   currentIndex = 0,
 }: MultiStepFormWizardProps) {
-  console.log("Render");
   const [currentStepIndex, setCurrentStepIndex] = React.useState(currentIndex);
   const [loading, setLoading] = React.useState(false);
   const currentStep = useMemo(
@@ -43,8 +44,12 @@ export default function MultiStepFormWizard({
 
     if (currentStepIndex < steps.length - 1) {
       goNext();
-    } else {
+    }
+
+    if (currentStepIndex === steps.length - 1 && onFinish) {
       setCurrentStepIndex(currentIndex);
+      setLoading(false);
+      await onFinish();
     }
   };
 

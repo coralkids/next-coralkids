@@ -16,6 +16,7 @@ import ActiveOrganizationMembership from "../ui/ActiveOrganizationMembership";
 import OrganizationMembershipSelector from "../ui/OrganizationMembershipSelector";
 import OrganizationMembershipEmpty from "../ui/OrganizationMembershipEmpty";
 import { useRouter } from "expo-router";
+import { randomUUID } from "expo-crypto";
 export const OrganizationMembershipHome: React.FC<
   React.PropsWithChildren
 > = () => {
@@ -57,7 +58,7 @@ export const OrganizationMembershipHome: React.FC<
           {user?.organizationMemberships?.length === 0 && (
             <OrganizationMembershipEmpty
               onCreateOrganizationPress={() =>
-                router.navigate("/organization-onboarding")
+                router.navigate(`/organization-onboarding/${randomUUID()}`)
               }
             />
           )}
