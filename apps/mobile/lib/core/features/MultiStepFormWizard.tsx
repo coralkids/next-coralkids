@@ -1,6 +1,6 @@
 import { spacing } from "@/theme/spacing";
 import React, { useMemo } from "react";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import { ActivityIndicator, ProgressBar } from "react-native-paper";
 import { WithSafeAreaInsetsProps } from "react-native-safe-area-context";
 import styled, { ThemeStyledProps } from "styled-components/native";
@@ -70,10 +70,7 @@ export default function MultiStepFormWizard({
             animating={loading}
           />
         </MultiStepFormWizardStepLoaderWrapper>
-        <MultiStepFormWizardStepContainer
-          isLoading={loading}
-          contentContainerStyle={{ flex: 1 }}
-        >
+        <MultiStepFormWizardStepContainer isLoading={loading}>
           <MultiStepFormWizardStep key={currentStepIndex}>
             {currentStep.render()}
           </MultiStepFormWizardStep>
@@ -134,7 +131,7 @@ interface MultiStepFormWizardStepContainerProps extends ThemeStyledProps {
 }
 
 const MultiStepFormWizardStepContainer = styled(
-  ScrollView,
+  View,
 )<MultiStepFormWizardStepContainerProps>`
   flex: 1;
   display: flex;
