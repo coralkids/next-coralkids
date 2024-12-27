@@ -7,6 +7,7 @@ import styled from "styled-components/native";
 import OrganizationLogoStep from "./OrganizationLogoStep";
 import OrganizationNameStep from "./OrganizationNameStep";
 import { useOrganizationOnboarding } from "../hooks/useOrganizationOnboarding";
+import { MultiStepFormWizardProvider } from "@/lib/core/providers/MultiStepFormWizardProvider";
 
 export default function OrganizationOnboarding() {
   const router = useRouter();
@@ -24,32 +25,23 @@ export default function OrganizationOnboarding() {
       </Appbar.Header>
       <OrganizationOnboardingContainer>
         {!!organizationOnboarding && (
-          <MultiStepFormWizard
-            key={organizationOnboarding?._id}
-            onFinish={async () => router.navigate("/")}
-            currentIndex={organizationOnboarding?.currentStep || 0}
-            steps={[
-              {
-                render: () => <OrganizationNameStep />,
-                onNext: async () =>
-                  new Promise((resolve) => {
-                    global.setTimeout(function () {
-                      resolve();
-                    }, 1000);
-                  }),
-              },
-              {
-                render: () => <OrganizationLogoStep />,
-                onNext: async () =>
-                  new Promise((resolve) => {
-                    global.setTimeout(function () {
-                      resolve();
-                    }, 1000);
-                  }),
-              },
-            ]}
-          />
+          <MultiStepFormWizardProvider
+            currentIndex={organizationOnboarding.currentStep || 0}
+          >
+            <MultiStepFormWizard
+              key={organizationOnboarding?._id}
+              steps={[
+                {
+                  render: () => <OrganizationNameStep />,
+                },
+                {
+                  render: () => <OrganizationLogoStep />,
+                },
+              ]}
+            />
+          </MultiStepFormWizardProvider>
         )}
+
         <ActivityIndicator size="large" animating={!organizationOnboarding} />
       </OrganizationOnboardingContainer>
     </>

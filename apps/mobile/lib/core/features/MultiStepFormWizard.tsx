@@ -1,40 +1,35 @@
 import { spacing } from "@/theme/spacing";
 import React, { useMemo } from "react";
 import { ScrollView, View } from "react-native";
-import { ActivityIndicator, Button, ProgressBar } from "react-native-paper";
+import { ActivityIndicator, ProgressBar } from "react-native-paper";
 import { WithSafeAreaInsetsProps } from "react-native-safe-area-context";
 import styled, { ThemeStyledProps } from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import MultiStepFormWizardStep from "./MultiStepFormWizardStep";
+import { useMultiStepFormWizard } from "../hooks/useMultiStepFormWizard";
 
 interface Step {
   render: () => React.ReactNode;
-  canSkip?: boolean;
-  onNext?: () => Promise<void>;
 }
 
 interface MultiStepFormWizardProps extends React.PropsWithChildren {
   steps: Step[];
   showProgressBar?: boolean;
-  currentIndex?: number;
-  onFinish?: () => Promise<void>;
 }
 
 export default function MultiStepFormWizard({
   steps,
-  onFinish,
   showProgressBar = true,
-  currentIndex = 0,
 }: MultiStepFormWizardProps) {
-  const [currentStepIndex, setCurrentStepIndex] = React.useState(currentIndex);
-  const [loading, setLoading] = React.useState(false);
+  const { loading, currentStepIndex } = useMultiStepFormWizard();
+
   const currentStep = useMemo(
     () => steps[currentStepIndex],
     [currentStepIndex, steps],
   );
 
   const insets = useSafeAreaInsets();
-
+  /**
   const onNextStepPress = async () => {
     if (currentStep.onNext) {
       setLoading(true);
@@ -52,12 +47,12 @@ export default function MultiStepFormWizard({
       await onFinish();
     }
   };
-
-  const goNext = () => setCurrentStepIndex(currentStepIndex + 1);
-
   const onPreviusStatePress = () => {
     setCurrentStepIndex(currentStepIndex - 1);
   };
+
+  const goNext = () => setCurrentStepIndex(currentStepIndex + 1);
+   */
 
   const progress = useMemo(
     () => parseFloat(((currentStepIndex + 1) / steps.length).toFixed(2)),
@@ -83,7 +78,8 @@ export default function MultiStepFormWizard({
             {currentStep.render()}
           </MultiStepFormWizardStep>
         </MultiStepFormWizardStepContainer>
-        <MultiStepFormWizardActionsContainer>
+        {/** 
+          <MultiStepFormWizardActionsContainer>
           <MultiStepFormWizardNextActions>
             {currentStepIndex < steps.length - 1 && currentStep.canSkip && (
               <Button disabled={loading} onPress={goNext} mode="text">
@@ -115,7 +111,7 @@ export default function MultiStepFormWizard({
               Anterior
             </Button>
           )}
-        </MultiStepFormWizardActionsContainer>
+        </MultiStepFormWizardActionsContainer> */}
       </MultiStepFormWizardWrapper>
     </>
   );
@@ -143,7 +139,6 @@ const MultiStepFormWizardStepContainer = styled(
   height: 100%;
   width: 100%;
   flex-direction: column;
-  padding: ${spacing}px;
   opacity: ${(props: MultiStepFormWizardStepContainerProps) =>
     props.isLoading ? 0.05 : 1};
 `;
@@ -154,7 +149,7 @@ const MultiStepFormWizardWrapper = styled(View)<WithSafeAreaInsetsProps>`
   padding-bottom: ${(props: WithSafeAreaInsetsProps) => props.insets.bottom}px;
 `;
 
-const MultiStepFormWizardActionsContainer = styled(View)`
+export const MultiStepFormWizardActionsContainer = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
@@ -162,7 +157,7 @@ const MultiStepFormWizardActionsContainer = styled(View)`
   padding: ${spacing}px;
 `;
 
-const MultiStepFormWizardNextActions = styled(View)`
+export const MultiStepFormWizardNextActions = styled(View)`
   flex-direction: column;
   gap: ${spacing}px;
 `;
