@@ -32,12 +32,15 @@ export default function OrganizationOnboarding() {
       {!organizationOnboarding && (
         <ActivityIndicator
           size="large"
-          style={{ height: "100%" }}
+          style={{
+            flex: 1,
+            marginBottom: insets.bottom,
+          }}
           animating={!organizationOnboarding}
         />
       )}
-      <OrganizationOnboardingContainer insets={insets}>
-        {!!organizationOnboarding && (
+      {!!organizationOnboarding && (
+        <OrganizationOnboardingContainer insets={insets}>
           <MultiStepFormWizardProvider
             currentIndex={organizationOnboarding.currentStep || 0}
           >
@@ -53,8 +56,8 @@ export default function OrganizationOnboarding() {
               ]}
             />
           </MultiStepFormWizardProvider>
-        )}
-      </OrganizationOnboardingContainer>
+        </OrganizationOnboardingContainer>
+      )}
     </SafeAreaProvider>
   );
 }
