@@ -16,12 +16,16 @@ import ActiveOrganizationMembership from "../ui/ActiveOrganizationMembership";
 import OrganizationMembershipSelector from "../ui/OrganizationMembershipSelector";
 import OrganizationMembershipEmpty from "../ui/OrganizationMembershipEmpty";
 import { useRouter } from "expo-router";
-import { randomUUID } from "expo-crypto";
+import { useMutation } from "convex/react";
+import { api } from "@packages/backend/convex/_generated/api";
 export const OrganizationMembershipHome: React.FC<
   React.PropsWithChildren
 > = () => {
   const user = useUser();
   const router = useRouter();
+  const startOnboarding = useMutation(
+    api.organizationOnboarding.startOnboarding,
+  );
 
   const { activeOrganizationMembership, setActiveOrganizationMembership } =
     useActiveOrganizationMembership();
@@ -42,6 +46,12 @@ export const OrganizationMembershipHome: React.FC<
     bottomSheetRef.current?.present();
   }, []);
 
+  const onCreateOrganizationPress = () => {
+    startOnboarding().then((obId) => {
+      router.navigate(`/organization-onboarding/${obId}`);
+    });
+  };
+
   return (
     <>
       <Appbar.Header elevated>
@@ -57,9 +67,7 @@ export const OrganizationMembershipHome: React.FC<
           )}
           {user?.organizationMemberships?.length === 0 && (
             <OrganizationMembershipEmpty
-              onCreateOrganizationPress={() =>
-                router.navigate(`/organization-onboarding/${randomUUID()}`)
-              }
+              onCreateOrganizationPress={onCreateOrganizationPress}
             />
           )}
           {!!user?.organizationMemberships?.length && (

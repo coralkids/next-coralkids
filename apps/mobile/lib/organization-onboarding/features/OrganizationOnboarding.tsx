@@ -1,15 +1,16 @@
 import MultiStepFormWizard from "@/lib/core/features/MultiStepFormWizard";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import { Appbar } from "react-native-paper";
+import { ActivityIndicator, Appbar } from "react-native-paper";
 import styled from "styled-components/native";
 import OrganizationLogoStep from "./OrganizationLogoStep";
 import OrganizationNameStep from "./OrganizationNameStep";
+import { useOrganizationOnboarding } from "../hooks/useOrganizationOnboarding";
 
 export default function OrganizationOnboarding() {
   const router = useRouter();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const organizationOnboarding = useOrganizationOnboarding();
 
   return (
     <>
@@ -22,31 +23,34 @@ export default function OrganizationOnboarding() {
         <Appbar.Content title="Registar nueva escuela"></Appbar.Content>
       </Appbar.Header>
       <OrganizationOnboardingContainer>
-        <MultiStepFormWizard
-          key={id}
-          onFinish={async () => router.navigate("/")}
-          currentIndex={0}
-          steps={[
-            {
-              render: () => <OrganizationNameStep />,
-              onNext: async () =>
-                new Promise((resolve) => {
-                  global.setTimeout(function () {
-                    resolve();
-                  }, 1000);
-                }),
-            },
-            {
-              render: () => <OrganizationLogoStep />,
-              onNext: async () =>
-                new Promise((resolve) => {
-                  global.setTimeout(function () {
-                    resolve();
-                  }, 1000);
-                }),
-            },
-          ]}
-        />
+        {!!organizationOnboarding && (
+          <MultiStepFormWizard
+            key={organizationOnboarding?._id}
+            onFinish={async () => router.navigate("/")}
+            currentIndex={organizationOnboarding?.currentStep || 0}
+            steps={[
+              {
+                render: () => <OrganizationNameStep />,
+                onNext: async () =>
+                  new Promise((resolve) => {
+                    global.setTimeout(function () {
+                      resolve();
+                    }, 1000);
+                  }),
+              },
+              {
+                render: () => <OrganizationLogoStep />,
+                onNext: async () =>
+                  new Promise((resolve) => {
+                    global.setTimeout(function () {
+                      resolve();
+                    }, 1000);
+                  }),
+              },
+            ]}
+          />
+        )}
+        <ActivityIndicator size="large" animating={!organizationOnboarding} />
       </OrganizationOnboardingContainer>
     </>
   );
@@ -54,4 +58,6 @@ export default function OrganizationOnboarding() {
 
 const OrganizationOnboardingContainer = styled(View)`
   flex: 1;
+  justify-content: center;
+  align-items: center;
 `;

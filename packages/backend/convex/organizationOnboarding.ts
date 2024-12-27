@@ -1,27 +1,35 @@
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
-import { useAuthenticatedGuard, useAuthenticatedInOrganizationGuard } from "./userHelpers";
+import { useAuthenticatedGuard } from "./userHelpers";
 
 export const startOnboarding = mutation({
-  args: {
-    organizationId: v.optional(v.string()),
-    onboardingUuid: v.string(),
-    currentStep: v.number(),
-    finished: v.boolean()
-  },
-  handler: async (ctx, args) => {
+  args: {},
+  handler: async (ctx) => {
     const { subject: userId } = await useAuthenticatedGuard(ctx);
 
-    if (args.organizationId) {
-      await useAuthenticatedInOrganizationGuard(ctx, args.organizationId, "org:sys_profile:manage");
-    }
-    
-    await ctx.db.insert("organizationOnboarding", {
+    const id = await ctx.db.insert("organizationOnboarding", {
       userId,
-      frontendGeneratedUuid: args.onboardingUuid,
-      organizationId: args.organizationId,
-      currentStep: args.currentStep,
-      finished: args.finished
+      currentStep: 0,
+      finished: false,
+      updatedAt: Date.now()
     });
+
+    return id;
+  },
+});
+
+export const getOrganizationOnboarding = query({
+  args: {
+    id: v.string()
+  },
+  handler: async (ctx, args) => {
+    const {subject: userId} = await useAuthenticatedGuard(ctx)
+
+    const organizationOnboarding = await ctx.db
+      .query("organizationOnboarding")
+      .filter((q) => q.eq(q.field("userId"), userId) && q.eq(q.field("_id"), args.id))
+      .unique();
+
+    return organizationOnboarding;
   },
 });
