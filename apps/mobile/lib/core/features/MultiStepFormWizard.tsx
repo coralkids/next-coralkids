@@ -2,9 +2,7 @@ import { spacing } from "@/theme/spacing";
 import React, { useMemo } from "react";
 import { ScrollView, View } from "react-native";
 import { ActivityIndicator, ProgressBar } from "react-native-paper";
-import { WithSafeAreaInsetsProps } from "react-native-safe-area-context";
 import styled, { ThemeStyledProps } from "styled-components/native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import MultiStepFormWizardStep from "./MultiStepFormWizardStep";
 import { useMultiStepFormWizard } from "../hooks/useMultiStepFormWizard";
 
@@ -28,7 +26,6 @@ export default function MultiStepFormWizard({
     [currentStepIndex, steps],
   );
 
-  const insets = useSafeAreaInsets();
   /**
   const onNextStepPress = async () => {
     if (currentStep.onNext) {
@@ -62,7 +59,7 @@ export default function MultiStepFormWizard({
   return (
     <>
       <View>{showProgressBar && <ProgressBar progress={progress} />}</View>
-      <MultiStepFormWizardWrapper insets={insets}>
+      <MultiStepFormWizardWrapper>
         <MultiStepFormWizardStepLoaderWrapper>
           <ActivityIndicator
             style={{ position: "absolute" }}
@@ -119,6 +116,8 @@ export default function MultiStepFormWizard({
 
 const MultiStepFormWizardStepLoaderWrapper = styled(View)`
   flex: 1;
+  left: 0;
+  top: 0;
   width: 100%;
   flex-direction: column;
   align-items: center;
@@ -138,15 +137,16 @@ const MultiStepFormWizardStepContainer = styled(
   display: flex;
   height: 100%;
   width: 100%;
+  padding: ${spacing}px;
   flex-direction: column;
   opacity: ${(props: MultiStepFormWizardStepContainerProps) =>
     props.isLoading ? 0.05 : 1};
 `;
 
-const MultiStepFormWizardWrapper = styled(View)<WithSafeAreaInsetsProps>`
+const MultiStepFormWizardWrapper = styled(View)`
   flex: 1;
   height: 100%;
-  padding-bottom: ${(props: WithSafeAreaInsetsProps) => props.insets.bottom}px;
+  width: 100%;
 `;
 
 export const MultiStepFormWizardActionsContainer = styled(View)`
@@ -154,7 +154,6 @@ export const MultiStepFormWizardActionsContainer = styled(View)`
   justify-content: space-between;
   align-items: flex-end;
   flex-direction: row-reverse;
-  padding: ${spacing}px;
 `;
 
 export const MultiStepFormWizardNextActions = styled(View)`
