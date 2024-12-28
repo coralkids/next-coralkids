@@ -19,12 +19,11 @@ import { useRouter } from "expo-router";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
 import { AntDesign } from "@expo/vector-icons";
-import { useClerk } from "@clerk/clerk-react";
+import { useClerk } from "@clerk/clerk-expo";
 
 export function OrganizationMembershipHome() {
   const user = useUser();
   const router = useRouter();
-  const clerk = useClerk();
   const startOnboarding = useMutation(
     api.organizationOnboarding.startOnboarding,
   );
@@ -33,27 +32,17 @@ export function OrganizationMembershipHome() {
   );
 
   const theme = useTheme();
+  const clerk = useClerk();
 
-  const { activeOrganizationMembership, setActiveOrganizationMembership } =
-    useActiveOrganizationMembership();
-
-  if (clerk.organization) {
-    const om = clerk.user?.organizationMemberships.find(
-      (om) => om.organization.id === clerk.organization?.id,
-    );
-
-    if (om) {
-      setActiveOrganizationMembership(om);
-    }
-  }
+  const { activeOrganizationMembership } = useActiveOrganizationMembership();
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["100%"], []);
 
-  const onOrganizationChange = (
+  const onOrganizationChange = async (
     orgMembership: OrganizationMembershipResource,
   ) => {
-    setActiveOrganizationMembership(orgMembership);
+    await clerk.setActive({ organization: orgMembership.organization.id });
 
     bottomSheetRef?.current?.close();
   };

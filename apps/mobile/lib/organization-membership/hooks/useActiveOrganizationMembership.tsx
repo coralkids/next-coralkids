@@ -8,10 +8,9 @@ export const useActiveOrganizationMembership = () => {
     throw "ActiveOrganizationMembershipProvider is required";
   }
 
-  const { activeOrganizationMembership, setActiveOrganizationMembership } = ctx;
+  const { activeOrganizationMembership } = ctx;
 
   return {
     activeOrganizationMembership,
-    setActiveOrganizationMembership,
   };
 };
