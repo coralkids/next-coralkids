@@ -1,4 +1,4 @@
-import AuthProtect, { ConvexSignedIn } from "@/lib/core/ui/AuthProtect";
+import AuthProtect from "@/lib/core/ui/AuthProtect";
 import OrganizationOnboarding from "@/lib/organization-onboarding/features/OrganizationOnboarding";
 import { OrganizationOnboardingProvider } from "@/lib/organization-onboarding/providers/OrganizationOnboardingProvider";
 import UserProvider from "@/lib/user/providers/UserProvider";
@@ -10,13 +10,11 @@ export default function OnBoarding() {
 
   return (
     <AuthProtect>
-      <ConvexSignedIn>
-        <UserProvider>
-          <OrganizationOnboardingProvider id={params.id}>
-            <OrganizationOnboarding />
-          </OrganizationOnboardingProvider>
-        </UserProvider>
-      </ConvexSignedIn>
+      <UserProvider>
+        <OrganizationOnboardingProvider id={params.id}>
+          <OrganizationOnboarding />
+        </OrganizationOnboardingProvider>
+      </UserProvider>
     </AuthProtect>
   );
 }

@@ -19,6 +19,7 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
 import { AntDesign } from "@expo/vector-icons";
 import { useClerk } from "@clerk/clerk-react";
+import { useActiveOrganizationMembership } from "../hooks/useActiveOrganizationMembership";
 
 export function OrganizationMembershipHome() {
   const user = useUser();
@@ -34,20 +35,7 @@ export function OrganizationMembershipHome() {
 
   const theme = useTheme();
   const clerk = useClerk();
-
-  const activeOrganizationMembership = useMemo(() => {
-    if (!user?.organizationMemberships) {
-      return undefined;
-    }
-
-    if (!clerk.organization) {
-      return user.organizationMemberships[0];
-    }
-
-    return user.organizationMemberships.find(
-      (om) => om.organization.id === clerk.organization!.id,
-    );
-  }, [clerk, user]);
+  const activeOrganizationMembership = useActiveOrganizationMembership();
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["100%"], []);

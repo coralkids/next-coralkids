@@ -30,7 +30,6 @@
       "editor.formatOnType": false, // required
       "editor.formatOnPaste": true, // optional
       "editor.codeActionsOnSave": {
-          "source.fixAll.ts": "always",
           "source.fixAll.eslint": "always"
       },
       "editor.formatOnSave": true, // optional
@@ -38,10 +37,7 @@
       "files.autoSave": "onFocusChange", // optional but recommended
       "eslint.lintTask.enable": true,
       "npm.packageManager": "yarn",
-      "npm.autoDetect": "on",
-      "[typescript]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
-      }
+      "npm.autoDetect": "on"
     },
     "extensions": {
       "recommendations": [
