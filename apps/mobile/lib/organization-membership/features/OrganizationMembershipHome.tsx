@@ -94,7 +94,7 @@ export function OrganizationMembershipHome() {
               />
             )}
           >
-            Todavía no has completado el proceso de registro de tu escuela
+            Tienes una escuela con un proceso de registro pendiente de terminar.
           </Banner>
 
           {!!user?.organizationMemberships?.length && (
