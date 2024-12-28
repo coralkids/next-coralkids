@@ -16,7 +16,7 @@ export default function ActiveOrganizationMembership({
 }) {
   return (
     <>
-      <OrganizationMembershipListHeaderContainer entering={FadeIn.delay(100)}>
+      <OrganizationMembershipListHeaderContainer entering={FadeIn}>
         <SelectedOrganizationMembershipTitle variant="titleMedium">
           Escuela
         </SelectedOrganizationMembershipTitle>
@@ -29,7 +29,8 @@ export default function ActiveOrganizationMembership({
       <OrganizationMembershipListContainer>
         {activeOrganizationMembership && (
           <AnimatedFullWidthView
-            exiting={FadeInLeft.delay(100)}
+            key={activeOrganizationMembership.id}
+            exiting={FadeInLeft}
             entering={FadeInRight.delay(100)}
           >
             <OrganizationMembershipItem

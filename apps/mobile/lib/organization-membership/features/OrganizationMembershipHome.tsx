@@ -35,15 +35,19 @@ export function OrganizationMembershipHome() {
   const theme = useTheme();
   const clerk = useClerk();
 
-  const activeOrganizationMembership = useMemo(
-    () =>
-      clerk.organization
-        ? user?.organizationMemberships.find(
-            (om) => om.organization.id === clerk?.organization?.id,
-          )
-        : undefined,
-    [clerk, user],
-  );
+  const activeOrganizationMembership = useMemo(() => {
+    if (!user?.organizationMemberships) {
+      return undefined;
+    }
+
+    if (!clerk.organization) {
+      return user.organizationMemberships[0];
+    }
+
+    return user.organizationMemberships.find(
+      (om) => om.organization.id === clerk.organization!.id,
+    );
+  }, [clerk, user]);
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["100%"], []);
@@ -114,6 +118,7 @@ export function OrganizationMembershipHome() {
 
           {!!user?.organizationMemberships?.length && (
             <ActiveOrganizationMembership
+              key={user.id}
               activeOrganizationMembership={activeOrganizationMembership}
               onChangePress={handlePresentModalPress}
             />
