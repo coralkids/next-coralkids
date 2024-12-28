@@ -28,17 +28,16 @@ export const getUnfinishedOrganizationOnboarding = query(({
   handler: async (ctx) => {
     const identity = await useAuthenticatedGuard(ctx);
 
-    if (identity) {
-      const organizationOnboarding = await ctx.db
-        .query("organizationOnboarding")
-        .withIndex("by_userId", (q) => q.eq("userId", identity.subject))
-        .filter((q) => q.and(q.eq(q.field("finished"), false), q.gt(q.field("currentStep"), 0)))
-        .first();
+
+    const organizationOnboarding = await ctx.db
+      .query("organizationOnboarding")
+      .withIndex("by_userId", (q) => q.eq("userId", identity.subject))
+      .filter((q) => q.and(q.eq(q.field("finished"), false), q.gt(q.field("currentStep"), 0)))
+      .first();
 
 
 
-      return organizationOnboarding;
-    }
+    return organizationOnboarding;
   }
 }))
 
@@ -96,12 +95,11 @@ export const nextStepOrganizationOnboarding = action({
   },
   handler: async (ctx, args): Promise<Doc<"organizationOnboarding"> | undefined> => {
     try {
-      const { userId } = await useAuthenticatedInOrganizationGuard(ctx, args.organizationId, "org:sys_profile:manage");
-
+      const { identity } = await useAuthenticatedInOrganizationGuard(ctx, args.organizationId, "org:sys_profile:manage");
 
       const updatedOrganizationOnboarding = await ctx.runMutation(internal.organizationOnboarding.updateOrganizationOnboarding, {
         id: args.id,
-        userId,
+        userId: identity.subject,
         organizationId: args.organizationId,
         currentStep: args.currentStep,
         finished: args.finished

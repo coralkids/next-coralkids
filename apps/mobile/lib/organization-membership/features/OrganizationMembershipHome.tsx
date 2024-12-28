@@ -19,11 +19,12 @@ import { useRouter } from "expo-router";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
 import { AntDesign } from "@expo/vector-icons";
-import { useClerk } from "@clerk/clerk-expo";
+import { useClerk } from "@clerk/clerk-react";
 
 export function OrganizationMembershipHome() {
   const user = useUser();
   const router = useRouter();
+
   const startOnboarding = useMutation(
     api.organizationOnboarding.startOnboarding,
   );
