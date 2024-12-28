@@ -60,57 +60,21 @@ export default function MultiStepFormWizard({
   );
 
   return (
-    <>
-      <View>{showProgressBar && <ProgressBar progress={progress} />}</View>
-      <MultiStepFormWizardWrapper insets={insets}>
-        <MultiStepFormWizardStepLoaderWrapper>
-          <ActivityIndicator
-            style={{ position: "absolute" }}
-            size="large"
-            animating={loading}
-          />
-        </MultiStepFormWizardStepLoaderWrapper>
-        <MultiStepFormWizardStepContainer isLoading={loading}>
-          <MultiStepFormWizardStep key={currentStepIndex}>
-            {currentStep.render()}
-          </MultiStepFormWizardStep>
-        </MultiStepFormWizardStepContainer>
-        {/** 
-          <MultiStepFormWizardActionsContainer>
-          <MultiStepFormWizardNextActions>
-            {currentStepIndex < steps.length - 1 && currentStep.canSkip && (
-              <Button disabled={loading} onPress={goNext} mode="text">
-                Saltar
-              </Button>
-            )}
-            {currentStepIndex <= steps.length && (
-              <Button
-                disabled={loading}
-                onPress={onNextStepPress}
-                mode="contained"
-                elevation={2}
-              >
-                Continuar
-              </Button>
-            )}
-          </MultiStepFormWizardNextActions>
-          {currentStepIndex > 0 && (
-            <Button
-              style={{
-                height: 40,
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
-              mode="outlined"
-              disabled={loading}
-              onPress={onPreviusStatePress}
-            >
-              Anterior
-            </Button>
-          )}
-        </MultiStepFormWizardActionsContainer> */}
-      </MultiStepFormWizardWrapper>
-    </>
+    <MultiStepFormWizardWrapper insets={insets}>
+      {showProgressBar && <ProgressBar progress={progress} />}
+      <MultiStepFormWizardStepLoaderWrapper>
+        <ActivityIndicator
+          style={{ position: "absolute" }}
+          size="large"
+          animating={loading}
+        />
+      </MultiStepFormWizardStepLoaderWrapper>
+      <MultiStepFormWizardStepContainer isLoading={loading}>
+        <MultiStepFormWizardStep key={currentStepIndex}>
+          {currentStep.render()}
+        </MultiStepFormWizardStep>
+      </MultiStepFormWizardStepContainer>
+    </MultiStepFormWizardWrapper>
   );
 }
 

@@ -13,6 +13,7 @@ import {
   WithSafeAreaInsetsProps,
 } from "react-native-safe-area-context";
 import { View } from "react-native";
+import OrganizationFinishStep from "./OrganizationFinishStep";
 
 export default function OrganizationOnboarding() {
   const router = useRouter();
@@ -52,6 +53,9 @@ export default function OrganizationOnboarding() {
                 },
                 {
                   render: () => <OrganizationLogoStep />,
+                },
+                {
+                  render: () => <OrganizationFinishStep />,
                 },
               ]}
             />

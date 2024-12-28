@@ -11,11 +11,30 @@ import {
 } from "@/lib/core/features/MultiStepFormWizard";
 import { useMultiStepFormWizard } from "@/lib/core/hooks/useMultiStepFormWizard";
 import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from "expo-file-system";
+
+import { useOrganizationOnboarding } from "../hooks/useOrganizationOnboarding";
+import { useClerk } from "@clerk/clerk-expo";
+import { useAction } from "convex/react";
+import { api } from "@packages/backend/convex/_generated/api";
 
 export default function OrganizationLogoStep() {
-  const { setCurrentStepIndex, currentStepIndex } = useMultiStepFormWizard();
+  const { setCurrentStepIndex, currentStepIndex, setLoading } =
+    useMultiStepFormWizard();
+  const orgOnboarding = useOrganizationOnboarding();
+  const clerk = useClerk();
 
-  const [image, setImage] = useState<string | null>(null);
+  const nextStepOrganizationOnboarding = useAction(
+    api.organizationOnboarding.nextStepOrganizationOnboarding,
+  );
+
+  if (orgOnboarding?.organizationId) {
+    clerk.setActive({ organization: orgOnboarding.organizationId });
+  }
+
+  const [image, setImage] = useState<ImagePicker.ImagePickerAsset | undefined>(
+    undefined,
+  );
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -26,8 +45,53 @@ export default function OrganizationLogoStep() {
     });
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      setImage(result.assets[0]);
     }
+  };
+
+  const nextStep = async () => {
+    if (image && clerk.organization && image.uri && orgOnboarding) {
+      setLoading(true);
+
+      try {
+        const base64Image = await FileSystem.readAsStringAsync(image.uri, {
+          encoding: "base64",
+        });
+
+        await clerk.organization.setLogo({
+          file: `data:${image.mimeType};base64,` + base64Image,
+        });
+
+        await nextStepOrganizationOnboarding({
+          id: orgOnboarding._id,
+          organizationId: clerk.organization.id,
+          currentStep: currentStepIndex + 1,
+          finished: false,
+        });
+        setLoading(false);
+
+        setCurrentStepIndex(currentStepIndex + 1);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
+
+  const onSkip = async () => {
+    setLoading(true);
+
+    if (orgOnboarding && clerk.organization) {
+      await nextStepOrganizationOnboarding({
+        id: orgOnboarding._id,
+        organizationId: clerk.organization.id,
+        currentStep: currentStepIndex + 1,
+        finished: false,
+      });
+    }
+
+    setLoading(false);
+
+    setCurrentStepIndex(currentStepIndex + 1);
   };
 
   return (
@@ -35,7 +99,13 @@ export default function OrganizationLogoStep() {
       <OrganizationLogoStepStepWrapper>
         <Text variant="titleLarge">Sube tu logo</Text>
         <OrganizationLogoStepStepLogoImage
-          source={image ? { uri: image } : require("@/assets/images/icon.png")}
+          source={
+            image
+              ? { uri: image.uri }
+              : clerk.organization
+                ? { uri: clerk.organization.imageUrl }
+                : require("@/assets/images/icon.png")
+          }
         />
         <OrganizationLogoStepStepUploadLogoButton
           onPress={pickImage}
@@ -47,7 +117,15 @@ export default function OrganizationLogoStep() {
       </OrganizationLogoStepStepWrapper>
       <MultiStepFormWizardActionsContainer>
         <MultiStepFormWizardNextActions>
-          <Button mode="contained" elevation={2}>
+          <Button onPress={onSkip} mode="text">
+            Saltar paso
+          </Button>
+          <Button
+            onPress={nextStep}
+            disabled={!image}
+            mode="contained"
+            elevation={2}
+          >
             Continuar
           </Button>
         </MultiStepFormWizardNextActions>

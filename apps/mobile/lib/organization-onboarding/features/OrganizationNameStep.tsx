@@ -42,7 +42,7 @@ export default function OrganizationNameStep() {
       await nextStepOrganizationOnboarding({
         id: orgOnboarding!._id,
         organizationId: organizationResource.id,
-        currentStep: 1,
+        currentStep: currentStepIndex + 1,
         finished: false,
       });
 
