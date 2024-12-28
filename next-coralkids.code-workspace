@@ -38,7 +38,10 @@
       "files.autoSave": "onFocusChange", // optional but recommended
       "eslint.lintTask.enable": true,
       "npm.packageManager": "yarn",
-      "npm.autoDetect": "on"
+      "npm.autoDetect": "on",
+      "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+      }
     },
     "extensions": {
       "recommendations": [

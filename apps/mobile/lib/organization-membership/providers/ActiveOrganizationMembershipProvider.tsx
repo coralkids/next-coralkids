@@ -1,5 +1,5 @@
 import useUser from "@/lib/user/hooks/useUser";
-import { useClerk } from "@clerk/clerk-expo";
+import { useClerk } from "@clerk/clerk-react";
 import { OrganizationMembershipResource } from "@clerk/types";
 import React, { createContext, useState } from "react";
 

@@ -37,7 +37,6 @@ export const useAuthenticatedInOrganizationGuard = async (ctx: { auth: Auth}, or
     }
 
     if (permission) {
-        console.log(organizationMembership.permissions)
         if (!organizationMembership.permissions.includes(permission)) {
             throw "User has not permissions to do that Forbidden"
         }
@@ -47,7 +46,8 @@ export const useAuthenticatedInOrganizationGuard = async (ctx: { auth: Auth}, or
     return {
         identity,
         userId,
-        organizationMemberships
+        organizationMemberships,
+        organizationMembership
     }
 
 }
