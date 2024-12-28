@@ -1,9 +1,9 @@
 import { Auth } from "convex/server";
-import clerk from "./clerkClient";
+import clerk from "../clerkClient";
 import { ConvexError } from "convex/values";
 
 
-export const useAuthenticatedGuard = async (ctx: { auth: Auth }) => {
+export const useAuthenticatedACL = async (ctx: { auth: Auth }) => {
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
@@ -13,7 +13,7 @@ export const useAuthenticatedGuard = async (ctx: { auth: Auth }) => {
     return identity;
 }
 
-export const useAuthenticatedInOrganizationGuard = async (ctx: { auth: Auth }, organizationId: string, permission?: string) => {
+export const useAuthenticatedInOrganizationACL = async (ctx: { auth: Auth }, organizationId: string, permission?: string) => {
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
@@ -36,7 +36,7 @@ export const useAuthenticatedInOrganizationGuard = async (ctx: { auth: Auth }, o
 
     if (permission) {
         if (!organizationMembership.permissions.includes(permission)) {
-            throw new ConvexError("User has not permissions to do that Forbidden")
+            throw new ConvexError("User has not permissions to do that, Forbidden")
         }
     }
 

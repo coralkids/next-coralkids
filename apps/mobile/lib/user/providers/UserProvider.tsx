@@ -1,4 +1,4 @@
-import { useUser } from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-expo";
 import { UserResource } from "@clerk/types";
 import React, { createContext } from "react";
 

@@ -17,7 +17,10 @@ export default function OrganizationFinishStep() {
   const clerk = useClerk();
 
   if (orgOnboarding?.organizationId) {
-    clerk.setActive({ organization: orgOnboarding.organizationId });
+    clerk.setActive({
+      session: clerk.session,
+      organization: orgOnboarding.organizationId,
+    });
   }
 
   const nextStepOrganizationOnboarding = useAction(

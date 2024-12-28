@@ -11,7 +11,6 @@ import {
 import { ThemeStyledProps } from "styled-components/native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { OrganizationMembershipResource } from "@clerk/types";
-import { useActiveOrganizationMembership } from "../hooks/useActiveOrganizationMembership";
 import ActiveOrganizationMembership from "../ui/ActiveOrganizationMembership";
 import OrganizationMembershipSelector from "../ui/OrganizationMembershipSelector";
 import OrganizationMembershipEmpty from "../ui/OrganizationMembershipEmpty";
@@ -36,7 +35,15 @@ export function OrganizationMembershipHome() {
   const theme = useTheme();
   const clerk = useClerk();
 
-  const { activeOrganizationMembership } = useActiveOrganizationMembership();
+  const activeOrganizationMembership = useMemo(
+    () =>
+      clerk.organization
+        ? user?.organizationMemberships.find(
+            (om) => om.organization.id === clerk?.organization?.id,
+          )
+        : undefined,
+    [clerk, user],
+  );
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["100%"], []);
@@ -44,7 +51,10 @@ export function OrganizationMembershipHome() {
   const onOrganizationChange = async (
     orgMembership: OrganizationMembershipResource,
   ) => {
-    await clerk.setActive({ organization: orgMembership.organization.id });
+    await clerk.setActive({
+      session: clerk.session,
+      organization: orgMembership.organization.id,
+    });
 
     bottomSheetRef?.current?.close();
   };
@@ -72,10 +82,23 @@ export function OrganizationMembershipHome() {
             actions={[
               {
                 label: "Completar registro",
-                onPress: () =>
-                  router.navigate(
+                onPress: async () => {
+                  if (
+                    unfinishedOnboarding?.organizationId &&
+                    clerk.organization &&
+                    clerk.organization.id !==
+                      unfinishedOnboarding.organizationId
+                  ) {
+                    await clerk.setActive({
+                      session: clerk.session,
+                      organization: unfinishedOnboarding.organizationId,
+                    });
+                  }
+
+                  await router.navigate(
                     `/organization-onboarding/${unfinishedOnboarding?._id}`,
-                  ),
+                  );
+                },
               },
             ]}
             icon={({ size }) => (

@@ -1,13 +1,13 @@
 import { action, internalMutation, mutation, query } from "./_generated/server";
 import { v } from "convex/values";
-import { useAuthenticatedGuard, useAuthenticatedInOrganizationGuard } from "./userHelpers";
+import { useAuthenticatedACL, useAuthenticatedInOrganizationACL } from "./acl/acl";
 import { internal } from "./_generated/api";
 import { Doc } from "./_generated/dataModel";
 
 export const startOnboarding = mutation({
   args: {},
   handler: async (ctx) => {
-    const identity = await useAuthenticatedGuard(ctx);
+    const identity = await useAuthenticatedACL(ctx);
 
     if (identity) {
       const id = await ctx.db.insert("organizationOnboarding", {
@@ -26,7 +26,7 @@ export const startOnboarding = mutation({
 export const getUnfinishedOrganizationOnboarding = query(({
   args: {},
   handler: async (ctx) => {
-    const identity = await useAuthenticatedGuard(ctx);
+    const identity = await useAuthenticatedACL(ctx);
 
 
     const organizationOnboarding = await ctx.db
@@ -46,7 +46,7 @@ export const getOrganizationOnboarding = query({
     id: v.string()
   },
   handler: async (ctx, args) => {
-    const identity = await useAuthenticatedGuard(ctx)
+    const identity = await useAuthenticatedACL(ctx)
 
     const organizationOnboarding = await ctx.db
       .query("organizationOnboarding")
@@ -95,7 +95,7 @@ export const nextStepOrganizationOnboarding = action({
   },
   handler: async (ctx, args): Promise<Doc<"organizationOnboarding"> | undefined> => {
     try {
-      const { identity } = await useAuthenticatedInOrganizationGuard(ctx, args.organizationId, "org:sys_profile:manage");
+      const { identity } = await useAuthenticatedInOrganizationACL(ctx, args.organizationId, "org:sys_profile:manage");
 
       const updatedOrganizationOnboarding = await ctx.runMutation(internal.organizationOnboarding.updateOrganizationOnboarding, {
         id: args.id,

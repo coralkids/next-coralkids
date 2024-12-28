@@ -13,11 +13,11 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as acl_acl from "../acl/acl.js";
 import type * as clerkClient from "../clerkClient.js";
 import type * as notes from "../notes.js";
 import type * as openai from "../openai.js";
 import type * as organizationOnboarding from "../organizationOnboarding.js";
-import type * as userHelpers from "../userHelpers.js";
 import type * as utils from "../utils.js";
 
 /**
@@ -29,11 +29,11 @@ import type * as utils from "../utils.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  "acl/acl": typeof acl_acl;
   clerkClient: typeof clerkClient;
   notes: typeof notes;
   openai: typeof openai;
   organizationOnboarding: typeof organizationOnboarding;
-  userHelpers: typeof userHelpers;
   utils: typeof utils;
 }>;
 export declare const api: FilterApi<

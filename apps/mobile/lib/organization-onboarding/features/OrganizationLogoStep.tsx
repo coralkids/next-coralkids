@@ -28,10 +28,6 @@ export default function OrganizationLogoStep() {
     api.organizationOnboarding.nextStepOrganizationOnboarding,
   );
 
-  if (orgOnboarding?.organizationId) {
-    clerk.setActive({ organization: orgOnboarding.organizationId });
-  }
-
   const [image, setImage] = useState<ImagePicker.ImagePickerAsset | undefined>(
     undefined,
   );

@@ -11,7 +11,7 @@ import styled from "styled-components/native";
 import { useForm, Controller } from "react-hook-form";
 import { useAction } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
-import { useClerk } from "@clerk/clerk-react";
+import { useClerk } from "@clerk/clerk-expo";
 import { useOrganizationOnboarding } from "../hooks/useOrganizationOnboarding";
 
 export default function OrganizationNameStep() {
@@ -27,10 +27,6 @@ export default function OrganizationNameStep() {
   }>();
   const clerk = useClerk();
 
-  if (orgOnboarding?.organizationId) {
-    clerk.setActive({ organization: orgOnboarding.organizationId });
-  }
-
   const onSubmit = async (data: { organizationName: string }) => {
     setLoading(true);
 
@@ -45,8 +41,6 @@ export default function OrganizationNameStep() {
         currentStep: currentStepIndex + 1,
         finished: false,
       });
-
-      await clerk.setActive({ organization: organizationResource.id });
     } else if (clerk.organization?.name !== data.organizationName) {
       await clerk.organization?.update({ name: data.organizationName });
     }
