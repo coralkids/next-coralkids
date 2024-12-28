@@ -32,7 +32,7 @@ export const getUnfinishedOrganizationOnboarding = query(({
       const organizationOnboarding = await ctx.db
         .query("organizationOnboarding")
         .withIndex("by_userId", (q) => q.eq("userId", identity.subject))
-        .filter((q) => q.eq(q.field("finished"), false))
+        .filter((q) => q.and(q.eq(q.field("finished"), false), q.gt(q.field("currentStep"), 1)))
         .first();
 
 

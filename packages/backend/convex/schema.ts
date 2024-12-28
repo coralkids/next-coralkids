@@ -14,5 +14,5 @@ export default defineSchema({
     currentStep: v.optional(v.number()),
     finished: v.optional(v.boolean()),
     updatedAt: v.number()
-  }).index("by_userId", ["userId"]),
+  }).index("by_userId", ["userId"]).index("by_finished", ["finished"]).index("by_currentStep", ["currentStep"]),
 });
