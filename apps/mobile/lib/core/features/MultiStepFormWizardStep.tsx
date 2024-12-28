@@ -22,5 +22,6 @@ export default function MultiStepFormWizardStep({
 const MultiStepFormWizardStepWrapper = styled(Animated.View)`
   padding: ${spacing}px;
   height: 100%;
+
   flex: 1;
 `;

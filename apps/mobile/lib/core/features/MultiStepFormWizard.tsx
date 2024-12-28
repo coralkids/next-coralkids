@@ -61,7 +61,11 @@ export default function MultiStepFormWizard({
 
   return (
     <MultiStepFormWizardWrapper insets={insets}>
-      {showProgressBar && <ProgressBar progress={progress} />}
+      {showProgressBar && (
+        <View>
+          <ProgressBar progress={progress} />
+        </View>
+      )}
       <MultiStepFormWizardStepLoaderWrapper>
         <ActivityIndicator
           style={{ position: "absolute" }}
@@ -83,10 +87,10 @@ const MultiStepFormWizardStepLoaderWrapper = styled(View)`
   left: 0;
   top: 0;
   width: 100%;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
   position: absolute;
 `;
 
@@ -99,8 +103,9 @@ const MultiStepFormWizardStepContainer = styled(
 )<MultiStepFormWizardStepContainerProps>`
   flex: 1;
   display: flex;
-  height: 100%;
   width: 100%;
+  height: 100%;
+
   flex-direction: column;
   opacity: ${(props: MultiStepFormWizardStepContainerProps) =>
     props.isLoading ? 0.05 : 1};
@@ -108,8 +113,8 @@ const MultiStepFormWizardStepContainer = styled(
 
 const MultiStepFormWizardWrapper = styled(View)<WithSafeAreaInsetsProps>`
   flex: 1;
-  height: 100%;
   width: 100%;
+  height: 100%;
   margin-bottom: ${(props: WithSafeAreaInsetsProps) => props.insets.bottom}px;
 `;
 

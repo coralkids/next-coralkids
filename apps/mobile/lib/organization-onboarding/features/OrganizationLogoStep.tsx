@@ -4,7 +4,7 @@ import { Image } from "expo-image";
 import { spacing } from "@/theme/spacing";
 import { Button, Text } from "react-native-paper";
 import { ThemeStyledProps } from "styled-components/native";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import {
   MultiStepFormWizardActionsContainer,
   MultiStepFormWizardNextActions,
@@ -54,12 +54,18 @@ export default function OrganizationLogoStep() {
       setLoading(true);
 
       try {
-        const base64Image = await FileSystem.readAsStringAsync(image.uri, {
-          encoding: "base64",
-        });
+        const base64Image =
+          Platform.OS !== "web"
+            ? await FileSystem.readAsStringAsync(image.uri, {
+                encoding: "base64",
+              })
+            : null;
 
         await clerk.organization.setLogo({
-          file: `data:${image.mimeType};base64,` + base64Image,
+          file:
+            Platform.OS !== "web"
+              ? `data:${image.mimeType};base64,` + base64Image
+              : image.uri,
         });
 
         await nextStepOrganizationOnboarding({

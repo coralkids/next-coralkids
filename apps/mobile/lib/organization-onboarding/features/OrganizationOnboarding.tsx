@@ -69,6 +69,7 @@ export default function OrganizationOnboarding() {
 const OrganizationOnboardingContainer = styled(View)<WithSafeAreaInsetsProps>`
   flex: 1;
   height: 100%;
+
   justify-content: flex-start;
   width: 100%;
   margin-bottom: ${(props: WithSafeAreaInsetsProps) => props.insets.bottom}px;
