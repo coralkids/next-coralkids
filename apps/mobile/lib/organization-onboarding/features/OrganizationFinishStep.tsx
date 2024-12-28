@@ -16,13 +16,6 @@ export default function OrganizationFinishStep() {
     useMultiStepFormWizard();
   const clerk = useClerk();
 
-  if (orgOnboarding?.organizationId) {
-    clerk.setActive({
-      session: clerk.session,
-      organization: orgOnboarding.organizationId,
-    });
-  }
-
   const nextStepOrganizationOnboarding = useAction(
     api.organizationOnboarding.nextStepOrganizationOnboarding,
   );

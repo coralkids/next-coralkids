@@ -75,18 +75,6 @@ export function OrganizationMembershipHome() {
               {
                 label: "Completar registro",
                 onPress: async () => {
-                  if (
-                    unfinishedOnboarding?.organizationId &&
-                    clerk.organization &&
-                    clerk.organization.id !==
-                      unfinishedOnboarding.organizationId
-                  ) {
-                    await clerk.setActive({
-                      session: clerk.session,
-                      organization: unfinishedOnboarding.organizationId,
-                    });
-                  }
-
                   await router.navigate(
                     `/organization-onboarding/${unfinishedOnboarding?._id}`,
                   );
@@ -106,7 +94,6 @@ export function OrganizationMembershipHome() {
 
           {!!user?.organizationMemberships?.length && (
             <ActiveOrganizationMembership
-              key={user.id}
               activeOrganizationMembership={activeOrganizationMembership}
               onChangePress={handlePresentModalPress}
             />
