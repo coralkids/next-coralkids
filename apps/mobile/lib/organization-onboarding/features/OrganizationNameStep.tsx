@@ -77,7 +77,7 @@ export default function OrganizationNameStep() {
                 <OrganizationNameStepTextInput
                   style={{ width: "100%" }}
                   label="Nombre de escuela"
-                  error={fieldState.error}
+                  error={!!fieldState.error}
                   value={field.value}
                   onChangeText={field.onChange}
                 />

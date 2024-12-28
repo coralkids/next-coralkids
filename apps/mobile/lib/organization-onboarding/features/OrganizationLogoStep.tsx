@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import { Image } from "expo-image";
 import { spacing } from "@/theme/spacing";
@@ -10,18 +10,38 @@ import {
   MultiStepFormWizardNextActions,
 } from "@/lib/core/features/MultiStepFormWizard";
 import { useMultiStepFormWizard } from "@/lib/core/hooks/useMultiStepFormWizard";
+import * as ImagePicker from "expo-image-picker";
 
 export default function OrganizationLogoStep() {
   const { setCurrentStepIndex, currentStepIndex } = useMultiStepFormWizard();
+
+  const [image, setImage] = useState<string | null>(null);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   return (
     <>
       <OrganizationLogoStepStepWrapper>
         <Text variant="titleLarge">Sube tu logo</Text>
         <OrganizationLogoStepStepLogoImage
-          source={require("@/assets/images/icon.png")}
+          source={image ? { uri: image } : require("@/assets/images/icon.png")}
         />
-        <OrganizationLogoStepStepUploadLogoButton icon="upload" mode="elevated">
+        <OrganizationLogoStepStepUploadLogoButton
+          onPress={pickImage}
+          icon="upload"
+          mode="elevated"
+        >
           Subir logo
         </OrganizationLogoStepStepUploadLogoButton>
       </OrganizationLogoStepStepWrapper>
