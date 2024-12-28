@@ -35,6 +35,11 @@ export default function OrganizationNameStep() {
         name: data.organizationName,
       });
 
+      await clerk.setActive({
+        session: clerk.session,
+        organization: organizationResource.id,
+      });
+
       await nextStepOrganizationOnboarding({
         id: orgOnboarding!._id,
         organizationId: organizationResource.id,
