@@ -7,7 +7,6 @@ import { OrganizationMembershipResource } from "@clerk/types";
 import styled from "styled-components/native";
 import Animated, { FadeIn, FadeInRight } from "react-native-reanimated";
 import AnimatedFullWidthView from "@/lib/core/ui/AnimatedFullWidthView";
-import { useRouter } from "expo-router";
 
 interface OrganizationMembershipSelectorProps {
   onPress: (orgMembership: OrganizationMembershipResource) => void;
@@ -27,7 +26,6 @@ export const OrganizationMembershipSelector: React.FC<
   const [state, setState] = React.useState({ open: false });
 
   const onStateChange = ({ open }: { open: boolean }) => setState({ open });
-  const router = useRouter();
 
   const { open } = state;
 
@@ -106,6 +104,7 @@ const OrganizationMembershipSelectorTitle = styled(AnimatedFullWidthView)`
 
 const OrganizationMembershipSelectorWrapper = styled(View)`
   flex: 1;
+  height: "100%";
   border-radius: 12px;
 `;
 
@@ -114,5 +113,5 @@ const TouchableOrganizationMembershipItem = styled(TouchableOpacity)`
 `;
 
 const OrganizationMembershipItemContainer = styled(AnimatedFullWidthView)`
-  flex: 1;
+  height: "100%";
 `;
