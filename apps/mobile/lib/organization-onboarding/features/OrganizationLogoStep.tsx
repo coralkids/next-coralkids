@@ -1,21 +1,49 @@
+import React from "react";
 import styled from "styled-components/native";
 import { Image } from "expo-image";
 import { spacing } from "@/theme/spacing";
 import { Button, Text } from "react-native-paper";
 import { ThemeStyledProps } from "styled-components/native";
 import { View } from "react-native";
+import {
+  MultiStepFormWizardActionsContainer,
+  MultiStepFormWizardNextActions,
+} from "@/lib/core/features/MultiStepFormWizard";
+import { useMultiStepFormWizard } from "@/lib/core/hooks/useMultiStepFormWizard";
 
 export default function OrganizationLogoStep() {
+  const { setCurrentStepIndex, currentStepIndex } = useMultiStepFormWizard();
+
   return (
-    <OrganizationLogoStepStepWrapper>
-      <Text variant="titleLarge">Sube tu logo</Text>
-      <OrganizationLogoStepStepLogoImage
-        source={require("@/assets/images/icon.png")}
-      />
-      <OrganizationLogoStepStepUploadLogoButton icon="upload" mode="elevated">
-        Subir logo
-      </OrganizationLogoStepStepUploadLogoButton>
-    </OrganizationLogoStepStepWrapper>
+    <>
+      <OrganizationLogoStepStepWrapper>
+        <Text variant="titleLarge">Sube tu logo</Text>
+        <OrganizationLogoStepStepLogoImage
+          source={require("@/assets/images/icon.png")}
+        />
+        <OrganizationLogoStepStepUploadLogoButton icon="upload" mode="elevated">
+          Subir logo
+        </OrganizationLogoStepStepUploadLogoButton>
+      </OrganizationLogoStepStepWrapper>
+      <MultiStepFormWizardActionsContainer>
+        <MultiStepFormWizardNextActions>
+          <Button mode="contained" elevation={2}>
+            Continuar
+          </Button>
+        </MultiStepFormWizardNextActions>
+        <Button
+          style={{
+            height: 40,
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+          mode="outlined"
+          onPress={() => setCurrentStepIndex(currentStepIndex - 1)}
+        >
+          Anterior
+        </Button>
+      </MultiStepFormWizardActionsContainer>
+    </>
   );
 }
 

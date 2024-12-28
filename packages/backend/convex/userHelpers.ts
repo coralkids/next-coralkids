@@ -2,20 +2,15 @@ import { Auth } from "convex/server";
 import clerk from "./clerkClient";
 
 
-export const useAuthenticatedGuard = async (ctx: { auth: Auth}) => {
+export const useAuthenticatedGuard = async (ctx: { auth: Auth }) => {
     const identity = await ctx.auth.getUserIdentity();
-    const userId = identity?.subject;
-
-      if (!userId) {
-      throw new Error("Not authenticated");
-    }
 
     return identity;
 }
 
-export const useAuthenticatedInOrganizationGuard = async (ctx: { auth: Auth}, organizationId: string, permission?: string) => {
+export const useAuthenticatedInOrganizationGuard = async (ctx: { auth: Auth }, organizationId: string, permission?: string) => {
     const identity = await ctx.auth.getUserIdentity();
-    
+
     const userId = identity?.subject;
 
     if (!userId) {
@@ -32,11 +27,11 @@ export const useAuthenticatedInOrganizationGuard = async (ctx: { auth: Auth}, or
 
     const organizationMembership = organizationMemberships.data?.find((o) => o.organization.id === organizationId);
 
-    if (!organizationMembership){
+    if (!organizationMembership) {
         throw "User is not member of the organization"
     }
 
-    if (permission) {
+    if (permission) {
         if (!organizationMembership.permissions.includes(permission)) {
             throw "User has not permissions to do that Forbidden"
         }

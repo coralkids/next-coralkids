@@ -27,22 +27,31 @@ export default function OrganizationNameStep() {
   }>();
   const clerk = useClerk();
 
+  if (orgOnboarding?.organizationId) {
+    clerk.setActive({ organization: orgOnboarding.organizationId });
+  }
+
   const onSubmit = async (data: { organizationName: string }) => {
     setLoading(true);
 
-    const organizationResource = await clerk.createOrganization({
-      name: data.organizationName,
-    });
+    if (!orgOnboarding?.organizationId) {
+      const organizationResource = await clerk.createOrganization({
+        name: data.organizationName,
+      });
 
-    await nextStepOrganizationOnboarding({
-      id: orgOnboarding!._id,
-      organizationId: organizationResource.id,
-      currentStep: 1,
-      finished: false,
-    });
+      await nextStepOrganizationOnboarding({
+        id: orgOnboarding!._id,
+        organizationId: organizationResource.id,
+        currentStep: 1,
+        finished: false,
+      });
+
+      await clerk.setActive({ organization: organizationResource.id });
+    } else {
+      await clerk.organization?.update({ name: data.organizationName });
+    }
 
     await clerk.user?.reload();
-    await clerk.setActive({ organization: organizationResource.id });
 
     setLoading(false);
     setCurrentStepIndex(currentStepIndex + 1);
@@ -57,6 +66,7 @@ export default function OrganizationNameStep() {
         <Controller
           control={control}
           rules={{ required: true, minLength: 3 }}
+          defaultValue={clerk.organization?.name}
           name="organizationName"
           render={({ field, fieldState }) => {
             return (

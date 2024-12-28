@@ -7,30 +7,35 @@ import { Doc } from "./_generated/dataModel";
 export const startOnboarding = mutation({
   args: {},
   handler: async (ctx) => {
-    const { subject: userId } = await useAuthenticatedGuard(ctx);
+    const identity = await useAuthenticatedGuard(ctx);
 
-    const id = await ctx.db.insert("organizationOnboarding", {
-      userId,
-      currentStep: 0,
-      finished: false,
-      updatedAt: Date.now()
-    });
+    if (identity) {
+      const id = await ctx.db.insert("organizationOnboarding", {
+        userId: identity?.subject,
+        currentStep: 0,
+        finished: false,
+        updatedAt: Date.now()
+      });
 
-    return id;
+      return id;
+    }
+
   },
 });
 
 export const getUnfinishedOrganizationOnboarding = query(({
   args: {},
   handler: async (ctx) => {
-    const { subject: userId } = await useAuthenticatedGuard(ctx);
+    const identity = await useAuthenticatedGuard(ctx);
 
-    const organizationOnboarding = await ctx.db
-      .query("organizationOnboarding")
-      .filter((q) => q.eq(q.field("userId"), userId) && q.eq(q.field("finished"), false))
-      .unique();
+    if (identity) {
+      const organizationOnboarding = await ctx.db
+        .query("organizationOnboarding")
+        .filter((q) => q.eq(q.field("userId"), identity.subject) && q.eq(q.field("finished"), false))
+        .unique();
 
-    return organizationOnboarding;
+      return organizationOnboarding;
+    }
   }
 }))
 
@@ -39,11 +44,11 @@ export const getOrganizationOnboarding = query({
     id: v.string()
   },
   handler: async (ctx, args) => {
-    const { subject: userId } = await useAuthenticatedGuard(ctx)
+    const identity = await useAuthenticatedGuard(ctx)
 
     const organizationOnboarding = await ctx.db
       .query("organizationOnboarding")
-      .filter((q) => q.eq(q.field("userId"), userId) && q.eq(q.field("_id"), args.id))
+      .filter((q) => q.eq(q.field("userId"), identity?.subject) && q.eq(q.field("_id"), args.id))
       .unique();
 
     return organizationOnboarding;

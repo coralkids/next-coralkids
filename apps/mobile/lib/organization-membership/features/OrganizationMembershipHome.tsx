@@ -1,6 +1,6 @@
 import useUser from "@/lib/user/hooks/useUser";
 import React, { FC, useCallback, useMemo, useRef } from "react";
-import { Appbar } from "react-native-paper";
+import { Appbar, Banner, Card, useTheme } from "react-native-paper";
 import styled from "styled-components/native";
 import ProfileTouchableWithMenu from "../../core/features/ProfileTouchableWithMenu";
 import {
@@ -16,16 +16,22 @@ import ActiveOrganizationMembership from "../ui/ActiveOrganizationMembership";
 import OrganizationMembershipSelector from "../ui/OrganizationMembershipSelector";
 import OrganizationMembershipEmpty from "../ui/OrganizationMembershipEmpty";
 import { useRouter } from "expo-router";
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
-export const OrganizationMembershipHome: React.FC<
-  React.PropsWithChildren
-> = () => {
+import { spacing } from "@/theme/spacing";
+import { AntDesign } from "@expo/vector-icons";
+
+export function OrganizationMembershipHome() {
   const user = useUser();
   const router = useRouter();
   const startOnboarding = useMutation(
     api.organizationOnboarding.startOnboarding,
   );
+  const unfinishedOnboarding = useQuery(
+    api.organizationOnboarding.getUnfinishedOrganizationOnboarding,
+  );
+
+  const theme = useTheme();
 
   const { activeOrganizationMembership, setActiveOrganizationMembership } =
     useActiveOrganizationMembership();
@@ -59,6 +65,30 @@ export const OrganizationMembershipHome: React.FC<
       </Appbar.Header>
       <SafeAreaProvider>
         <OrganizationMembershipHomeWrapper style={{ flex: 1 }}>
+          <Banner
+            elevation={3}
+            visible={!!unfinishedOnboarding}
+            actions={[
+              {
+                label: "Completar registro",
+                onPress: () =>
+                  router.navigate(
+                    `/organization-onboarding/${unfinishedOnboarding?._id}`,
+                    {},
+                  ),
+              },
+            ]}
+            icon={({ size }) => (
+              <AntDesign
+                name="warning"
+                size={size}
+                color={theme.colors.error}
+              />
+            )}
+          >
+            Todavía no has completado el proceso de registro de tu escuela
+          </Banner>
+
           {!!user?.organizationMemberships?.length && (
             <ActiveOrganizationMembership
               activeOrganizationMembership={activeOrganizationMembership}
@@ -94,9 +124,17 @@ export const OrganizationMembershipHome: React.FC<
       </SafeAreaProvider>
     </>
   );
-};
+}
 
 export default OrganizationMembershipHome;
+
+const UnfinishedOnboardingContainer = styled(Card)`
+  padding: ${spacing}px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: ${spacing}px;
+`;
 
 const OrganizationMembershipHomeWrapper = styled(SafeAreaView)``;
 

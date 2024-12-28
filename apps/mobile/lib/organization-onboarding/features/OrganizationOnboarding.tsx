@@ -67,6 +67,6 @@ const OrganizationOnboardingContainer = styled(View)<WithSafeAreaInsetsProps>`
   height: 100%;
   justify-content: flex-start;
   width: 100%;
-  margin-bottom: ${(props) => props.insets.bottom}px;
+  margin-bottom: ${(props: WithSafeAreaInsetsProps) => props.insets.bottom}px;
   align-items: flex-start;
 `;
