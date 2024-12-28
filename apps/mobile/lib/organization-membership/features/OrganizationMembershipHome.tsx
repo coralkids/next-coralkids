@@ -68,13 +68,6 @@ export function OrganizationMembershipHome() {
             visible={!!unfinishedOnboarding}
             actions={[
               {
-                label: "Cancelar",
-                onPress: () =>
-                  router.navigate(
-                    `/organization-onboarding/${unfinishedOnboarding?._id}`,
-                  ),
-              },
-              {
                 label: "Completar registro",
                 onPress: () =>
                   router.navigate(
