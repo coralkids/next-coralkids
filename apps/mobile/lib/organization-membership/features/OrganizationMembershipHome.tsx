@@ -28,6 +28,7 @@ export function OrganizationMembershipHome() {
   const startOnboarding = useMutation(
     api.organizationOnboarding.startOnboarding,
   );
+
   const unfinishedOnboarding = useQuery(
     api.organizationOnboarding.getUnfinishedOrganizationOnboarding,
   );
