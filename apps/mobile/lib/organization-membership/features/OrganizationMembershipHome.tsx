@@ -75,6 +75,11 @@ export function OrganizationMembershipHome() {
               {
                 label: "Completar registro",
                 onPress: async () => {
+                  await clerk.setActive({
+                    session: clerk.session,
+                    organization: unfinishedOnboarding?.organizationId,
+                  });
+
                   await router.navigate(
                     `/organization-onboarding/${unfinishedOnboarding?._id}`,
                   );
