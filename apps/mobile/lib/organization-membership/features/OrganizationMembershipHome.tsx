@@ -66,7 +66,6 @@ export function OrganizationMembershipHome() {
       <SafeAreaProvider>
         <OrganizationMembershipHomeWrapper style={{ flex: 1 }}>
           <Banner
-            elevation={3}
             visible={!!unfinishedOnboarding}
             actions={[
               {
@@ -74,7 +73,6 @@ export function OrganizationMembershipHome() {
                 onPress: () =>
                   router.navigate(
                     `/organization-onboarding/${unfinishedOnboarding?._id}`,
-                    {},
                   ),
               },
             ]}
@@ -127,14 +125,6 @@ export function OrganizationMembershipHome() {
 }
 
 export default OrganizationMembershipHome;
-
-const UnfinishedOnboardingContainer = styled(Card)`
-  padding: ${spacing}px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: ${spacing}px;
-`;
 
 const OrganizationMembershipHomeWrapper = styled(SafeAreaView)``;
 
