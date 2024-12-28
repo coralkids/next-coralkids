@@ -13,6 +13,7 @@ interface OrganizationMembershipSelectorProps {
   onPress: (orgMembership: OrganizationMembershipResource) => void;
   organizationMemberships?: OrganizationMembershipResource[];
   activeOrganizationMembership?: OrganizationMembershipResource;
+  onCreateOrganizationPress: () => void;
 }
 
 export const OrganizationMembershipSelector: React.FC<
@@ -20,6 +21,7 @@ export const OrganizationMembershipSelector: React.FC<
 > = ({
   onPress,
   activeOrganizationMembership,
+  onCreateOrganizationPress,
   organizationMemberships = [],
 }) => {
   const [state, setState] = React.useState({ open: false });
@@ -76,7 +78,7 @@ export const OrganizationMembershipSelector: React.FC<
             {
               icon: "plus",
               label: "Registrar nueva",
-              onPress: () => router.navigate("/organization-onboarding"),
+              onPress: onCreateOrganizationPress,
             },
           ]}
           onStateChange={onStateChange}

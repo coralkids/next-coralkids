@@ -1,6 +1,6 @@
 import useUser from "@/lib/user/hooks/useUser";
 import React, { FC, useCallback, useMemo, useRef } from "react";
-import { Appbar, Banner, Card, useTheme } from "react-native-paper";
+import { Appbar, Banner, useTheme } from "react-native-paper";
 import styled from "styled-components/native";
 import ProfileTouchableWithMenu from "../../core/features/ProfileTouchableWithMenu";
 import {
@@ -18,7 +18,6 @@ import OrganizationMembershipEmpty from "../ui/OrganizationMembershipEmpty";
 import { useRouter } from "expo-router";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
-import { spacing } from "@/theme/spacing";
 import { AntDesign } from "@expo/vector-icons";
 
 export function OrganizationMembershipHome() {
@@ -69,6 +68,13 @@ export function OrganizationMembershipHome() {
             visible={!!unfinishedOnboarding}
             actions={[
               {
+                label: "Cancelar",
+                onPress: () =>
+                  router.navigate(
+                    `/organization-onboarding/${unfinishedOnboarding?._id}`,
+                  ),
+              },
+              {
                 label: "Completar registro",
                 onPress: () =>
                   router.navigate(
@@ -111,6 +117,7 @@ export function OrganizationMembershipHome() {
                 onChange={handleSheetChanges}
               >
                 <OrganizationMembershipSelector
+                  onCreateOrganizationPress={onCreateOrganizationPress}
                   activeOrganizationMembership={activeOrganizationMembership}
                   organizationMemberships={user?.organizationMemberships}
                   onPress={onOrganizationChange}
