@@ -46,7 +46,6 @@ export default function OrganizationOnboarding() {
             currentIndex={organizationOnboarding.currentStep || 0}
           >
             <MultiStepFormWizard
-              key={organizationOnboarding._id}
               steps={[
                 {
                   render: () => <OrganizationNameStep />,
