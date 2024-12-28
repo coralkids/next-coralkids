@@ -154,6 +154,7 @@ export const MultiStepFormWizardActionsContainer = styled(View)`
   justify-content: space-between;
   align-items: flex-end;
   flex-direction: row-reverse;
+  padding: ${spacing}px;
 `;
 
 export const MultiStepFormWizardNextActions = styled(View)`
