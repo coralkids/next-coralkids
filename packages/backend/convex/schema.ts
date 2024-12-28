@@ -12,7 +12,7 @@ export default defineSchema({
     userId: v.string(),
     organizationId: v.optional(v.string()),
     currentStep: v.optional(v.number()),
-    finished:  v.optional(v.boolean()),
+    finished: v.optional(v.boolean()),
     updatedAt: v.number()
-  }),
+  }).index("by_userId", ["userId"]),
 });

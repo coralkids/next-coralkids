@@ -31,8 +31,11 @@ export const getUnfinishedOrganizationOnboarding = query(({
     if (identity) {
       const organizationOnboarding = await ctx.db
         .query("organizationOnboarding")
-        .filter((q) => q.eq(q.field("userId"), identity.subject) && q.eq(q.field("finished"), false))
-        .unique();
+        .withIndex("by_userId", (q) => q.eq("userId", identity.subject))
+        .filter((q) => q.eq(q.field("finished"), false))
+        .first();
+
+
 
       return organizationOnboarding;
     }
@@ -65,8 +68,9 @@ export const updateOrganizationOnboarding = internalMutation(({
   },
   handler: async (ctx, args) => {
     const organizationOnboarding = await ctx.db.query("organizationOnboarding")
-      .filter((q) => q.eq(q.field("userId"), args.userId) && q.eq(q.field("_id"), args.id))
-      .unique();
+      .withIndex("by_userId", (q) => q.eq("userId", args.userId))
+      .filter((q) => q.eq(q.field("finished"), false))
+      .first();
 
     if (!organizationOnboarding) {
       throw "OrganizationOnboarding not found"

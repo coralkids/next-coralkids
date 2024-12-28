@@ -22,7 +22,7 @@ export default function OrganizationNameStep() {
   );
   const orgOnboarding = useOrganizationOnboarding();
 
-  const { control, handleSubmit } = useForm<{
+  const { control, handleSubmit, reset } = useForm<{
     organizationName: string;
   }>();
   const clerk = useClerk();
@@ -47,13 +47,14 @@ export default function OrganizationNameStep() {
       });
 
       await clerk.setActive({ organization: organizationResource.id });
-    } else {
+    } else if (clerk.organization?.name !== data.organizationName) {
       await clerk.organization?.update({ name: data.organizationName });
     }
 
-    await clerk.user?.reload();
-
     setLoading(false);
+
+    reset();
+
     setCurrentStepIndex(currentStepIndex + 1);
   };
 
@@ -66,7 +67,9 @@ export default function OrganizationNameStep() {
         <Controller
           control={control}
           rules={{ required: true, minLength: 3 }}
-          defaultValue={clerk.organization?.name}
+          defaultValue={
+            orgOnboarding?.organizationId ? clerk.organization?.name : ""
+          }
           name="organizationName"
           render={({ field, fieldState }) => {
             return (
