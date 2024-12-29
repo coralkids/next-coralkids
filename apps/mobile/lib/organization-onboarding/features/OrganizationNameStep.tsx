@@ -22,7 +22,7 @@ export default function OrganizationNameStep() {
   );
   const orgOnboarding = useOrganizationOnboarding();
 
-  const { control, handleSubmit, reset } = useForm<{
+  const { control, handleSubmit } = useForm<{
     organizationName: string;
   }>();
   const clerk = useClerk();
