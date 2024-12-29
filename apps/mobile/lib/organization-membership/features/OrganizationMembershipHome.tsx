@@ -21,7 +21,7 @@ import { useClerk, useUser } from "@clerk/clerk-expo";
 import { useActiveOrganizationMembership } from "../hooks/useActiveOrganizationMembership";
 
 export function OrganizationMembershipHome() {
-  const user = useUser();
+  const { user } = useUser();
   const router = useRouter();
 
   const startOnboarding = useMutation(

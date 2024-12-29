@@ -3,8 +3,9 @@ import { ClerkProvider } from "@clerk/clerk-expo";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ConvexReactClient } from "convex/react";
 import { tokenCache } from "@/lib/core/utils/cache";
-import { ClerkLoaded, useAuth } from "@clerk/clerk-expo";
+import { ClerkLoaded } from "@clerk/clerk-expo";
 import { LocalizationResource } from "@clerk/types";
+import { useAuth } from "@clerk/clerk-react";
 
 if (!process.env.EXPO_PUBLIC_CONVEX_URL) {
   throw new Error("EXPO_PUBLIC_CONVEX_URL is not defined and is requred");
