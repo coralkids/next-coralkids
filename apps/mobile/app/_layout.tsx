@@ -75,9 +75,12 @@ export default function RootLayout() {
               value={paperTheme as ReactNativePaperCustomTheme & Theme}
             >
               <StatusBar />
-              <BaseLayout>
-                <Stack screenOptions={{ headerShown: false }} />
-              </BaseLayout>
+              <Stack
+                screenLayout={({ children }) => (
+                  <BaseLayout>{children}</BaseLayout>
+                )}
+                screenOptions={{ headerShown: false }}
+              />
             </ExpoRouterThemeProvider>
           </ClerkConvexProvider>
         </ThemeProvider>

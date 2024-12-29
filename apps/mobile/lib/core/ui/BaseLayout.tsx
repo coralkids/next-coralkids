@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { Platform, View } from "react-native";
 import styled from "styled-components/native";
 import { ImageBackground } from "expo-image";
+
 export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { loaded: clerkLoaded } = useClerk();
 
@@ -32,9 +33,8 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
     if (Platform.OS === "web") {
       return (
         <AppScreen
-          resizeMode="repeat"
-          source={require("@/assets/images/welcome-bg-hue.png")}
-          imageStyle={{ opacity: 0.75 }}
+          source={require("@/assets/images/welcome-bg.jpg")}
+          imageStyle={{ opacity: 1 }}
         >
           <AppContainer>{children}</AppContainer>
         </AppScreen>
@@ -48,13 +48,13 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
 const AppScreen = styled(ImageBackground)`
   flex: 1;
   width: 100%;
-  background-color: black;
 `;
 
 const AppContainer = styled(View)`
   max-width: 1024px;
   flex: 1;
   width: 100%;
+  background-color: transparent;
   margin: 0 auto;
 `;
 

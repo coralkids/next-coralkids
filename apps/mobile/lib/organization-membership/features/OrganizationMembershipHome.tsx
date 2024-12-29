@@ -131,7 +131,9 @@ export function OrganizationMembershipHome() {
 
 export default OrganizationMembershipHome;
 
-const OrganizationMembershipHomeWrapper = styled(SafeAreaView)``;
+const OrganizationMembershipHomeWrapper = styled(SafeAreaView)`
+  background-color: ${(props) => props.theme.colors.background};
+`;
 
 const OrganizationMembershipSelectorBottomSheetPanArea = styled(
   BottomSheetView,

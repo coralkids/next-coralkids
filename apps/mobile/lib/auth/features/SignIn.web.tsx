@@ -15,4 +15,5 @@ const WebSignInContainer = styled(View)`
   justify-content: center;
   align-items: center;
   font-family: "MRegular";
+  background-color: transparent;
 `;
