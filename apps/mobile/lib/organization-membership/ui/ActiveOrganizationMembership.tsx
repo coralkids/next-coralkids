@@ -6,6 +6,7 @@ import { Button, Text } from "react-native-paper";
 import { FadeIn, FadeInLeft, FadeInRight } from "react-native-reanimated";
 import styled from "styled-components/native";
 import OrganizationMembershipItem from "./OrganizationMembershipItem";
+import { View } from "react-native";
 
 export default function ActiveOrganizationMembership({
   activeOrganizationMembership,
@@ -16,7 +17,7 @@ export default function ActiveOrganizationMembership({
 }) {
   return (
     <>
-      <OrganizationMembershipListHeaderContainer entering={FadeIn}>
+      <OrganizationMembershipListHeaderContainer>
         <SelectedOrganizationMembershipTitle variant="titleMedium">
           Escuela
         </SelectedOrganizationMembershipTitle>
@@ -28,11 +29,7 @@ export default function ActiveOrganizationMembership({
       </OrganizationMembershipListHeaderContainer>
       <OrganizationMembershipListContainer>
         {activeOrganizationMembership && (
-          <AnimatedFullWidthView
-            key={activeOrganizationMembership.id}
-            exiting={FadeInLeft}
-            entering={FadeInRight.delay(100)}
-          >
+          <AnimatedFullWidthView key={activeOrganizationMembership.id}>
             <OrganizationMembershipItem
               org={activeOrganizationMembership}
               displayConfig={activeOrganizationMembership.role === "org:admin"}
@@ -62,14 +59,14 @@ const OrganizationMembershipButtonSelect = styled(Button)`
   margin-top: ${spacing}px;
 `;
 
-const OrganizationMembershipListHeaderContainer = styled(AnimatedFullWidthView)`
+const OrganizationMembershipListHeaderContainer = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: ${spacing}px;
 `;
 
-const OrganizationMembershipListContainer = styled(AnimatedFullWidthView)`
+const OrganizationMembershipListContainer = styled(View)`
   padding: 0px ${spacing}px;
 `;
 

@@ -44,7 +44,7 @@ export const OrganizationMembershipSelector: React.FC<
           renderItem={({ item, index }) => {
             return (
               <OrganizationMembershipItemContainer
-                entering={FadeInRight.delay((index + 1) * 150)}
+                entering={FadeInRight.delay((index + 1) * 250)}
               >
                 <TouchableOrganizationMembershipItem
                   key={item.id}
