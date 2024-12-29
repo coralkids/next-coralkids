@@ -34,7 +34,7 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
       return (
         <AppScreen
           source={require("@/assets/images/welcome-bg.jpg")}
-          imageStyle={{ opacity: 1 }}
+          imageStyle={{ opacity: 0.1 }}
         >
           <AppContainer>{children}</AppContainer>
         </AppScreen>
@@ -48,6 +48,7 @@ export const BaseLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
 const AppScreen = styled(ImageBackground)`
   flex: 1;
   width: 100%;
+  background-color: white;
 `;
 
 const AppContainer = styled(View)`

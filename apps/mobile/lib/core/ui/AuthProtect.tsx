@@ -12,7 +12,12 @@ const ConvexSignedIn: React.FC<React.PropsWithChildren> = ({ children }) => {
   if (auth.isLoading) {
     return (
       <ActivityIndicator
-        style={{ flex: 1, backgroundColor: theme.colors.background }}
+        style={{
+          flex: 1,
+          backgroundColor: theme.colors.background,
+          width: "100%",
+          height: "100%",
+        }}
         size="large"
         color={theme.colors.primary}
       />
