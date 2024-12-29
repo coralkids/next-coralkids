@@ -35,26 +35,25 @@ export default function OrganizationNameStep() {
         name: data.organizationName,
       });
 
+      await clerk.setActive({
+        session: clerk.session,
+        organization: organizationResource.id,
+      });
+
       await nextStepOrganizationOnboarding({
         id: orgOnboarding!._id,
         organizationId: organizationResource.id,
         currentStep: currentStepIndex + 1,
         finished: false,
       });
-
-      await clerk.setActive({
-        session: clerk.session,
-        organization: organizationResource.id,
-      });
     } else if (clerk.organization?.name !== data.organizationName) {
       await clerk.organization?.update({ name: data.organizationName });
+      setLoading(false);
+      setCurrentStepIndex(currentStepIndex + 1);
+    } else {
+      setLoading(false);
+      setCurrentStepIndex(currentStepIndex + 1);
     }
-
-    setLoading(false);
-
-    reset();
-
-    setCurrentStepIndex(currentStepIndex + 1);
   };
 
   return (

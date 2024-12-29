@@ -67,30 +67,34 @@ export function OrganizationMembershipHome() {
         <ProfileTouchableWithMenu />
       </Appbar.Header>
       <SafeAreaProvider>
-        <Banner
-          visible={!!unfinishedOnboarding}
-          actions={[
-            {
-              label: "Completar registro",
-              onPress: async () => {
-                await clerk.setActive({
-                  session: clerk.session,
-                  organization: unfinishedOnboarding?.organizationId,
-                });
-
-                await router.navigate(
-                  `/organization-onboarding/${unfinishedOnboarding?._id}`,
-                );
-              },
-            },
-          ]}
-          icon={({ size }) => (
-            <AntDesign name="warning" size={size} color={theme.colors.error} />
-          )}
-        >
-          Tienes una escuela con un proceso de registro pendiente de terminar.
-        </Banner>
         <OrganizationMembershipHomeWrapper style={{ flex: 1 }}>
+          <Banner
+            visible={!!unfinishedOnboarding}
+            actions={[
+              {
+                label: "Completar registro",
+                onPress: async () => {
+                  await clerk.setActive({
+                    session: clerk.session,
+                    organization: unfinishedOnboarding?.organizationId,
+                  });
+
+                  await router.navigate(
+                    `/organization-onboarding/${unfinishedOnboarding?._id}`,
+                  );
+                },
+              },
+            ]}
+            icon={({ size }) => (
+              <AntDesign
+                name="warning"
+                size={size}
+                color={theme.colors.error}
+              />
+            )}
+          >
+            Tienes una escuela con un proceso de registro pendiente de terminar.
+          </Banner>
           {!!user?.organizationMemberships?.length && (
             <ActiveOrganizationMembership
               activeOrganizationMembership={activeOrganizationMembership}
