@@ -58,7 +58,7 @@ export default function OrganizationMembershipEmpty({
             Registrar escuela
           </OrganizationMembershipCreateOrganization>
           <OrganizationMembershipEmptyContactContainer>
-            <OrganizationMembershipEmptyContactTitle variant="titleMedium">
+            <OrganizationMembershipEmptyContactTitle variant="labelLarge">
               ¿Necesitas ayuda?
             </OrganizationMembershipEmptyContactTitle>
             <OrganizationMembershipCreateOrganization
