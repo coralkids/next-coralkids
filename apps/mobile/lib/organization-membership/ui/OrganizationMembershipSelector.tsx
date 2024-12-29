@@ -7,6 +7,7 @@ import { OrganizationMembershipResource } from "@clerk/types";
 import styled from "styled-components/native";
 import Animated, { FadeIn, FadeInRight } from "react-native-reanimated";
 import AnimatedFullWidthView from "@/lib/core/ui/AnimatedFullWidthView";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface OrganizationMembershipSelectorProps {
   onPress: (orgMembership: OrganizationMembershipResource) => void;
@@ -24,6 +25,7 @@ export const OrganizationMembershipSelector: React.FC<
   organizationMemberships = [],
 }) => {
   const [state, setState] = React.useState({ open: false });
+  const insets = useSafeAreaInsets();
 
   const onStateChange = ({ open }: { open: boolean }) => setState({ open });
 
@@ -36,6 +38,7 @@ export const OrganizationMembershipSelector: React.FC<
           <Text variant="titleMedium">Mis escuelas</Text>
         </OrganizationMembershipSelectorTitle>
         <Animated.FlatList
+          style={{ marginBottom: insets.bottom }}
           itemLayoutAnimation={FadeIn.delay(100)}
           data={organizationMemberships}
           renderItem={({ item, index }) => {
