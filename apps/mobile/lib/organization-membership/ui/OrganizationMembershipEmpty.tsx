@@ -1,9 +1,11 @@
 import { spacing } from "@/theme/spacing";
 import { router } from "expo-router";
-import { Platform, ScrollView } from "react-native";
+import { Platform, ScrollView, View } from "react-native";
 import { Button, Card, Icon, useTheme, Text } from "react-native-paper";
 import Animated, { FadeInRight } from "react-native-reanimated";
 import styled, { ThemeStyledProps } from "styled-components/native";
+import * as Linking from "expo-linking";
+import { useUser } from "@clerk/clerk-expo";
 
 interface OrganizationMembershipEmptyProps {
   onCreateOrganizationPress: () => void;
@@ -13,6 +15,14 @@ export default function OrganizationMembershipEmpty({
   onCreateOrganizationPress,
 }: OrganizationMembershipEmptyProps) {
   const theme = useTheme();
+  const { user } = useUser();
+
+  const onContactWhatsAppPress = () => {
+    Linking.openURL(
+      `https://api.whatsapp.com/send?phone=+34600200862&text=Hola soy ${user?.fullName} me he registrado en la app y me gustaría recibir más información. Gracias`,
+    );
+    //
+  };
 
   return (
     <OrganizationMembershipEmptyContainer
@@ -30,8 +40,8 @@ export default function OrganizationMembershipEmpty({
             &nbsp; Soy responsable de escuela
           </OrganizationMembershipEmptyTextTitle>
           <OrganizationMembershipEmptyText variant="bodyLarge">
-            ¡Registra tu mism@! o agenda una reunión con nosotros. Te haremos
-            una demo gratuita sin compromiso.
+            ¡Registra tu mism@ tu escuela! o agenda una reunión con nosotros. Te
+            haremos una demo gratuita sin compromiso.
           </OrganizationMembershipEmptyText>
           <OrganizationMembershipCreateOrganization
             icon="calendar"
@@ -47,6 +57,19 @@ export default function OrganizationMembershipEmpty({
           >
             Registrar escuela
           </OrganizationMembershipCreateOrganization>
+          <OrganizationMembershipEmptyContactContainer>
+            <OrganizationMembershipEmptyContactTitle variant="titleMedium">
+              ¿Necesitas ayuda?
+            </OrganizationMembershipEmptyContactTitle>
+            <OrganizationMembershipCreateOrganization
+              icon="whatsapp"
+              onPress={onContactWhatsAppPress}
+              textColor="#0f3928"
+              mode="text"
+            >
+              Contactar por WhatsApp
+            </OrganizationMembershipCreateOrganization>
+          </OrganizationMembershipEmptyContactContainer>
         </OrganizationMembershipEmptyCard>
       </Animated.View>
       <Animated.View entering={FadeInRight.delay(600)}>
@@ -86,6 +109,16 @@ export default function OrganizationMembershipEmpty({
     </OrganizationMembershipEmptyContainer>
   );
 }
+
+const OrganizationMembershipEmptyContactContainer = styled(View)`
+  display: flex;
+`;
+
+const OrganizationMembershipEmptyContactTitle = styled(Text)`
+  text-align: center;
+  margin-top: ${spacing * 2}px;
+`;
+
 const OrganizationMembershipEmptyCard = styled(Card)<ThemeStyledProps>`
   padding: ${spacing}px;
   margin: ${spacing}px 0px;
