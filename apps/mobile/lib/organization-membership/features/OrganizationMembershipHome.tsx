@@ -138,8 +138,9 @@ const OrganizationMembershipSelectorBottomSheetPanArea = styled(
 )`
   padding: 0px;
   margin: 0px;
-  background-color: ${({ theme }: ThemeStyledProps) => theme.colors.background};
+  background-color: ${({ theme }: ThemeStyledProps) =>
+    theme.colors.elevation.level1};
   border-top-width: 25px;
   border-color: ${({ theme }: ThemeStyledProps) =>
-    theme.colors.elevation.level2};
+    theme.colors.elevation.level3};
 `;
