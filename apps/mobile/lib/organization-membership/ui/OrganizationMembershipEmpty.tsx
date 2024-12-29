@@ -1,4 +1,5 @@
 import { spacing } from "@/theme/spacing";
+import { router } from "expo-router";
 import { Platform, ScrollView } from "react-native";
 import { Button, Card, Icon, useTheme, Text } from "react-native-paper";
 import Animated, { FadeInRight } from "react-native-reanimated";
@@ -35,6 +36,7 @@ export default function OrganizationMembershipEmpty({
           <OrganizationMembershipCreateOrganization
             icon="calendar"
             mode="elevated"
+            onPress={() => router.navigate("/demo-meeting")}
           >
             Agendar una demo
           </OrganizationMembershipCreateOrganization>
