@@ -1,4 +1,3 @@
-import useUser from "@/lib/user/hooks/useUser";
 import React, { FC, useCallback, useMemo, useRef } from "react";
 import { Appbar, Banner, useTheme } from "react-native-paper";
 import styled from "styled-components/native";
@@ -18,7 +17,7 @@ import { useRouter } from "expo-router";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
 import { AntDesign } from "@expo/vector-icons";
-import { useClerk } from "@clerk/clerk-react";
+import { useClerk, useUser } from "@clerk/clerk-expo";
 import { useActiveOrganizationMembership } from "../hooks/useActiveOrganizationMembership";
 
 export function OrganizationMembershipHome() {

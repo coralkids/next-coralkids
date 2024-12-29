@@ -3,7 +3,7 @@ import { ClerkProvider } from "@clerk/clerk-expo";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ConvexReactClient } from "convex/react";
 import { tokenCache } from "@/lib/core/utils/cache";
-import { ClerkLoaded, useAuth } from "@clerk/clerk-react";
+import { ClerkLoaded, useAuth } from "@clerk/clerk-expo";
 import { LocalizationResource } from "@clerk/types";
 
 if (!process.env.EXPO_PUBLIC_CONVEX_URL) {

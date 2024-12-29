@@ -14,7 +14,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 
 import { useOrganizationOnboarding } from "../hooks/useOrganizationOnboarding";
-import { useClerk } from "@clerk/clerk-react";
+import { useClerk } from "@clerk/clerk-expo";
 import { useAction } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
 

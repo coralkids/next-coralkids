@@ -1,10 +1,9 @@
-import useUser from "@/lib/user/hooks/useUser";
-import { useClerk } from "@clerk/clerk-expo";
+import { useClerk, useUser } from "@clerk/clerk-expo";
 import { useMemo } from "react";
 
 export const useActiveOrganizationMembership = () => {
   const clerk = useClerk();
-  const user = useUser();
+  const { user } = useUser();
 
   const activeOrganizationMembership = useMemo(() => {
     if (!user?.organizationMemberships) {

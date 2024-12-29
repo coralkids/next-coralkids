@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
 
-import { useAuth, useUser } from "@clerk/clerk-react";
+import { useAuth, useUser } from "@clerk/clerk-expo";
 import { router } from "expo-router";
 import { Doc } from "@packages/backend/convex/_generated/dataModel";
 import { useNotes } from "@/lib/notes/hooks/useNotes";

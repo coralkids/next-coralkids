@@ -6,7 +6,7 @@ import styled from "styled-components/native";
 import { useOrganizationOnboarding } from "../hooks/useOrganizationOnboarding";
 import { useAction } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
-import { useClerk } from "@clerk/clerk-react";
+import { useClerk } from "@clerk/clerk-expo";
 import { useMultiStepFormWizard } from "@/lib/core/hooks/useMultiStepFormWizard";
 
 export default function OrganizationFinishStep() {

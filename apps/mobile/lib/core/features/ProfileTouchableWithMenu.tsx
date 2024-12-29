@@ -1,6 +1,5 @@
-import useUser from "@/lib/user/hooks/useUser";
 import { spacing } from "@/theme/spacing";
-import { useAuth } from "@clerk/clerk-expo";
+import { useAuth, useUser } from "@clerk/clerk-expo";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { useState } from "react";
@@ -16,7 +15,7 @@ import {
 import styled from "styled-components/native";
 
 const ProfileTouchableWithMenu = () => {
-  const user = useUser();
+  const { user } = useUser();
   const auth = useAuth();
   const theme = useTheme();
 
