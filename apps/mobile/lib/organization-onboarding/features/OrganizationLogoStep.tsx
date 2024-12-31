@@ -15,7 +15,7 @@ import * as FileSystem from "expo-file-system";
 
 import { useOrganizationOnboarding } from "../hooks/useOrganizationOnboarding";
 import { useClerk } from "@clerk/clerk-expo";
-import { useAction } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
 
 export default function OrganizationLogoStep() {
@@ -24,7 +24,7 @@ export default function OrganizationLogoStep() {
   const orgOnboarding = useOrganizationOnboarding();
   const clerk = useClerk();
 
-  const nextStepOrganizationOnboarding = useAction(
+  const nextStepOrganizationOnboarding = useMutation(
     api.organizationOnboarding.nextStepOrganizationOnboarding,
   );
 

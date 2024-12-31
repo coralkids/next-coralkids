@@ -9,7 +9,7 @@ import { View } from "react-native";
 import { Button, HelperText, Text, TextInput } from "react-native-paper";
 import styled from "styled-components/native";
 import { useForm, Controller } from "react-hook-form";
-import { useAction } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
 import { useClerk } from "@clerk/clerk-expo";
 import { useOrganizationOnboarding } from "../hooks/useOrganizationOnboarding";
@@ -17,7 +17,7 @@ import { useOrganizationOnboarding } from "../hooks/useOrganizationOnboarding";
 export default function OrganizationNameStep() {
   const { setLoading, setCurrentStepIndex, currentStepIndex } =
     useMultiStepFormWizard();
-  const nextStepOrganizationOnboarding = useAction(
+  const nextStepOrganizationOnboarding = useMutation(
     api.organizationOnboarding.nextStepOrganizationOnboarding,
   );
   const orgOnboarding = useOrganizationOnboarding();

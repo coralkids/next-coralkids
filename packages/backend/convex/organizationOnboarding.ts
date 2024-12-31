@@ -57,17 +57,19 @@ export const getOrganizationOnboarding = query({
   },
 });
 
-export const updateOrganizationOnboarding = internalMutation(({
+
+export const nextStepOrganizationOnboarding = mutation({
   args: {
-    userId: v.string(),
     id: v.id("organizationOnboarding"),
     organizationId: v.string(),
     currentStep: v.number(),
     finished: v.boolean()
   },
   handler: async (ctx, args) => {
-    const organizationOnboarding = await ctx.db.query("organizationOnboarding")
-      .withIndex("by_userId", (q) => q.eq("userId", args.userId))
+   const identity = await useAuthenticatedInOrganizationACL(ctx, args.organizationId, "org:admin")
+    
+   const organizationOnboarding = await ctx.db.query("organizationOnboarding")
+      .withIndex("by_userId", (q) => q.eq("userId", identity.subject))
       .filter((q) => q.eq(q.field("finished"), false))
       .first();
 
@@ -75,44 +77,11 @@ export const updateOrganizationOnboarding = internalMutation(({
       throw "OrganizationOnboarding not found"
     }
 
-    const updatedOnboarding = await ctx.db.patch(organizationOnboarding._id, {
+    await ctx.db.patch(organizationOnboarding._id, {
       organizationId: args.organizationId,
       currentStep: args.currentStep,
       finished: args.finished,
       updatedAt: Date.now()
     })
-
-    return updatedOnboarding;
-  }
-}))
-
-export const nextStepOrganizationOnboarding = action({
-  args: {
-    id: v.id("organizationOnboarding"),
-    organizationId: v.string(),
-    currentStep: v.number(),
-    finished: v.boolean()
-  },
-  handler: async (ctx, args): Promise<Doc<"organizationOnboarding"> | undefined> => {
-    try {
-      const { identity } = await useAuthenticatedInOrganizationACL(ctx, args.organizationId, "org:sys_profile:manage");
-
-      const updatedOrganizationOnboarding = await ctx.runMutation(internal.organizationOnboarding.updateOrganizationOnboarding, {
-        id: args.id,
-        userId: identity.subject,
-        organizationId: args.organizationId,
-        currentStep: args.currentStep,
-        finished: args.finished
-      });
-
-      if (updatedOrganizationOnboarding) {
-        return updatedOrganizationOnboarding;
-      }
-
-
-    } catch (e) {
-      console.error(e)
-    }
-
   },
 });
