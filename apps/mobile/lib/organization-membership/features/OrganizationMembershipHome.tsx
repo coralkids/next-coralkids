@@ -1,5 +1,13 @@
-import React, { FC, useCallback, useMemo, useRef } from "react";
-import { Appbar, Banner, useTheme } from "react-native-paper";
+import React, { FC, useCallback, useMemo, useRef, useState } from "react";
+import {
+  Appbar,
+  Banner,
+  Dialog,
+  Portal,
+  useTheme,
+  Text,
+  Button,
+} from "react-native-paper";
 import styled from "styled-components/native";
 import ProfileTouchableWithMenu from "../../core/features/ProfileTouchableWithMenu";
 import {
@@ -14,7 +22,7 @@ import ActiveOrganizationMembership from "../ui/ActiveOrganizationMembership";
 import OrganizationMembershipSelector from "../ui/OrganizationMembershipSelector";
 import OrganizationMembershipEmpty from "../ui/OrganizationMembershipEmpty";
 import { useRouter } from "expo-router";
-import { useMutation, useQuery } from "convex/react";
+import { useQuery } from "convex/react";
 import { api } from "@packages/backend/convex/_generated/api";
 import { AntDesign } from "@expo/vector-icons";
 import { useClerk, useUser } from "@clerk/clerk-expo";
@@ -23,10 +31,8 @@ import { useActiveOrganizationMembership } from "../hooks/useActiveOrganizationM
 export function OrganizationMembershipHome() {
   const { user } = useUser();
   const router = useRouter();
-
-  const startOnboarding = useMutation(
-    api.organizationOnboarding.startOnboarding,
-  );
+  const [isVisitWebsiteDialogVisible, setIsVisitWebsiteDialogVisible] =
+    useState(false);
 
   const unfinishedOnboarding = useQuery(
     api.organizationOnboarding.getUnfinishedOrganizationOnboarding,
@@ -56,9 +62,7 @@ export function OrganizationMembershipHome() {
   }, []);
 
   const onCreateOrganizationPress = () => {
-    startOnboarding().then((obId) => {
-      router.navigate(`/organization-onboarding/${obId}`);
-    });
+    setIsVisitWebsiteDialogVisible(true);
   };
 
   return (
@@ -68,6 +72,26 @@ export function OrganizationMembershipHome() {
       </Appbar.Header>
       <SafeAreaProvider>
         <OrganizationMembershipHomeWrapper style={{ flex: 1 }}>
+          <Portal>
+            <Dialog
+              visible={isVisitWebsiteDialogVisible}
+              onDismiss={() => setIsVisitWebsiteDialogVisible(false)}
+            >
+              <Dialog.Title>Visita nuestra web</Dialog.Title>
+              <Dialog.Content>
+                <Text variant="bodyMedium">
+                  El proceso de alta no está disponible desde la aplicación
+                  móvil, por favor, visita nuestra web para dar de alta tu
+                  escuela, después podrás usar la app.
+                </Text>
+              </Dialog.Content>
+              <Dialog.Actions>
+                <Button onPress={() => setIsVisitWebsiteDialogVisible(false)}>
+                  Aceptar
+                </Button>
+              </Dialog.Actions>
+            </Dialog>
+          </Portal>
           <Banner
             visible={!!unfinishedOnboarding}
             actions={[
